@@ -1,4 +1,4 @@
-import React$1, { useState } from 'react';
+import React, { useState } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
 var propTypes = {exports: {}};
@@ -5186,45 +5186,45 @@ const Heatmap = ({
     if (!value || value <= 0) return legend[0].color;else if (value === 1) return legend[1].color;else if (value === 2) return legend[2].color;else if (value === 3) return legend[3].color;else return legend[4].color;
   };
 
-  return /*#__PURE__*/React$1.createElement(Container$1, null, /*#__PURE__*/React$1.createElement(FlexContainer, null, /*#__PURE__*/React$1.createElement(WeekContainer, null, Array(7).fill(0).map((_, index) => /*#__PURE__*/React$1.createElement(WeekLabel, {
+  return /*#__PURE__*/React.createElement(Container$1, null, /*#__PURE__*/React.createElement(FlexContainer, null, /*#__PURE__*/React.createElement(WeekContainer, null, Array(7).fill(0).map((_, index) => /*#__PURE__*/React.createElement(WeekLabel, {
     style: {
       visibility: showWeekDays.includes(index) ? 'visible' : 'hidden'
     }
   }, getLocale().localize.day(index, {
     width: 'short'
-  })))), /*#__PURE__*/React$1.createElement(ColumnsContainer, null, columns && columns.map(column => {
+  })))), /*#__PURE__*/React.createElement(ColumnsContainer, null, columns && columns.map(column => {
     const {
       index,
       month,
       year,
       days
     } = column;
-    return /*#__PURE__*/React$1.createElement(Column, column, /*#__PURE__*/React$1.createElement("span", {
+    return /*#__PURE__*/React.createElement(Column, column, /*#__PURE__*/React.createElement("span", {
       style: {
         left: index * 14,
         visibility: showMonths && showMonth(index, month, year) ? 'visible' : 'hidden'
       }
-    }, month), /*#__PURE__*/React$1.createElement(BoxContainer, null, days && days.map((day, indexDay) => {
+    }, month), /*#__PURE__*/React.createElement(BoxContainer, null, days && days.map((day, indexDay) => {
       const startDay = getStartDay();
       const formulaMargin = startDay * 14;
       const margin = startDay > 0 ? formulaMargin + 2 : formulaMargin;
-      return /*#__PURE__*/React$1.createElement(Box, _extends({}, day, {
+      return /*#__PURE__*/React.createElement(Box, _extends({}, day, {
         color: getBoxColor(day.value),
         showTooltip: showTooltip,
         boxShape: boxShape,
         marginTop: index === 0 && indexDay === 0 ? margin || 2 : 2
       }));
     })));
-  }))), /*#__PURE__*/React$1.createElement(FlexContainer, {
+  }))), /*#__PURE__*/React.createElement(FlexContainer, {
     legend: true
-  }, contentBeforeLegend && /*#__PURE__*/React$1.createElement("span", {
+  }, contentBeforeLegend && /*#__PURE__*/React.createElement("span", {
     style: {
       marginRight: 5
     }
-  }, contentBeforeLegend), legend && legend.map(legend => /*#__PURE__*/React$1.createElement(Box, _extends({}, legend, {
+  }, contentBeforeLegend), legend && legend.map(legend => /*#__PURE__*/React.createElement(Box, _extends({}, legend, {
     showTooltip: true,
     boxShape: boxShape
-  }))), contentAfterLegend && /*#__PURE__*/React$1.createElement("span", {
+  }))), contentAfterLegend && /*#__PURE__*/React.createElement("span", {
     style: {
       marginLeft: 5
     }
@@ -5273,9 +5273,9 @@ const propsDefault = {
 
 const Container = (props = {}) => {
   const options = Object.assign({}, propsDefault, props);
-  return /*#__PURE__*/React$1.createElement(ThemeProvider, {
+  return /*#__PURE__*/React.createElement(ThemeProvider, {
     theme: {}
-  }, /*#__PURE__*/React$1.createElement(Heatmap, options));
+  }, /*#__PURE__*/React.createElement(Heatmap, options));
 };
 
 Container.propTypes = {

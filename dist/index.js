@@ -1,11 +1,11 @@
 'use strict';
 
-var React$1 = require('react');
+var React = require('react');
 var styled = require('styled-components');
 
 function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
 
-var React__default = /*#__PURE__*/_interopDefaultLegacy(React$1);
+var React__default = /*#__PURE__*/_interopDefaultLegacy(React);
 var styled__default = /*#__PURE__*/_interopDefaultLegacy(styled);
 
 var propTypes = {exports: {}};
@@ -5027,8 +5027,8 @@ const Box = ({
   boxShape,
   onClick = () => {}
 }) => {
-  const [showTooltip, setShowTooltip] = React$1.useState(false);
-  return /*#__PURE__*/React.createElement(Container$3, {
+  const [showTooltip, setShowTooltip] = React.useState(false);
+  return /*#__PURE__*/React__default['default'].createElement(Container$3, {
     onClick: () => onClick(date, value),
     onMouseEnter: () => setShowTooltip(true),
     onMouseLeave: () => setShowTooltip(false),
@@ -5038,13 +5038,13 @@ const Box = ({
       cursor: value ? 'pointer' : '',
       borderRadius: boxShape === 'circle' ? '50%' : 0
     }
-  }, showTooltipProps && showTooltip && /*#__PURE__*/React.createElement(Tooltip, null, date && /*#__PURE__*/React.createElement("span", null, format(date, 'PP', {
+  }, showTooltipProps && showTooltip && /*#__PURE__*/React__default['default'].createElement(Tooltip, null, date && /*#__PURE__*/React__default['default'].createElement("span", null, format(date, 'PP', {
     locale: locale$1
-  }), value && /*#__PURE__*/React.createElement("span", {
+  }), value && /*#__PURE__*/React__default['default'].createElement("span", {
     style: {
       marginRight: 2
     }
-  }, ":")), value && /*#__PURE__*/React.createElement("span", null, " ", value)));
+  }, ":")), value && /*#__PURE__*/React__default['default'].createElement("span", null, " ", value)));
 };
 
 const Container$2 = styled__default['default'].div`
@@ -5064,7 +5064,7 @@ const Column = ({
   margin = 2,
   ...rest
 }) => {
-  return /*#__PURE__*/React.createElement(Container$2, rest);
+  return /*#__PURE__*/React__default['default'].createElement(Container$2, rest);
 };
 
 const Container$1 = styled__default['default'].div`
@@ -5169,8 +5169,8 @@ const Heatmap = ({
     });
   };
 
-  const [columns] = React$1.useState(getColumns());
-  const [legend] = React$1.useState([{
+  const [columns] = React.useState(getColumns());
+  const [legend] = React.useState([{
     color: '#EBEDF0',
     value: '= 0'
   }, {
