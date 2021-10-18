@@ -10,7 +10,7 @@ Simple and easy to get started.
 
 ```js
 import React from 'react';
-import HeatMap from './index';
+import HeatMap from 'react-best-heatmap';
 
 const values = [
   {
