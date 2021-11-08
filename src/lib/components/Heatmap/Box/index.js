@@ -1,43 +1,69 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { format } from 'date-fns';
-import locale from 'date-fns/esm/locale/pt-BR';
-
-import { Container, Tooltip } from './styles';
+import { usePopperTooltip } from "react-popper-tooltip";
+import { Container } from './styles';
 
 const Box = ({
-  date,
-  color,
-  value,
+  box,
+  legend,
+  locale,
   marginTop,
-  showTooltip: showTooltipProps,
-  boxShape,
-  onClick = () => { }
+  showTooltip,
+  boxShape
 }) => {
 
-  const [showTooltip, setShowTooltip] = useState(false);
+  const {
+    getArrowProps,
+    getTooltipProps,
+    setTooltipRef,
+    setTriggerRef,
+    visible
+  } = usePopperTooltip();
+
+  const { date, value, valueLabel, color, onClick } = box;
+
+  const getColor = () => (legend && legend.find(l => l.isInRange(value))?.color) || '#ebedf0';
+
+  const label = valueLabel ? valueLabel : value;
+  const finalColor = color ? color : getColor();
 
   return (
     <Container
-      onClick={() => onClick(date, value)}
-      onMouseEnter={() => setShowTooltip(true)}
-      onMouseLeave={() => setShowTooltip(false)}
+      ref={setTriggerRef}
+      onClick={() => onClick && onClick(date, value)}
       style={{
         marginTop,
-        backgroundColor: color,
+        backgroundColor: finalColor,
         cursor: value ? 'pointer' : '',
         borderRadius: boxShape === 'circle' ? '50%' : 0
       }}>
       {
-        showTooltipProps && showTooltip &&
-        <Tooltip>
-          {
-            date &&
-            <span>{format(date, 'PP', {
-              locale
-            })}{value && <span style={{ marginRight: 2 }}>:</span>}</span>
+        showTooltip && visible &&
+        <div ref={setTooltipRef} {...getTooltipProps({
+          className: "tooltip-container",
+          style: {
+            background: 'rgba(0, 0, 0, .75)',
+            color: '#fff',
+            minWidth: 100,
+            textAlign: 'center'
           }
-          {value && <span> {value}</span>}
-        </Tooltip>
+        })}>
+          {
+            label ? (
+              <span>{label}</span>
+            ) : (
+              date && locale &&
+              <span>{format(date, 'PP', {
+                locale
+              })}{value && <span style={{ marginRight: 2 }}>:</span>}</span>
+            )
+          }
+          <div {...getArrowProps({
+            className: "tooltip-arrow", style: {
+              border: 'black', '--tooltipBackground': 'rgba(0, 0, 0, .75)'
+            }
+          })} />
+        </div>
       }
     </Container>
   )

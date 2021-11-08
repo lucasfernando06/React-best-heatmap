@@ -15,7 +15,8 @@ import HeatMap from 'react-best-heatmap';
 const values = [
   {
     date: new Date(),
-    count: 1
+    value: 1,
+    valueLabel: 'Custom content...'
   }
 ];
 
@@ -30,14 +31,16 @@ export default App;
   
 | Name                    | Type               | Default Value                                     | Required? | Description                               |
 | ----------------------- | ------------------ | ------------------------------------------------- | --------- | ----------------------------------------  |
-| `showWeekDays`          | `array`            | `[1,3,5]`                                         | Yes       | Showing days of week (0 - 6)              |     
 | `startDate`             | `Date`             | `Today's date`                                    | Yes       | Initial date                              |  
 | `values`                | `array`            | `[]`                                              | Yes       | Custom values                             |
-| `showTooltip`           | `bool`             | `true`                                            | No        | Show box tooltip                          |
+| `showWeekDays`          | `array`            | `[1,3,5]`                                         | Yes       | Showing days of week (0 - 6)              |    
+| `showBlockTooltip`           | `bool`             | `true`                                            | No        | Show block tooltip                          |
+| `showLegendTooltip`           | `bool`             | `true`                                            | No        | Show legend tooltip                          |
 | `showMonths`            | `bool`             | `true`                                            | No        | Show months |                             |
-| `legend`                | `array`            | `["#9BE9A8","#40C463","#30A14E","#216E39"]`       | No        | Select box colors                         | 
 | `locale`                | `string`           | `en`                                              | No        | Select the language (en/pt-br/es/fr)      |  
-| `boxShape`              | `string`           | `square`                                          | No        | Select box shape (square/circle)          |  
+| `rangeDays`                | `number`            | `365`       | No        | Limit of days from start date                         | 
+| `boxShape`              | `string`           | `square`                                          | No        | Select box shape (square/circle)          | 
+| `legend`   | `array`   | `[...array]`                                       | Yes        | Legend array, check the proptypes to see the structure                    |  
 | `contentBeforeLegend`   | `string/Element`   | `undefined`                                       | No        | Content before legend                     |  
 | `contentAfterLegend`    | `string/Element`   | `undefined`                                       | No        | Content before legend                     |                             
                                         
@@ -45,15 +48,20 @@ export default App;
 
 ```js
 {
-  props: {
-  showWeekDays: PropTypes.array,
-  startDate: PropTypes.instanceOf(Date),
+  startDate: PropTypes.instanceOf(Date).isRequired,
   values: PropTypes.array,
-  showTooltip: PropTypes.bool,
+  showWeekDays: PropTypes.array,
+  showBlockTooltip: PropTypes.bool,
+  showLegendTooltip: PropTypes.bool,
   showMonths: PropTypes.bool,
-  legend: PropTypes.array,
   locale: PropTypes.string,
+  rangeDays: PropTypes.number,
   boxShape: PropTypes.string,
+  legend: PropTypes.arrayOf(PropTypes.shape({
+    isInRange: PropTypes.func.isRequired, // Example: (value) => value > 3
+    color: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
+  })),
   contentBeforeLegend: PropTypes.string,
   contentAfterLegend: PropTypes.string,
 }

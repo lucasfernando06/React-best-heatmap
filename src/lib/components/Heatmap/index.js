@@ -20,12 +20,13 @@ const Heatmap = ({
   startDate,
   values,
   showWeekDays,
-  legendColors,
-  showTooltip,
+  showBlockTooltip,
+  showLegendTooltip,
   showMonths,
   locale,
   rangeDays,
   boxShape,
+  legend,
   contentBeforeLegend,
   contentAfterLegend
 }) => {
@@ -36,7 +37,9 @@ const Heatmap = ({
     else if (locale === 'fr') return localeFR;
 
     return localeEN;
-  }
+  };
+
+  const finalLocale = getLocale();
 
   const getValue = (refDate) => values?.find(x => isSameDay(x.date, refDate));
 
@@ -52,12 +55,15 @@ const Heatmap = ({
 
     const daysList = Array(daysCount).fill(0).map((_, index) => {
       const newDate = addDays(startDate, index);
-      const value = getValue(newDate);
+      const customValue = getValue(newDate);
+
+      const { value, valueLabel, onClick } = customValue || {};
 
       return {
         date: new Date(newDate.setHours(0, 0, 0, 0)),
-        value: value?.count,
-        onClick: value?.onClick
+        value,
+        valueLabel: valueLabel ? valueLabel : value,
+        onClick
       }
     });
 
@@ -70,7 +76,7 @@ const Heatmap = ({
 
       const month = days.every(x => format(x.date, 'M') === format(days[0].date, 'M')) ?
         format(days[0].date, 'MMM', {
-          locale: getLocale()
+          finalLocale
         }) : '';
       const year = format(refDate, 'y');
 
@@ -84,38 +90,8 @@ const Heatmap = ({
   };
 
   const [columns] = useState(getColumns());
-  const [legend] = useState([
-    {
-      color: '#EBEDF0',
-      value: '= 0'
-    },
-    {
-      color: legendColors && legendColors[0] ? legendColors[0] : '#9BE9A8',
-      value: '= 1'
-    },
-    {
-      color: legendColors && legendColors[1] ? legendColors[1] : '#40C463',
-      value: '= 2'
-    },
-    {
-      color: legendColors && legendColors[2] ? legendColors[2] : '#30A14E',
-      value: '= 3'
-    },
-    {
-      color: legendColors && legendColors[3] ? legendColors[3] : '#216E39',
-      value: '>= 4'
-    },
-  ]);
 
   const showMonth = (index, month, year) => columns.find(x => x.month === month && x.year === year)?.index === index;
-
-  const getBoxColor = (value) => {
-    if (!value || value <= 0) return legend[0].color;
-    else if (value === 1) return legend[1].color;
-    else if (value === 2) return legend[2].color;
-    else if (value === 3) return legend[3].color;
-    else return legend[4].color;
-  };
 
   return (
     <Container>
@@ -124,7 +100,7 @@ const Heatmap = ({
           {
             Array(7).fill(0).map((_, index) => (
               <WeekLabel style={{ visibility: showWeekDays.includes(index) ? 'visible' : 'hidden' }}>
-                {getLocale().localize.day(index, { width: 'short' })}
+                {finalLocale.localize.day(index, { width: 'short' })}
               </WeekLabel>
             ))
           }
@@ -148,9 +124,10 @@ const Heatmap = ({
                         const margin = startDay > 0 ? formulaMargin + 2 : formulaMargin;
                         return (
                           <Box
-                            {...day}
-                            color={getBoxColor(day.value)}
-                            showTooltip={showTooltip}
+                            box={day || {}}
+                            legend={legend}
+                            locale={finalLocale}
+                            showTooltip={showBlockTooltip}
                             boxShape={boxShape}
                             marginTop={index === 0 && indexDay === 0 ? margin || 2 : 2} />
                         );
@@ -170,7 +147,7 @@ const Heatmap = ({
         }
         {
           legend && legend.map((legend) => (
-            <Box {...legend} showTooltip boxShape={boxShape} />
+            <Box box={{ ...legend, value: legend.label }} showTooltip={showLegendTooltip} boxShape={boxShape} />
           ))
         }
         {
