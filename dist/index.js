@@ -1,1115 +1,10 @@
 'use strict';
 
 var React = require('react');
-var styled = require('styled-components');
 
 function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
 
-function _interopNamespace(e) {
-  if (e && e.__esModule) return e;
-  var n = Object.create(null);
-  if (e) {
-    Object.keys(e).forEach(function (k) {
-      if (k !== 'default') {
-        var d = Object.getOwnPropertyDescriptor(e, k);
-        Object.defineProperty(n, k, d.get ? d : {
-          enumerable: true,
-          get: function () {
-            return e[k];
-          }
-        });
-      }
-    });
-  }
-  n['default'] = e;
-  return Object.freeze(n);
-}
-
-var React__namespace = /*#__PURE__*/_interopNamespace(React);
 var React__default = /*#__PURE__*/_interopDefaultLegacy(React);
-var styled__default = /*#__PURE__*/_interopDefaultLegacy(styled);
-
-var propTypes = {exports: {}};
-
-var reactIs = {exports: {}};
-
-var reactIs_production_min = {};
-
-/** @license React v16.13.1
- * react-is.production.min.js
- *
- * Copyright (c) Facebook, Inc. and its affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-var b="function"===typeof Symbol&&Symbol.for,c=b?Symbol.for("react.element"):60103,d=b?Symbol.for("react.portal"):60106,e=b?Symbol.for("react.fragment"):60107,f=b?Symbol.for("react.strict_mode"):60108,g=b?Symbol.for("react.profiler"):60114,h=b?Symbol.for("react.provider"):60109,k=b?Symbol.for("react.context"):60110,l=b?Symbol.for("react.async_mode"):60111,m=b?Symbol.for("react.concurrent_mode"):60111,n=b?Symbol.for("react.forward_ref"):60112,p=b?Symbol.for("react.suspense"):60113,q=b?
-Symbol.for("react.suspense_list"):60120,r=b?Symbol.for("react.memo"):60115,t=b?Symbol.for("react.lazy"):60116,v=b?Symbol.for("react.block"):60121,w=b?Symbol.for("react.fundamental"):60117,x=b?Symbol.for("react.responder"):60118,y=b?Symbol.for("react.scope"):60119;
-function z(a){if("object"===typeof a&&null!==a){var u=a.$$typeof;switch(u){case c:switch(a=a.type,a){case l:case m:case e:case g:case f:case p:return a;default:switch(a=a&&a.$$typeof,a){case k:case n:case t:case r:case h:return a;default:return u}}case d:return u}}}function A(a){return z(a)===m}reactIs_production_min.AsyncMode=l;reactIs_production_min.ConcurrentMode=m;reactIs_production_min.ContextConsumer=k;reactIs_production_min.ContextProvider=h;reactIs_production_min.Element=c;reactIs_production_min.ForwardRef=n;reactIs_production_min.Fragment=e;reactIs_production_min.Lazy=t;reactIs_production_min.Memo=r;reactIs_production_min.Portal=d;
-reactIs_production_min.Profiler=g;reactIs_production_min.StrictMode=f;reactIs_production_min.Suspense=p;reactIs_production_min.isAsyncMode=function(a){return A(a)||z(a)===l};reactIs_production_min.isConcurrentMode=A;reactIs_production_min.isContextConsumer=function(a){return z(a)===k};reactIs_production_min.isContextProvider=function(a){return z(a)===h};reactIs_production_min.isElement=function(a){return "object"===typeof a&&null!==a&&a.$$typeof===c};reactIs_production_min.isForwardRef=function(a){return z(a)===n};reactIs_production_min.isFragment=function(a){return z(a)===e};reactIs_production_min.isLazy=function(a){return z(a)===t};
-reactIs_production_min.isMemo=function(a){return z(a)===r};reactIs_production_min.isPortal=function(a){return z(a)===d};reactIs_production_min.isProfiler=function(a){return z(a)===g};reactIs_production_min.isStrictMode=function(a){return z(a)===f};reactIs_production_min.isSuspense=function(a){return z(a)===p};
-reactIs_production_min.isValidElementType=function(a){return "string"===typeof a||"function"===typeof a||a===e||a===m||a===g||a===f||a===p||a===q||"object"===typeof a&&null!==a&&(a.$$typeof===t||a.$$typeof===r||a.$$typeof===h||a.$$typeof===k||a.$$typeof===n||a.$$typeof===w||a.$$typeof===x||a.$$typeof===y||a.$$typeof===v)};reactIs_production_min.typeOf=z;
-
-var reactIs_development = {};
-
-/** @license React v16.13.1
- * react-is.development.js
- *
- * Copyright (c) Facebook, Inc. and its affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-
-
-if (process.env.NODE_ENV !== "production") {
-  (function() {
-
-// The Symbol used to tag the ReactElement-like types. If there is no native Symbol
-// nor polyfill, then a plain number is used for performance.
-var hasSymbol = typeof Symbol === 'function' && Symbol.for;
-var REACT_ELEMENT_TYPE = hasSymbol ? Symbol.for('react.element') : 0xeac7;
-var REACT_PORTAL_TYPE = hasSymbol ? Symbol.for('react.portal') : 0xeaca;
-var REACT_FRAGMENT_TYPE = hasSymbol ? Symbol.for('react.fragment') : 0xeacb;
-var REACT_STRICT_MODE_TYPE = hasSymbol ? Symbol.for('react.strict_mode') : 0xeacc;
-var REACT_PROFILER_TYPE = hasSymbol ? Symbol.for('react.profiler') : 0xead2;
-var REACT_PROVIDER_TYPE = hasSymbol ? Symbol.for('react.provider') : 0xeacd;
-var REACT_CONTEXT_TYPE = hasSymbol ? Symbol.for('react.context') : 0xeace; // TODO: We don't use AsyncMode or ConcurrentMode anymore. They were temporary
-// (unstable) APIs that have been removed. Can we remove the symbols?
-
-var REACT_ASYNC_MODE_TYPE = hasSymbol ? Symbol.for('react.async_mode') : 0xeacf;
-var REACT_CONCURRENT_MODE_TYPE = hasSymbol ? Symbol.for('react.concurrent_mode') : 0xeacf;
-var REACT_FORWARD_REF_TYPE = hasSymbol ? Symbol.for('react.forward_ref') : 0xead0;
-var REACT_SUSPENSE_TYPE = hasSymbol ? Symbol.for('react.suspense') : 0xead1;
-var REACT_SUSPENSE_LIST_TYPE = hasSymbol ? Symbol.for('react.suspense_list') : 0xead8;
-var REACT_MEMO_TYPE = hasSymbol ? Symbol.for('react.memo') : 0xead3;
-var REACT_LAZY_TYPE = hasSymbol ? Symbol.for('react.lazy') : 0xead4;
-var REACT_BLOCK_TYPE = hasSymbol ? Symbol.for('react.block') : 0xead9;
-var REACT_FUNDAMENTAL_TYPE = hasSymbol ? Symbol.for('react.fundamental') : 0xead5;
-var REACT_RESPONDER_TYPE = hasSymbol ? Symbol.for('react.responder') : 0xead6;
-var REACT_SCOPE_TYPE = hasSymbol ? Symbol.for('react.scope') : 0xead7;
-
-function isValidElementType(type) {
-  return typeof type === 'string' || typeof type === 'function' || // Note: its typeof might be other than 'symbol' or 'number' if it's a polyfill.
-  type === REACT_FRAGMENT_TYPE || type === REACT_CONCURRENT_MODE_TYPE || type === REACT_PROFILER_TYPE || type === REACT_STRICT_MODE_TYPE || type === REACT_SUSPENSE_TYPE || type === REACT_SUSPENSE_LIST_TYPE || typeof type === 'object' && type !== null && (type.$$typeof === REACT_LAZY_TYPE || type.$$typeof === REACT_MEMO_TYPE || type.$$typeof === REACT_PROVIDER_TYPE || type.$$typeof === REACT_CONTEXT_TYPE || type.$$typeof === REACT_FORWARD_REF_TYPE || type.$$typeof === REACT_FUNDAMENTAL_TYPE || type.$$typeof === REACT_RESPONDER_TYPE || type.$$typeof === REACT_SCOPE_TYPE || type.$$typeof === REACT_BLOCK_TYPE);
-}
-
-function typeOf(object) {
-  if (typeof object === 'object' && object !== null) {
-    var $$typeof = object.$$typeof;
-
-    switch ($$typeof) {
-      case REACT_ELEMENT_TYPE:
-        var type = object.type;
-
-        switch (type) {
-          case REACT_ASYNC_MODE_TYPE:
-          case REACT_CONCURRENT_MODE_TYPE:
-          case REACT_FRAGMENT_TYPE:
-          case REACT_PROFILER_TYPE:
-          case REACT_STRICT_MODE_TYPE:
-          case REACT_SUSPENSE_TYPE:
-            return type;
-
-          default:
-            var $$typeofType = type && type.$$typeof;
-
-            switch ($$typeofType) {
-              case REACT_CONTEXT_TYPE:
-              case REACT_FORWARD_REF_TYPE:
-              case REACT_LAZY_TYPE:
-              case REACT_MEMO_TYPE:
-              case REACT_PROVIDER_TYPE:
-                return $$typeofType;
-
-              default:
-                return $$typeof;
-            }
-
-        }
-
-      case REACT_PORTAL_TYPE:
-        return $$typeof;
-    }
-  }
-
-  return undefined;
-} // AsyncMode is deprecated along with isAsyncMode
-
-var AsyncMode = REACT_ASYNC_MODE_TYPE;
-var ConcurrentMode = REACT_CONCURRENT_MODE_TYPE;
-var ContextConsumer = REACT_CONTEXT_TYPE;
-var ContextProvider = REACT_PROVIDER_TYPE;
-var Element = REACT_ELEMENT_TYPE;
-var ForwardRef = REACT_FORWARD_REF_TYPE;
-var Fragment = REACT_FRAGMENT_TYPE;
-var Lazy = REACT_LAZY_TYPE;
-var Memo = REACT_MEMO_TYPE;
-var Portal = REACT_PORTAL_TYPE;
-var Profiler = REACT_PROFILER_TYPE;
-var StrictMode = REACT_STRICT_MODE_TYPE;
-var Suspense = REACT_SUSPENSE_TYPE;
-var hasWarnedAboutDeprecatedIsAsyncMode = false; // AsyncMode should be deprecated
-
-function isAsyncMode(object) {
-  {
-    if (!hasWarnedAboutDeprecatedIsAsyncMode) {
-      hasWarnedAboutDeprecatedIsAsyncMode = true; // Using console['warn'] to evade Babel and ESLint
-
-      console['warn']('The ReactIs.isAsyncMode() alias has been deprecated, ' + 'and will be removed in React 17+. Update your code to use ' + 'ReactIs.isConcurrentMode() instead. It has the exact same API.');
-    }
-  }
-
-  return isConcurrentMode(object) || typeOf(object) === REACT_ASYNC_MODE_TYPE;
-}
-function isConcurrentMode(object) {
-  return typeOf(object) === REACT_CONCURRENT_MODE_TYPE;
-}
-function isContextConsumer(object) {
-  return typeOf(object) === REACT_CONTEXT_TYPE;
-}
-function isContextProvider(object) {
-  return typeOf(object) === REACT_PROVIDER_TYPE;
-}
-function isElement(object) {
-  return typeof object === 'object' && object !== null && object.$$typeof === REACT_ELEMENT_TYPE;
-}
-function isForwardRef(object) {
-  return typeOf(object) === REACT_FORWARD_REF_TYPE;
-}
-function isFragment(object) {
-  return typeOf(object) === REACT_FRAGMENT_TYPE;
-}
-function isLazy(object) {
-  return typeOf(object) === REACT_LAZY_TYPE;
-}
-function isMemo(object) {
-  return typeOf(object) === REACT_MEMO_TYPE;
-}
-function isPortal(object) {
-  return typeOf(object) === REACT_PORTAL_TYPE;
-}
-function isProfiler(object) {
-  return typeOf(object) === REACT_PROFILER_TYPE;
-}
-function isStrictMode(object) {
-  return typeOf(object) === REACT_STRICT_MODE_TYPE;
-}
-function isSuspense(object) {
-  return typeOf(object) === REACT_SUSPENSE_TYPE;
-}
-
-reactIs_development.AsyncMode = AsyncMode;
-reactIs_development.ConcurrentMode = ConcurrentMode;
-reactIs_development.ContextConsumer = ContextConsumer;
-reactIs_development.ContextProvider = ContextProvider;
-reactIs_development.Element = Element;
-reactIs_development.ForwardRef = ForwardRef;
-reactIs_development.Fragment = Fragment;
-reactIs_development.Lazy = Lazy;
-reactIs_development.Memo = Memo;
-reactIs_development.Portal = Portal;
-reactIs_development.Profiler = Profiler;
-reactIs_development.StrictMode = StrictMode;
-reactIs_development.Suspense = Suspense;
-reactIs_development.isAsyncMode = isAsyncMode;
-reactIs_development.isConcurrentMode = isConcurrentMode;
-reactIs_development.isContextConsumer = isContextConsumer;
-reactIs_development.isContextProvider = isContextProvider;
-reactIs_development.isElement = isElement;
-reactIs_development.isForwardRef = isForwardRef;
-reactIs_development.isFragment = isFragment;
-reactIs_development.isLazy = isLazy;
-reactIs_development.isMemo = isMemo;
-reactIs_development.isPortal = isPortal;
-reactIs_development.isProfiler = isProfiler;
-reactIs_development.isStrictMode = isStrictMode;
-reactIs_development.isSuspense = isSuspense;
-reactIs_development.isValidElementType = isValidElementType;
-reactIs_development.typeOf = typeOf;
-  })();
-}
-
-if (process.env.NODE_ENV === 'production') {
-  reactIs.exports = reactIs_production_min;
-} else {
-  reactIs.exports = reactIs_development;
-}
-
-/*
-object-assign
-(c) Sindre Sorhus
-@license MIT
-*/
-/* eslint-disable no-unused-vars */
-var getOwnPropertySymbols = Object.getOwnPropertySymbols;
-var hasOwnProperty = Object.prototype.hasOwnProperty;
-var propIsEnumerable = Object.prototype.propertyIsEnumerable;
-
-function toObject(val) {
-	if (val === null || val === undefined) {
-		throw new TypeError('Object.assign cannot be called with null or undefined');
-	}
-
-	return Object(val);
-}
-
-function shouldUseNative() {
-	try {
-		if (!Object.assign) {
-			return false;
-		}
-
-		// Detect buggy property enumeration order in older V8 versions.
-
-		// https://bugs.chromium.org/p/v8/issues/detail?id=4118
-		var test1 = new String('abc');  // eslint-disable-line no-new-wrappers
-		test1[5] = 'de';
-		if (Object.getOwnPropertyNames(test1)[0] === '5') {
-			return false;
-		}
-
-		// https://bugs.chromium.org/p/v8/issues/detail?id=3056
-		var test2 = {};
-		for (var i = 0; i < 10; i++) {
-			test2['_' + String.fromCharCode(i)] = i;
-		}
-		var order2 = Object.getOwnPropertyNames(test2).map(function (n) {
-			return test2[n];
-		});
-		if (order2.join('') !== '0123456789') {
-			return false;
-		}
-
-		// https://bugs.chromium.org/p/v8/issues/detail?id=3056
-		var test3 = {};
-		'abcdefghijklmnopqrst'.split('').forEach(function (letter) {
-			test3[letter] = letter;
-		});
-		if (Object.keys(Object.assign({}, test3)).join('') !==
-				'abcdefghijklmnopqrst') {
-			return false;
-		}
-
-		return true;
-	} catch (err) {
-		// We don't expect any of the above to throw, but better to be safe.
-		return false;
-	}
-}
-
-var objectAssign = shouldUseNative() ? Object.assign : function (target, source) {
-	var from;
-	var to = toObject(target);
-	var symbols;
-
-	for (var s = 1; s < arguments.length; s++) {
-		from = Object(arguments[s]);
-
-		for (var key in from) {
-			if (hasOwnProperty.call(from, key)) {
-				to[key] = from[key];
-			}
-		}
-
-		if (getOwnPropertySymbols) {
-			symbols = getOwnPropertySymbols(from);
-			for (var i = 0; i < symbols.length; i++) {
-				if (propIsEnumerable.call(from, symbols[i])) {
-					to[symbols[i]] = from[symbols[i]];
-				}
-			}
-		}
-	}
-
-	return to;
-};
-
-/**
- * Copyright (c) 2013-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-var ReactPropTypesSecret$3 = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
-
-var ReactPropTypesSecret_1 = ReactPropTypesSecret$3;
-
-/**
- * Copyright (c) 2013-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-var printWarning$1 = function() {};
-
-if (process.env.NODE_ENV !== 'production') {
-  var ReactPropTypesSecret$2 = ReactPropTypesSecret_1;
-  var loggedTypeFailures = {};
-  var has$1 = Function.call.bind(Object.prototype.hasOwnProperty);
-
-  printWarning$1 = function(text) {
-    var message = 'Warning: ' + text;
-    if (typeof console !== 'undefined') {
-      console.error(message);
-    }
-    try {
-      // --- Welcome to debugging React ---
-      // This error was thrown as a convenience so that you can use this stack
-      // to find the callsite that caused this warning to fire.
-      throw new Error(message);
-    } catch (x) {}
-  };
-}
-
-/**
- * Assert that the values match with the type specs.
- * Error messages are memorized and will only be shown once.
- *
- * @param {object} typeSpecs Map of name to a ReactPropType
- * @param {object} values Runtime values that need to be type-checked
- * @param {string} location e.g. "prop", "context", "child context"
- * @param {string} componentName Name of the component for error messages.
- * @param {?Function} getStack Returns the component stack.
- * @private
- */
-function checkPropTypes$1(typeSpecs, values, location, componentName, getStack) {
-  if (process.env.NODE_ENV !== 'production') {
-    for (var typeSpecName in typeSpecs) {
-      if (has$1(typeSpecs, typeSpecName)) {
-        var error;
-        // Prop type validation may throw. In case they do, we don't want to
-        // fail the render phase where it didn't fail before. So we log it.
-        // After these have been cleaned up, we'll let them throw.
-        try {
-          // This is intentionally an invariant that gets caught. It's the same
-          // behavior as without this statement except with a better message.
-          if (typeof typeSpecs[typeSpecName] !== 'function') {
-            var err = Error(
-              (componentName || 'React class') + ': ' + location + ' type `' + typeSpecName + '` is invalid; ' +
-              'it must be a function, usually from the `prop-types` package, but received `' + typeof typeSpecs[typeSpecName] + '`.'
-            );
-            err.name = 'Invariant Violation';
-            throw err;
-          }
-          error = typeSpecs[typeSpecName](values, typeSpecName, componentName, location, null, ReactPropTypesSecret$2);
-        } catch (ex) {
-          error = ex;
-        }
-        if (error && !(error instanceof Error)) {
-          printWarning$1(
-            (componentName || 'React class') + ': type specification of ' +
-            location + ' `' + typeSpecName + '` is invalid; the type checker ' +
-            'function must return `null` or an `Error` but returned a ' + typeof error + '. ' +
-            'You may have forgotten to pass an argument to the type checker ' +
-            'creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and ' +
-            'shape all require an argument).'
-          );
-        }
-        if (error instanceof Error && !(error.message in loggedTypeFailures)) {
-          // Only monitor this failure once because there tends to be a lot of the
-          // same error.
-          loggedTypeFailures[error.message] = true;
-
-          var stack = getStack ? getStack() : '';
-
-          printWarning$1(
-            'Failed ' + location + ' type: ' + error.message + (stack != null ? stack : '')
-          );
-        }
-      }
-    }
-  }
-}
-
-/**
- * Resets warning cache when testing.
- *
- * @private
- */
-checkPropTypes$1.resetWarningCache = function() {
-  if (process.env.NODE_ENV !== 'production') {
-    loggedTypeFailures = {};
-  }
-};
-
-var checkPropTypes_1 = checkPropTypes$1;
-
-/**
- * Copyright (c) 2013-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-var ReactIs$1 = reactIs.exports;
-var assign = objectAssign;
-
-var ReactPropTypesSecret$1 = ReactPropTypesSecret_1;
-var checkPropTypes = checkPropTypes_1;
-
-var has = Function.call.bind(Object.prototype.hasOwnProperty);
-var printWarning = function() {};
-
-if (process.env.NODE_ENV !== 'production') {
-  printWarning = function(text) {
-    var message = 'Warning: ' + text;
-    if (typeof console !== 'undefined') {
-      console.error(message);
-    }
-    try {
-      // --- Welcome to debugging React ---
-      // This error was thrown as a convenience so that you can use this stack
-      // to find the callsite that caused this warning to fire.
-      throw new Error(message);
-    } catch (x) {}
-  };
-}
-
-function emptyFunctionThatReturnsNull() {
-  return null;
-}
-
-var factoryWithTypeCheckers = function(isValidElement, throwOnDirectAccess) {
-  /* global Symbol */
-  var ITERATOR_SYMBOL = typeof Symbol === 'function' && Symbol.iterator;
-  var FAUX_ITERATOR_SYMBOL = '@@iterator'; // Before Symbol spec.
-
-  /**
-   * Returns the iterator method function contained on the iterable object.
-   *
-   * Be sure to invoke the function with the iterable as context:
-   *
-   *     var iteratorFn = getIteratorFn(myIterable);
-   *     if (iteratorFn) {
-   *       var iterator = iteratorFn.call(myIterable);
-   *       ...
-   *     }
-   *
-   * @param {?object} maybeIterable
-   * @return {?function}
-   */
-  function getIteratorFn(maybeIterable) {
-    var iteratorFn = maybeIterable && (ITERATOR_SYMBOL && maybeIterable[ITERATOR_SYMBOL] || maybeIterable[FAUX_ITERATOR_SYMBOL]);
-    if (typeof iteratorFn === 'function') {
-      return iteratorFn;
-    }
-  }
-
-  /**
-   * Collection of methods that allow declaration and validation of props that are
-   * supplied to React components. Example usage:
-   *
-   *   var Props = require('ReactPropTypes');
-   *   var MyArticle = React.createClass({
-   *     propTypes: {
-   *       // An optional string prop named "description".
-   *       description: Props.string,
-   *
-   *       // A required enum prop named "category".
-   *       category: Props.oneOf(['News','Photos']).isRequired,
-   *
-   *       // A prop named "dialog" that requires an instance of Dialog.
-   *       dialog: Props.instanceOf(Dialog).isRequired
-   *     },
-   *     render: function() { ... }
-   *   });
-   *
-   * A more formal specification of how these methods are used:
-   *
-   *   type := array|bool|func|object|number|string|oneOf([...])|instanceOf(...)
-   *   decl := ReactPropTypes.{type}(.isRequired)?
-   *
-   * Each and every declaration produces a function with the same signature. This
-   * allows the creation of custom validation functions. For example:
-   *
-   *  var MyLink = React.createClass({
-   *    propTypes: {
-   *      // An optional string or URI prop named "href".
-   *      href: function(props, propName, componentName) {
-   *        var propValue = props[propName];
-   *        if (propValue != null && typeof propValue !== 'string' &&
-   *            !(propValue instanceof URI)) {
-   *          return new Error(
-   *            'Expected a string or an URI for ' + propName + ' in ' +
-   *            componentName
-   *          );
-   *        }
-   *      }
-   *    },
-   *    render: function() {...}
-   *  });
-   *
-   * @internal
-   */
-
-  var ANONYMOUS = '<<anonymous>>';
-
-  // Important!
-  // Keep this list in sync with production version in `./factoryWithThrowingShims.js`.
-  var ReactPropTypes = {
-    array: createPrimitiveTypeChecker('array'),
-    bool: createPrimitiveTypeChecker('boolean'),
-    func: createPrimitiveTypeChecker('function'),
-    number: createPrimitiveTypeChecker('number'),
-    object: createPrimitiveTypeChecker('object'),
-    string: createPrimitiveTypeChecker('string'),
-    symbol: createPrimitiveTypeChecker('symbol'),
-
-    any: createAnyTypeChecker(),
-    arrayOf: createArrayOfTypeChecker,
-    element: createElementTypeChecker(),
-    elementType: createElementTypeTypeChecker(),
-    instanceOf: createInstanceTypeChecker,
-    node: createNodeChecker(),
-    objectOf: createObjectOfTypeChecker,
-    oneOf: createEnumTypeChecker,
-    oneOfType: createUnionTypeChecker,
-    shape: createShapeTypeChecker,
-    exact: createStrictShapeTypeChecker,
-  };
-
-  /**
-   * inlined Object.is polyfill to avoid requiring consumers ship their own
-   * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is
-   */
-  /*eslint-disable no-self-compare*/
-  function is(x, y) {
-    // SameValue algorithm
-    if (x === y) {
-      // Steps 1-5, 7-10
-      // Steps 6.b-6.e: +0 != -0
-      return x !== 0 || 1 / x === 1 / y;
-    } else {
-      // Step 6.a: NaN == NaN
-      return x !== x && y !== y;
-    }
-  }
-  /*eslint-enable no-self-compare*/
-
-  /**
-   * We use an Error-like object for backward compatibility as people may call
-   * PropTypes directly and inspect their output. However, we don't use real
-   * Errors anymore. We don't inspect their stack anyway, and creating them
-   * is prohibitively expensive if they are created too often, such as what
-   * happens in oneOfType() for any type before the one that matched.
-   */
-  function PropTypeError(message) {
-    this.message = message;
-    this.stack = '';
-  }
-  // Make `instanceof Error` still work for returned errors.
-  PropTypeError.prototype = Error.prototype;
-
-  function createChainableTypeChecker(validate) {
-    if (process.env.NODE_ENV !== 'production') {
-      var manualPropTypeCallCache = {};
-      var manualPropTypeWarningCount = 0;
-    }
-    function checkType(isRequired, props, propName, componentName, location, propFullName, secret) {
-      componentName = componentName || ANONYMOUS;
-      propFullName = propFullName || propName;
-
-      if (secret !== ReactPropTypesSecret$1) {
-        if (throwOnDirectAccess) {
-          // New behavior only for users of `prop-types` package
-          var err = new Error(
-            'Calling PropTypes validators directly is not supported by the `prop-types` package. ' +
-            'Use `PropTypes.checkPropTypes()` to call them. ' +
-            'Read more at http://fb.me/use-check-prop-types'
-          );
-          err.name = 'Invariant Violation';
-          throw err;
-        } else if (process.env.NODE_ENV !== 'production' && typeof console !== 'undefined') {
-          // Old behavior for people using React.PropTypes
-          var cacheKey = componentName + ':' + propName;
-          if (
-            !manualPropTypeCallCache[cacheKey] &&
-            // Avoid spamming the console because they are often not actionable except for lib authors
-            manualPropTypeWarningCount < 3
-          ) {
-            printWarning(
-              'You are manually calling a React.PropTypes validation ' +
-              'function for the `' + propFullName + '` prop on `' + componentName  + '`. This is deprecated ' +
-              'and will throw in the standalone `prop-types` package. ' +
-              'You may be seeing this warning due to a third-party PropTypes ' +
-              'library. See https://fb.me/react-warning-dont-call-proptypes ' + 'for details.'
-            );
-            manualPropTypeCallCache[cacheKey] = true;
-            manualPropTypeWarningCount++;
-          }
-        }
-      }
-      if (props[propName] == null) {
-        if (isRequired) {
-          if (props[propName] === null) {
-            return new PropTypeError('The ' + location + ' `' + propFullName + '` is marked as required ' + ('in `' + componentName + '`, but its value is `null`.'));
-          }
-          return new PropTypeError('The ' + location + ' `' + propFullName + '` is marked as required in ' + ('`' + componentName + '`, but its value is `undefined`.'));
-        }
-        return null;
-      } else {
-        return validate(props, propName, componentName, location, propFullName);
-      }
-    }
-
-    var chainedCheckType = checkType.bind(null, false);
-    chainedCheckType.isRequired = checkType.bind(null, true);
-
-    return chainedCheckType;
-  }
-
-  function createPrimitiveTypeChecker(expectedType) {
-    function validate(props, propName, componentName, location, propFullName, secret) {
-      var propValue = props[propName];
-      var propType = getPropType(propValue);
-      if (propType !== expectedType) {
-        // `propValue` being instance of, say, date/regexp, pass the 'object'
-        // check, but we can offer a more precise error message here rather than
-        // 'of type `object`'.
-        var preciseType = getPreciseType(propValue);
-
-        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + preciseType + '` supplied to `' + componentName + '`, expected ') + ('`' + expectedType + '`.'));
-      }
-      return null;
-    }
-    return createChainableTypeChecker(validate);
-  }
-
-  function createAnyTypeChecker() {
-    return createChainableTypeChecker(emptyFunctionThatReturnsNull);
-  }
-
-  function createArrayOfTypeChecker(typeChecker) {
-    function validate(props, propName, componentName, location, propFullName) {
-      if (typeof typeChecker !== 'function') {
-        return new PropTypeError('Property `' + propFullName + '` of component `' + componentName + '` has invalid PropType notation inside arrayOf.');
-      }
-      var propValue = props[propName];
-      if (!Array.isArray(propValue)) {
-        var propType = getPropType(propValue);
-        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected an array.'));
-      }
-      for (var i = 0; i < propValue.length; i++) {
-        var error = typeChecker(propValue, i, componentName, location, propFullName + '[' + i + ']', ReactPropTypesSecret$1);
-        if (error instanceof Error) {
-          return error;
-        }
-      }
-      return null;
-    }
-    return createChainableTypeChecker(validate);
-  }
-
-  function createElementTypeChecker() {
-    function validate(props, propName, componentName, location, propFullName) {
-      var propValue = props[propName];
-      if (!isValidElement(propValue)) {
-        var propType = getPropType(propValue);
-        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected a single ReactElement.'));
-      }
-      return null;
-    }
-    return createChainableTypeChecker(validate);
-  }
-
-  function createElementTypeTypeChecker() {
-    function validate(props, propName, componentName, location, propFullName) {
-      var propValue = props[propName];
-      if (!ReactIs$1.isValidElementType(propValue)) {
-        var propType = getPropType(propValue);
-        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected a single ReactElement type.'));
-      }
-      return null;
-    }
-    return createChainableTypeChecker(validate);
-  }
-
-  function createInstanceTypeChecker(expectedClass) {
-    function validate(props, propName, componentName, location, propFullName) {
-      if (!(props[propName] instanceof expectedClass)) {
-        var expectedClassName = expectedClass.name || ANONYMOUS;
-        var actualClassName = getClassName(props[propName]);
-        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + actualClassName + '` supplied to `' + componentName + '`, expected ') + ('instance of `' + expectedClassName + '`.'));
-      }
-      return null;
-    }
-    return createChainableTypeChecker(validate);
-  }
-
-  function createEnumTypeChecker(expectedValues) {
-    if (!Array.isArray(expectedValues)) {
-      if (process.env.NODE_ENV !== 'production') {
-        if (arguments.length > 1) {
-          printWarning(
-            'Invalid arguments supplied to oneOf, expected an array, got ' + arguments.length + ' arguments. ' +
-            'A common mistake is to write oneOf(x, y, z) instead of oneOf([x, y, z]).'
-          );
-        } else {
-          printWarning('Invalid argument supplied to oneOf, expected an array.');
-        }
-      }
-      return emptyFunctionThatReturnsNull;
-    }
-
-    function validate(props, propName, componentName, location, propFullName) {
-      var propValue = props[propName];
-      for (var i = 0; i < expectedValues.length; i++) {
-        if (is(propValue, expectedValues[i])) {
-          return null;
-        }
-      }
-
-      var valuesString = JSON.stringify(expectedValues, function replacer(key, value) {
-        var type = getPreciseType(value);
-        if (type === 'symbol') {
-          return String(value);
-        }
-        return value;
-      });
-      return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of value `' + String(propValue) + '` ' + ('supplied to `' + componentName + '`, expected one of ' + valuesString + '.'));
-    }
-    return createChainableTypeChecker(validate);
-  }
-
-  function createObjectOfTypeChecker(typeChecker) {
-    function validate(props, propName, componentName, location, propFullName) {
-      if (typeof typeChecker !== 'function') {
-        return new PropTypeError('Property `' + propFullName + '` of component `' + componentName + '` has invalid PropType notation inside objectOf.');
-      }
-      var propValue = props[propName];
-      var propType = getPropType(propValue);
-      if (propType !== 'object') {
-        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected an object.'));
-      }
-      for (var key in propValue) {
-        if (has(propValue, key)) {
-          var error = typeChecker(propValue, key, componentName, location, propFullName + '.' + key, ReactPropTypesSecret$1);
-          if (error instanceof Error) {
-            return error;
-          }
-        }
-      }
-      return null;
-    }
-    return createChainableTypeChecker(validate);
-  }
-
-  function createUnionTypeChecker(arrayOfTypeCheckers) {
-    if (!Array.isArray(arrayOfTypeCheckers)) {
-      process.env.NODE_ENV !== 'production' ? printWarning('Invalid argument supplied to oneOfType, expected an instance of array.') : void 0;
-      return emptyFunctionThatReturnsNull;
-    }
-
-    for (var i = 0; i < arrayOfTypeCheckers.length; i++) {
-      var checker = arrayOfTypeCheckers[i];
-      if (typeof checker !== 'function') {
-        printWarning(
-          'Invalid argument supplied to oneOfType. Expected an array of check functions, but ' +
-          'received ' + getPostfixForTypeWarning(checker) + ' at index ' + i + '.'
-        );
-        return emptyFunctionThatReturnsNull;
-      }
-    }
-
-    function validate(props, propName, componentName, location, propFullName) {
-      for (var i = 0; i < arrayOfTypeCheckers.length; i++) {
-        var checker = arrayOfTypeCheckers[i];
-        if (checker(props, propName, componentName, location, propFullName, ReactPropTypesSecret$1) == null) {
-          return null;
-        }
-      }
-
-      return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` supplied to ' + ('`' + componentName + '`.'));
-    }
-    return createChainableTypeChecker(validate);
-  }
-
-  function createNodeChecker() {
-    function validate(props, propName, componentName, location, propFullName) {
-      if (!isNode(props[propName])) {
-        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` supplied to ' + ('`' + componentName + '`, expected a ReactNode.'));
-      }
-      return null;
-    }
-    return createChainableTypeChecker(validate);
-  }
-
-  function createShapeTypeChecker(shapeTypes) {
-    function validate(props, propName, componentName, location, propFullName) {
-      var propValue = props[propName];
-      var propType = getPropType(propValue);
-      if (propType !== 'object') {
-        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type `' + propType + '` ' + ('supplied to `' + componentName + '`, expected `object`.'));
-      }
-      for (var key in shapeTypes) {
-        var checker = shapeTypes[key];
-        if (!checker) {
-          continue;
-        }
-        var error = checker(propValue, key, componentName, location, propFullName + '.' + key, ReactPropTypesSecret$1);
-        if (error) {
-          return error;
-        }
-      }
-      return null;
-    }
-    return createChainableTypeChecker(validate);
-  }
-
-  function createStrictShapeTypeChecker(shapeTypes) {
-    function validate(props, propName, componentName, location, propFullName) {
-      var propValue = props[propName];
-      var propType = getPropType(propValue);
-      if (propType !== 'object') {
-        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type `' + propType + '` ' + ('supplied to `' + componentName + '`, expected `object`.'));
-      }
-      // We need to check all keys in case some are required but missing from
-      // props.
-      var allKeys = assign({}, props[propName], shapeTypes);
-      for (var key in allKeys) {
-        var checker = shapeTypes[key];
-        if (!checker) {
-          return new PropTypeError(
-            'Invalid ' + location + ' `' + propFullName + '` key `' + key + '` supplied to `' + componentName + '`.' +
-            '\nBad object: ' + JSON.stringify(props[propName], null, '  ') +
-            '\nValid keys: ' +  JSON.stringify(Object.keys(shapeTypes), null, '  ')
-          );
-        }
-        var error = checker(propValue, key, componentName, location, propFullName + '.' + key, ReactPropTypesSecret$1);
-        if (error) {
-          return error;
-        }
-      }
-      return null;
-    }
-
-    return createChainableTypeChecker(validate);
-  }
-
-  function isNode(propValue) {
-    switch (typeof propValue) {
-      case 'number':
-      case 'string':
-      case 'undefined':
-        return true;
-      case 'boolean':
-        return !propValue;
-      case 'object':
-        if (Array.isArray(propValue)) {
-          return propValue.every(isNode);
-        }
-        if (propValue === null || isValidElement(propValue)) {
-          return true;
-        }
-
-        var iteratorFn = getIteratorFn(propValue);
-        if (iteratorFn) {
-          var iterator = iteratorFn.call(propValue);
-          var step;
-          if (iteratorFn !== propValue.entries) {
-            while (!(step = iterator.next()).done) {
-              if (!isNode(step.value)) {
-                return false;
-              }
-            }
-          } else {
-            // Iterator will provide entry [k,v] tuples rather than values.
-            while (!(step = iterator.next()).done) {
-              var entry = step.value;
-              if (entry) {
-                if (!isNode(entry[1])) {
-                  return false;
-                }
-              }
-            }
-          }
-        } else {
-          return false;
-        }
-
-        return true;
-      default:
-        return false;
-    }
-  }
-
-  function isSymbol(propType, propValue) {
-    // Native Symbol.
-    if (propType === 'symbol') {
-      return true;
-    }
-
-    // falsy value can't be a Symbol
-    if (!propValue) {
-      return false;
-    }
-
-    // 19.4.3.5 Symbol.prototype[@@toStringTag] === 'Symbol'
-    if (propValue['@@toStringTag'] === 'Symbol') {
-      return true;
-    }
-
-    // Fallback for non-spec compliant Symbols which are polyfilled.
-    if (typeof Symbol === 'function' && propValue instanceof Symbol) {
-      return true;
-    }
-
-    return false;
-  }
-
-  // Equivalent of `typeof` but with special handling for array and regexp.
-  function getPropType(propValue) {
-    var propType = typeof propValue;
-    if (Array.isArray(propValue)) {
-      return 'array';
-    }
-    if (propValue instanceof RegExp) {
-      // Old webkits (at least until Android 4.0) return 'function' rather than
-      // 'object' for typeof a RegExp. We'll normalize this here so that /bla/
-      // passes PropTypes.object.
-      return 'object';
-    }
-    if (isSymbol(propType, propValue)) {
-      return 'symbol';
-    }
-    return propType;
-  }
-
-  // This handles more types than `getPropType`. Only used for error messages.
-  // See `createPrimitiveTypeChecker`.
-  function getPreciseType(propValue) {
-    if (typeof propValue === 'undefined' || propValue === null) {
-      return '' + propValue;
-    }
-    var propType = getPropType(propValue);
-    if (propType === 'object') {
-      if (propValue instanceof Date) {
-        return 'date';
-      } else if (propValue instanceof RegExp) {
-        return 'regexp';
-      }
-    }
-    return propType;
-  }
-
-  // Returns a string that is postfixed to a warning about an invalid type.
-  // For example, "undefined" or "of type array"
-  function getPostfixForTypeWarning(value) {
-    var type = getPreciseType(value);
-    switch (type) {
-      case 'array':
-      case 'object':
-        return 'an ' + type;
-      case 'boolean':
-      case 'date':
-      case 'regexp':
-        return 'a ' + type;
-      default:
-        return type;
-    }
-  }
-
-  // Returns class name of the object, if any.
-  function getClassName(propValue) {
-    if (!propValue.constructor || !propValue.constructor.name) {
-      return ANONYMOUS;
-    }
-    return propValue.constructor.name;
-  }
-
-  ReactPropTypes.checkPropTypes = checkPropTypes;
-  ReactPropTypes.resetWarningCache = checkPropTypes.resetWarningCache;
-  ReactPropTypes.PropTypes = ReactPropTypes;
-
-  return ReactPropTypes;
-};
-
-/**
- * Copyright (c) 2013-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-var ReactPropTypesSecret = ReactPropTypesSecret_1;
-
-function emptyFunction() {}
-function emptyFunctionWithReset() {}
-emptyFunctionWithReset.resetWarningCache = emptyFunction;
-
-var factoryWithThrowingShims = function() {
-  function shim(props, propName, componentName, location, propFullName, secret) {
-    if (secret === ReactPropTypesSecret) {
-      // It is still safe when called from React.
-      return;
-    }
-    var err = new Error(
-      'Calling PropTypes validators directly is not supported by the `prop-types` package. ' +
-      'Use PropTypes.checkPropTypes() to call them. ' +
-      'Read more at http://fb.me/use-check-prop-types'
-    );
-    err.name = 'Invariant Violation';
-    throw err;
-  }  shim.isRequired = shim;
-  function getShim() {
-    return shim;
-  }  // Important!
-  // Keep this list in sync with production version in `./factoryWithTypeCheckers.js`.
-  var ReactPropTypes = {
-    array: shim,
-    bool: shim,
-    func: shim,
-    number: shim,
-    object: shim,
-    string: shim,
-    symbol: shim,
-
-    any: shim,
-    arrayOf: getShim,
-    element: shim,
-    elementType: shim,
-    instanceOf: getShim,
-    node: shim,
-    objectOf: getShim,
-    oneOf: getShim,
-    oneOfType: getShim,
-    shape: getShim,
-    exact: getShim,
-
-    checkPropTypes: emptyFunctionWithReset,
-    resetWarningCache: emptyFunction
-  };
-
-  ReactPropTypes.PropTypes = ReactPropTypes;
-
-  return ReactPropTypes;
-};
-
-/**
- * Copyright (c) 2013-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-if (process.env.NODE_ENV !== 'production') {
-  var ReactIs = reactIs.exports;
-
-  // By explicitly using `prop-types` you are opting into new development behavior.
-  // http://fb.me/prop-types-in-prod
-  var throwOnDirectAccess = true;
-  propTypes.exports = factoryWithTypeCheckers(ReactIs.isElement, throwOnDirectAccess);
-} else {
-  // By explicitly using `prop-types` you are opting into new production behavior.
-  // http://fb.me/prop-types-in-prod
-  propTypes.exports = factoryWithThrowingShims();
-}
-
-var PropTypes = propTypes.exports;
 
 function toInteger(dirtyNumber) {
   if (dirtyNumber === null || dirtyNumber === true || dirtyNumber === false) {
@@ -3663,7 +2558,7 @@ var unescapedLatinCharacterRegExp = /[a-zA-Z]/;
  * //=> "3 o'clock"
  */
 
-function format$1(dirtyDate, dirtyFormatStr, dirtyOptions) {
+function format(dirtyDate, dirtyFormatStr, dirtyOptions) {
   requiredArgs(2, arguments);
   var formatStr = String(dirtyFormatStr);
   var options = dirtyOptions || {};
@@ -3784,68 +2679,6 @@ function getDay(dirtyDate) {
   var date = toDate(dirtyDate);
   var day = date.getDay();
   return day;
-}
-
-/**
- * @name isLeapYear
- * @category Year Helpers
- * @summary Is the given date in the leap year?
- *
- * @description
- * Is the given date in the leap year?
- *
- * ### v2.0.0 breaking changes:
- *
- * - [Changes that are common for the whole library](https://github.com/date-fns/date-fns/blob/master/docs/upgradeGuide.md#Common-Changes).
- *
- * @param {Date|Number} date - the date to check
- * @returns {Boolean} the date is in the leap year
- * @throws {TypeError} 1 argument required
- *
- * @example
- * // Is 1 September 2012 in the leap year?
- * var result = isLeapYear(new Date(2012, 8, 1))
- * //=> true
- */
-
-function isLeapYear(dirtyDate) {
-  requiredArgs(1, arguments);
-  var date = toDate(dirtyDate);
-  var year = date.getFullYear();
-  return year % 400 === 0 || year % 4 === 0 && year % 100 !== 0;
-}
-
-/**
- * @name getDaysInYear
- * @category Year Helpers
- * @summary Get the number of days in a year of the given date.
- *
- * @description
- * Get the number of days in a year of the given date.
- *
- * ### v2.0.0 breaking changes:
- *
- * - [Changes that are common for the whole library](https://github.com/date-fns/date-fns/blob/master/docs/upgradeGuide.md#Common-Changes).
- *
- * @param {Date|Number} date - the given date
- * @returns {Number} the number of days in a year
- * @throws {TypeError} 1 argument required
- *
- * @example
- * // How many days are in 2012?
- * const result = getDaysInYear(new Date(2012, 0, 1))
- * //=> 366
- */
-
-function getDaysInYear(dirtyDate) {
-  requiredArgs(1, arguments);
-  var date = toDate(dirtyDate);
-
-  if (String(new Date(date)) === 'Invalid Date') {
-    return NaN;
-  }
-
-  return isLeapYear(date) ? 366 : 365;
 }
 
 var formatDistanceLocale$2 = {
@@ -5005,19 +3838,1260 @@ function _extends$1() {
   return _extends$1.apply(this, arguments);
 }
 
-function _objectWithoutPropertiesLoose(source, excluded) {
-  if (source == null) return {};
-  var target = {};
-  var sourceKeys = Object.keys(source);
-  var key, i;
+const Wrapper = ({
+  children,
+  ...rest
+}) => {
+  return /*#__PURE__*/React__default['default'].createElement("div", rest, children);
+};
 
-  for (i = 0; i < sourceKeys.length; i++) {
-    key = sourceKeys[i];
-    if (excluded.indexOf(key) >= 0) continue;
-    target[key] = source[key];
+const Container$8 = ({
+  children,
+  ...rest
+}) => {
+  return /*#__PURE__*/React__default['default'].createElement(Wrapper, _extends$1({
+    className: "rbh-container"
+  }, rest), children);
+};
+
+const Container$7 = ({
+  children,
+  legend,
+  ...rest
+}) => {
+  return /*#__PURE__*/React__default['default'].createElement(Wrapper, _extends$1({
+    className: "rbh-wrapper",
+    style: {
+      marginTop: legend ? 10 : 0
+    }
+  }, rest), children);
+};
+
+const Container$6 = ({
+  children,
+  ...rest
+}) => {
+  return /*#__PURE__*/React__default['default'].createElement(Wrapper, _extends$1({
+    className: "rbh-week-container"
+  }, rest), children);
+};
+
+const Container$5 = ({
+  children,
+  ...rest
+}) => {
+  return /*#__PURE__*/React__default['default'].createElement(Wrapper, _extends$1({
+    className: "rbh-week-label"
+  }, rest), children);
+};
+
+const Container$4 = ({
+  children,
+  ...rest
+}) => {
+  return /*#__PURE__*/React__default['default'].createElement(Wrapper, _extends$1({
+    className: "rbh-columns-container"
+  }, rest), children);
+};
+
+const Container$3 = ({
+  children,
+  ...rest
+}) => {
+  return /*#__PURE__*/React__default['default'].createElement(Container$7, _extends$1({
+    className: "rbh-column-container"
+  }, rest), children);
+};
+
+const Column = ({ ...rest
+}) => {
+  return /*#__PURE__*/React__default['default'].createElement(Container$3, rest);
+};
+
+var Column$1 = /*#__PURE__*/React.memo(Column);
+
+const Container$2 = ({
+  children,
+  ...rest
+}) => {
+  return /*#__PURE__*/React__default['default'].createElement(Wrapper, _extends$1({
+    className: "rbh-boxes-container"
+  }, rest), children);
+};
+
+var propTypes = {exports: {}};
+
+var reactIs = {exports: {}};
+
+var reactIs_production_min = {};
+
+/** @license React v16.13.1
+ * react-is.production.min.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+var b="function"===typeof Symbol&&Symbol.for,c=b?Symbol.for("react.element"):60103,d=b?Symbol.for("react.portal"):60106,e=b?Symbol.for("react.fragment"):60107,f=b?Symbol.for("react.strict_mode"):60108,g=b?Symbol.for("react.profiler"):60114,h=b?Symbol.for("react.provider"):60109,k=b?Symbol.for("react.context"):60110,l=b?Symbol.for("react.async_mode"):60111,m=b?Symbol.for("react.concurrent_mode"):60111,n=b?Symbol.for("react.forward_ref"):60112,p=b?Symbol.for("react.suspense"):60113,q=b?
+Symbol.for("react.suspense_list"):60120,r=b?Symbol.for("react.memo"):60115,t=b?Symbol.for("react.lazy"):60116,v=b?Symbol.for("react.block"):60121,w=b?Symbol.for("react.fundamental"):60117,x=b?Symbol.for("react.responder"):60118,y=b?Symbol.for("react.scope"):60119;
+function z(a){if("object"===typeof a&&null!==a){var u=a.$$typeof;switch(u){case c:switch(a=a.type,a){case l:case m:case e:case g:case f:case p:return a;default:switch(a=a&&a.$$typeof,a){case k:case n:case t:case r:case h:return a;default:return u}}case d:return u}}}function A(a){return z(a)===m}reactIs_production_min.AsyncMode=l;reactIs_production_min.ConcurrentMode=m;reactIs_production_min.ContextConsumer=k;reactIs_production_min.ContextProvider=h;reactIs_production_min.Element=c;reactIs_production_min.ForwardRef=n;reactIs_production_min.Fragment=e;reactIs_production_min.Lazy=t;reactIs_production_min.Memo=r;reactIs_production_min.Portal=d;
+reactIs_production_min.Profiler=g;reactIs_production_min.StrictMode=f;reactIs_production_min.Suspense=p;reactIs_production_min.isAsyncMode=function(a){return A(a)||z(a)===l};reactIs_production_min.isConcurrentMode=A;reactIs_production_min.isContextConsumer=function(a){return z(a)===k};reactIs_production_min.isContextProvider=function(a){return z(a)===h};reactIs_production_min.isElement=function(a){return "object"===typeof a&&null!==a&&a.$$typeof===c};reactIs_production_min.isForwardRef=function(a){return z(a)===n};reactIs_production_min.isFragment=function(a){return z(a)===e};reactIs_production_min.isLazy=function(a){return z(a)===t};
+reactIs_production_min.isMemo=function(a){return z(a)===r};reactIs_production_min.isPortal=function(a){return z(a)===d};reactIs_production_min.isProfiler=function(a){return z(a)===g};reactIs_production_min.isStrictMode=function(a){return z(a)===f};reactIs_production_min.isSuspense=function(a){return z(a)===p};
+reactIs_production_min.isValidElementType=function(a){return "string"===typeof a||"function"===typeof a||a===e||a===m||a===g||a===f||a===p||a===q||"object"===typeof a&&null!==a&&(a.$$typeof===t||a.$$typeof===r||a.$$typeof===h||a.$$typeof===k||a.$$typeof===n||a.$$typeof===w||a.$$typeof===x||a.$$typeof===y||a.$$typeof===v)};reactIs_production_min.typeOf=z;
+
+var reactIs_development = {};
+
+/** @license React v16.13.1
+ * react-is.development.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+
+
+if (process.env.NODE_ENV !== "production") {
+  (function() {
+
+// The Symbol used to tag the ReactElement-like types. If there is no native Symbol
+// nor polyfill, then a plain number is used for performance.
+var hasSymbol = typeof Symbol === 'function' && Symbol.for;
+var REACT_ELEMENT_TYPE = hasSymbol ? Symbol.for('react.element') : 0xeac7;
+var REACT_PORTAL_TYPE = hasSymbol ? Symbol.for('react.portal') : 0xeaca;
+var REACT_FRAGMENT_TYPE = hasSymbol ? Symbol.for('react.fragment') : 0xeacb;
+var REACT_STRICT_MODE_TYPE = hasSymbol ? Symbol.for('react.strict_mode') : 0xeacc;
+var REACT_PROFILER_TYPE = hasSymbol ? Symbol.for('react.profiler') : 0xead2;
+var REACT_PROVIDER_TYPE = hasSymbol ? Symbol.for('react.provider') : 0xeacd;
+var REACT_CONTEXT_TYPE = hasSymbol ? Symbol.for('react.context') : 0xeace; // TODO: We don't use AsyncMode or ConcurrentMode anymore. They were temporary
+// (unstable) APIs that have been removed. Can we remove the symbols?
+
+var REACT_ASYNC_MODE_TYPE = hasSymbol ? Symbol.for('react.async_mode') : 0xeacf;
+var REACT_CONCURRENT_MODE_TYPE = hasSymbol ? Symbol.for('react.concurrent_mode') : 0xeacf;
+var REACT_FORWARD_REF_TYPE = hasSymbol ? Symbol.for('react.forward_ref') : 0xead0;
+var REACT_SUSPENSE_TYPE = hasSymbol ? Symbol.for('react.suspense') : 0xead1;
+var REACT_SUSPENSE_LIST_TYPE = hasSymbol ? Symbol.for('react.suspense_list') : 0xead8;
+var REACT_MEMO_TYPE = hasSymbol ? Symbol.for('react.memo') : 0xead3;
+var REACT_LAZY_TYPE = hasSymbol ? Symbol.for('react.lazy') : 0xead4;
+var REACT_BLOCK_TYPE = hasSymbol ? Symbol.for('react.block') : 0xead9;
+var REACT_FUNDAMENTAL_TYPE = hasSymbol ? Symbol.for('react.fundamental') : 0xead5;
+var REACT_RESPONDER_TYPE = hasSymbol ? Symbol.for('react.responder') : 0xead6;
+var REACT_SCOPE_TYPE = hasSymbol ? Symbol.for('react.scope') : 0xead7;
+
+function isValidElementType(type) {
+  return typeof type === 'string' || typeof type === 'function' || // Note: its typeof might be other than 'symbol' or 'number' if it's a polyfill.
+  type === REACT_FRAGMENT_TYPE || type === REACT_CONCURRENT_MODE_TYPE || type === REACT_PROFILER_TYPE || type === REACT_STRICT_MODE_TYPE || type === REACT_SUSPENSE_TYPE || type === REACT_SUSPENSE_LIST_TYPE || typeof type === 'object' && type !== null && (type.$$typeof === REACT_LAZY_TYPE || type.$$typeof === REACT_MEMO_TYPE || type.$$typeof === REACT_PROVIDER_TYPE || type.$$typeof === REACT_CONTEXT_TYPE || type.$$typeof === REACT_FORWARD_REF_TYPE || type.$$typeof === REACT_FUNDAMENTAL_TYPE || type.$$typeof === REACT_RESPONDER_TYPE || type.$$typeof === REACT_SCOPE_TYPE || type.$$typeof === REACT_BLOCK_TYPE);
+}
+
+function typeOf(object) {
+  if (typeof object === 'object' && object !== null) {
+    var $$typeof = object.$$typeof;
+
+    switch ($$typeof) {
+      case REACT_ELEMENT_TYPE:
+        var type = object.type;
+
+        switch (type) {
+          case REACT_ASYNC_MODE_TYPE:
+          case REACT_CONCURRENT_MODE_TYPE:
+          case REACT_FRAGMENT_TYPE:
+          case REACT_PROFILER_TYPE:
+          case REACT_STRICT_MODE_TYPE:
+          case REACT_SUSPENSE_TYPE:
+            return type;
+
+          default:
+            var $$typeofType = type && type.$$typeof;
+
+            switch ($$typeofType) {
+              case REACT_CONTEXT_TYPE:
+              case REACT_FORWARD_REF_TYPE:
+              case REACT_LAZY_TYPE:
+              case REACT_MEMO_TYPE:
+              case REACT_PROVIDER_TYPE:
+                return $$typeofType;
+
+              default:
+                return $$typeof;
+            }
+
+        }
+
+      case REACT_PORTAL_TYPE:
+        return $$typeof;
+    }
   }
 
-  return target;
+  return undefined;
+} // AsyncMode is deprecated along with isAsyncMode
+
+var AsyncMode = REACT_ASYNC_MODE_TYPE;
+var ConcurrentMode = REACT_CONCURRENT_MODE_TYPE;
+var ContextConsumer = REACT_CONTEXT_TYPE;
+var ContextProvider = REACT_PROVIDER_TYPE;
+var Element = REACT_ELEMENT_TYPE;
+var ForwardRef = REACT_FORWARD_REF_TYPE;
+var Fragment = REACT_FRAGMENT_TYPE;
+var Lazy = REACT_LAZY_TYPE;
+var Memo = REACT_MEMO_TYPE;
+var Portal = REACT_PORTAL_TYPE;
+var Profiler = REACT_PROFILER_TYPE;
+var StrictMode = REACT_STRICT_MODE_TYPE;
+var Suspense = REACT_SUSPENSE_TYPE;
+var hasWarnedAboutDeprecatedIsAsyncMode = false; // AsyncMode should be deprecated
+
+function isAsyncMode(object) {
+  {
+    if (!hasWarnedAboutDeprecatedIsAsyncMode) {
+      hasWarnedAboutDeprecatedIsAsyncMode = true; // Using console['warn'] to evade Babel and ESLint
+
+      console['warn']('The ReactIs.isAsyncMode() alias has been deprecated, ' + 'and will be removed in React 17+. Update your code to use ' + 'ReactIs.isConcurrentMode() instead. It has the exact same API.');
+    }
+  }
+
+  return isConcurrentMode(object) || typeOf(object) === REACT_ASYNC_MODE_TYPE;
+}
+function isConcurrentMode(object) {
+  return typeOf(object) === REACT_CONCURRENT_MODE_TYPE;
+}
+function isContextConsumer(object) {
+  return typeOf(object) === REACT_CONTEXT_TYPE;
+}
+function isContextProvider(object) {
+  return typeOf(object) === REACT_PROVIDER_TYPE;
+}
+function isElement(object) {
+  return typeof object === 'object' && object !== null && object.$$typeof === REACT_ELEMENT_TYPE;
+}
+function isForwardRef(object) {
+  return typeOf(object) === REACT_FORWARD_REF_TYPE;
+}
+function isFragment(object) {
+  return typeOf(object) === REACT_FRAGMENT_TYPE;
+}
+function isLazy(object) {
+  return typeOf(object) === REACT_LAZY_TYPE;
+}
+function isMemo(object) {
+  return typeOf(object) === REACT_MEMO_TYPE;
+}
+function isPortal(object) {
+  return typeOf(object) === REACT_PORTAL_TYPE;
+}
+function isProfiler(object) {
+  return typeOf(object) === REACT_PROFILER_TYPE;
+}
+function isStrictMode(object) {
+  return typeOf(object) === REACT_STRICT_MODE_TYPE;
+}
+function isSuspense(object) {
+  return typeOf(object) === REACT_SUSPENSE_TYPE;
+}
+
+reactIs_development.AsyncMode = AsyncMode;
+reactIs_development.ConcurrentMode = ConcurrentMode;
+reactIs_development.ContextConsumer = ContextConsumer;
+reactIs_development.ContextProvider = ContextProvider;
+reactIs_development.Element = Element;
+reactIs_development.ForwardRef = ForwardRef;
+reactIs_development.Fragment = Fragment;
+reactIs_development.Lazy = Lazy;
+reactIs_development.Memo = Memo;
+reactIs_development.Portal = Portal;
+reactIs_development.Profiler = Profiler;
+reactIs_development.StrictMode = StrictMode;
+reactIs_development.Suspense = Suspense;
+reactIs_development.isAsyncMode = isAsyncMode;
+reactIs_development.isConcurrentMode = isConcurrentMode;
+reactIs_development.isContextConsumer = isContextConsumer;
+reactIs_development.isContextProvider = isContextProvider;
+reactIs_development.isElement = isElement;
+reactIs_development.isForwardRef = isForwardRef;
+reactIs_development.isFragment = isFragment;
+reactIs_development.isLazy = isLazy;
+reactIs_development.isMemo = isMemo;
+reactIs_development.isPortal = isPortal;
+reactIs_development.isProfiler = isProfiler;
+reactIs_development.isStrictMode = isStrictMode;
+reactIs_development.isSuspense = isSuspense;
+reactIs_development.isValidElementType = isValidElementType;
+reactIs_development.typeOf = typeOf;
+  })();
+}
+
+if (process.env.NODE_ENV === 'production') {
+  reactIs.exports = reactIs_production_min;
+} else {
+  reactIs.exports = reactIs_development;
+}
+
+/*
+object-assign
+(c) Sindre Sorhus
+@license MIT
+*/
+/* eslint-disable no-unused-vars */
+var getOwnPropertySymbols = Object.getOwnPropertySymbols;
+var hasOwnProperty = Object.prototype.hasOwnProperty;
+var propIsEnumerable = Object.prototype.propertyIsEnumerable;
+
+function toObject(val) {
+	if (val === null || val === undefined) {
+		throw new TypeError('Object.assign cannot be called with null or undefined');
+	}
+
+	return Object(val);
+}
+
+function shouldUseNative() {
+	try {
+		if (!Object.assign) {
+			return false;
+		}
+
+		// Detect buggy property enumeration order in older V8 versions.
+
+		// https://bugs.chromium.org/p/v8/issues/detail?id=4118
+		var test1 = new String('abc');  // eslint-disable-line no-new-wrappers
+		test1[5] = 'de';
+		if (Object.getOwnPropertyNames(test1)[0] === '5') {
+			return false;
+		}
+
+		// https://bugs.chromium.org/p/v8/issues/detail?id=3056
+		var test2 = {};
+		for (var i = 0; i < 10; i++) {
+			test2['_' + String.fromCharCode(i)] = i;
+		}
+		var order2 = Object.getOwnPropertyNames(test2).map(function (n) {
+			return test2[n];
+		});
+		if (order2.join('') !== '0123456789') {
+			return false;
+		}
+
+		// https://bugs.chromium.org/p/v8/issues/detail?id=3056
+		var test3 = {};
+		'abcdefghijklmnopqrst'.split('').forEach(function (letter) {
+			test3[letter] = letter;
+		});
+		if (Object.keys(Object.assign({}, test3)).join('') !==
+				'abcdefghijklmnopqrst') {
+			return false;
+		}
+
+		return true;
+	} catch (err) {
+		// We don't expect any of the above to throw, but better to be safe.
+		return false;
+	}
+}
+
+var objectAssign = shouldUseNative() ? Object.assign : function (target, source) {
+	var from;
+	var to = toObject(target);
+	var symbols;
+
+	for (var s = 1; s < arguments.length; s++) {
+		from = Object(arguments[s]);
+
+		for (var key in from) {
+			if (hasOwnProperty.call(from, key)) {
+				to[key] = from[key];
+			}
+		}
+
+		if (getOwnPropertySymbols) {
+			symbols = getOwnPropertySymbols(from);
+			for (var i = 0; i < symbols.length; i++) {
+				if (propIsEnumerable.call(from, symbols[i])) {
+					to[symbols[i]] = from[symbols[i]];
+				}
+			}
+		}
+	}
+
+	return to;
+};
+
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+var ReactPropTypesSecret$3 = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
+
+var ReactPropTypesSecret_1 = ReactPropTypesSecret$3;
+
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+var printWarning$1 = function() {};
+
+if (process.env.NODE_ENV !== 'production') {
+  var ReactPropTypesSecret$2 = ReactPropTypesSecret_1;
+  var loggedTypeFailures = {};
+  var has$1 = Function.call.bind(Object.prototype.hasOwnProperty);
+
+  printWarning$1 = function(text) {
+    var message = 'Warning: ' + text;
+    if (typeof console !== 'undefined') {
+      console.error(message);
+    }
+    try {
+      // --- Welcome to debugging React ---
+      // This error was thrown as a convenience so that you can use this stack
+      // to find the callsite that caused this warning to fire.
+      throw new Error(message);
+    } catch (x) {}
+  };
+}
+
+/**
+ * Assert that the values match with the type specs.
+ * Error messages are memorized and will only be shown once.
+ *
+ * @param {object} typeSpecs Map of name to a ReactPropType
+ * @param {object} values Runtime values that need to be type-checked
+ * @param {string} location e.g. "prop", "context", "child context"
+ * @param {string} componentName Name of the component for error messages.
+ * @param {?Function} getStack Returns the component stack.
+ * @private
+ */
+function checkPropTypes$1(typeSpecs, values, location, componentName, getStack) {
+  if (process.env.NODE_ENV !== 'production') {
+    for (var typeSpecName in typeSpecs) {
+      if (has$1(typeSpecs, typeSpecName)) {
+        var error;
+        // Prop type validation may throw. In case they do, we don't want to
+        // fail the render phase where it didn't fail before. So we log it.
+        // After these have been cleaned up, we'll let them throw.
+        try {
+          // This is intentionally an invariant that gets caught. It's the same
+          // behavior as without this statement except with a better message.
+          if (typeof typeSpecs[typeSpecName] !== 'function') {
+            var err = Error(
+              (componentName || 'React class') + ': ' + location + ' type `' + typeSpecName + '` is invalid; ' +
+              'it must be a function, usually from the `prop-types` package, but received `' + typeof typeSpecs[typeSpecName] + '`.'
+            );
+            err.name = 'Invariant Violation';
+            throw err;
+          }
+          error = typeSpecs[typeSpecName](values, typeSpecName, componentName, location, null, ReactPropTypesSecret$2);
+        } catch (ex) {
+          error = ex;
+        }
+        if (error && !(error instanceof Error)) {
+          printWarning$1(
+            (componentName || 'React class') + ': type specification of ' +
+            location + ' `' + typeSpecName + '` is invalid; the type checker ' +
+            'function must return `null` or an `Error` but returned a ' + typeof error + '. ' +
+            'You may have forgotten to pass an argument to the type checker ' +
+            'creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and ' +
+            'shape all require an argument).'
+          );
+        }
+        if (error instanceof Error && !(error.message in loggedTypeFailures)) {
+          // Only monitor this failure once because there tends to be a lot of the
+          // same error.
+          loggedTypeFailures[error.message] = true;
+
+          var stack = getStack ? getStack() : '';
+
+          printWarning$1(
+            'Failed ' + location + ' type: ' + error.message + (stack != null ? stack : '')
+          );
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Resets warning cache when testing.
+ *
+ * @private
+ */
+checkPropTypes$1.resetWarningCache = function() {
+  if (process.env.NODE_ENV !== 'production') {
+    loggedTypeFailures = {};
+  }
+};
+
+var checkPropTypes_1 = checkPropTypes$1;
+
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+var ReactIs$1 = reactIs.exports;
+var assign = objectAssign;
+
+var ReactPropTypesSecret$1 = ReactPropTypesSecret_1;
+var checkPropTypes = checkPropTypes_1;
+
+var has = Function.call.bind(Object.prototype.hasOwnProperty);
+var printWarning = function() {};
+
+if (process.env.NODE_ENV !== 'production') {
+  printWarning = function(text) {
+    var message = 'Warning: ' + text;
+    if (typeof console !== 'undefined') {
+      console.error(message);
+    }
+    try {
+      // --- Welcome to debugging React ---
+      // This error was thrown as a convenience so that you can use this stack
+      // to find the callsite that caused this warning to fire.
+      throw new Error(message);
+    } catch (x) {}
+  };
+}
+
+function emptyFunctionThatReturnsNull() {
+  return null;
+}
+
+var factoryWithTypeCheckers = function(isValidElement, throwOnDirectAccess) {
+  /* global Symbol */
+  var ITERATOR_SYMBOL = typeof Symbol === 'function' && Symbol.iterator;
+  var FAUX_ITERATOR_SYMBOL = '@@iterator'; // Before Symbol spec.
+
+  /**
+   * Returns the iterator method function contained on the iterable object.
+   *
+   * Be sure to invoke the function with the iterable as context:
+   *
+   *     var iteratorFn = getIteratorFn(myIterable);
+   *     if (iteratorFn) {
+   *       var iterator = iteratorFn.call(myIterable);
+   *       ...
+   *     }
+   *
+   * @param {?object} maybeIterable
+   * @return {?function}
+   */
+  function getIteratorFn(maybeIterable) {
+    var iteratorFn = maybeIterable && (ITERATOR_SYMBOL && maybeIterable[ITERATOR_SYMBOL] || maybeIterable[FAUX_ITERATOR_SYMBOL]);
+    if (typeof iteratorFn === 'function') {
+      return iteratorFn;
+    }
+  }
+
+  /**
+   * Collection of methods that allow declaration and validation of props that are
+   * supplied to React components. Example usage:
+   *
+   *   var Props = require('ReactPropTypes');
+   *   var MyArticle = React.createClass({
+   *     propTypes: {
+   *       // An optional string prop named "description".
+   *       description: Props.string,
+   *
+   *       // A required enum prop named "category".
+   *       category: Props.oneOf(['News','Photos']).isRequired,
+   *
+   *       // A prop named "dialog" that requires an instance of Dialog.
+   *       dialog: Props.instanceOf(Dialog).isRequired
+   *     },
+   *     render: function() { ... }
+   *   });
+   *
+   * A more formal specification of how these methods are used:
+   *
+   *   type := array|bool|func|object|number|string|oneOf([...])|instanceOf(...)
+   *   decl := ReactPropTypes.{type}(.isRequired)?
+   *
+   * Each and every declaration produces a function with the same signature. This
+   * allows the creation of custom validation functions. For example:
+   *
+   *  var MyLink = React.createClass({
+   *    propTypes: {
+   *      // An optional string or URI prop named "href".
+   *      href: function(props, propName, componentName) {
+   *        var propValue = props[propName];
+   *        if (propValue != null && typeof propValue !== 'string' &&
+   *            !(propValue instanceof URI)) {
+   *          return new Error(
+   *            'Expected a string or an URI for ' + propName + ' in ' +
+   *            componentName
+   *          );
+   *        }
+   *      }
+   *    },
+   *    render: function() {...}
+   *  });
+   *
+   * @internal
+   */
+
+  var ANONYMOUS = '<<anonymous>>';
+
+  // Important!
+  // Keep this list in sync with production version in `./factoryWithThrowingShims.js`.
+  var ReactPropTypes = {
+    array: createPrimitiveTypeChecker('array'),
+    bool: createPrimitiveTypeChecker('boolean'),
+    func: createPrimitiveTypeChecker('function'),
+    number: createPrimitiveTypeChecker('number'),
+    object: createPrimitiveTypeChecker('object'),
+    string: createPrimitiveTypeChecker('string'),
+    symbol: createPrimitiveTypeChecker('symbol'),
+
+    any: createAnyTypeChecker(),
+    arrayOf: createArrayOfTypeChecker,
+    element: createElementTypeChecker(),
+    elementType: createElementTypeTypeChecker(),
+    instanceOf: createInstanceTypeChecker,
+    node: createNodeChecker(),
+    objectOf: createObjectOfTypeChecker,
+    oneOf: createEnumTypeChecker,
+    oneOfType: createUnionTypeChecker,
+    shape: createShapeTypeChecker,
+    exact: createStrictShapeTypeChecker,
+  };
+
+  /**
+   * inlined Object.is polyfill to avoid requiring consumers ship their own
+   * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is
+   */
+  /*eslint-disable no-self-compare*/
+  function is(x, y) {
+    // SameValue algorithm
+    if (x === y) {
+      // Steps 1-5, 7-10
+      // Steps 6.b-6.e: +0 != -0
+      return x !== 0 || 1 / x === 1 / y;
+    } else {
+      // Step 6.a: NaN == NaN
+      return x !== x && y !== y;
+    }
+  }
+  /*eslint-enable no-self-compare*/
+
+  /**
+   * We use an Error-like object for backward compatibility as people may call
+   * PropTypes directly and inspect their output. However, we don't use real
+   * Errors anymore. We don't inspect their stack anyway, and creating them
+   * is prohibitively expensive if they are created too often, such as what
+   * happens in oneOfType() for any type before the one that matched.
+   */
+  function PropTypeError(message) {
+    this.message = message;
+    this.stack = '';
+  }
+  // Make `instanceof Error` still work for returned errors.
+  PropTypeError.prototype = Error.prototype;
+
+  function createChainableTypeChecker(validate) {
+    if (process.env.NODE_ENV !== 'production') {
+      var manualPropTypeCallCache = {};
+      var manualPropTypeWarningCount = 0;
+    }
+    function checkType(isRequired, props, propName, componentName, location, propFullName, secret) {
+      componentName = componentName || ANONYMOUS;
+      propFullName = propFullName || propName;
+
+      if (secret !== ReactPropTypesSecret$1) {
+        if (throwOnDirectAccess) {
+          // New behavior only for users of `prop-types` package
+          var err = new Error(
+            'Calling PropTypes validators directly is not supported by the `prop-types` package. ' +
+            'Use `PropTypes.checkPropTypes()` to call them. ' +
+            'Read more at http://fb.me/use-check-prop-types'
+          );
+          err.name = 'Invariant Violation';
+          throw err;
+        } else if (process.env.NODE_ENV !== 'production' && typeof console !== 'undefined') {
+          // Old behavior for people using React.PropTypes
+          var cacheKey = componentName + ':' + propName;
+          if (
+            !manualPropTypeCallCache[cacheKey] &&
+            // Avoid spamming the console because they are often not actionable except for lib authors
+            manualPropTypeWarningCount < 3
+          ) {
+            printWarning(
+              'You are manually calling a React.PropTypes validation ' +
+              'function for the `' + propFullName + '` prop on `' + componentName  + '`. This is deprecated ' +
+              'and will throw in the standalone `prop-types` package. ' +
+              'You may be seeing this warning due to a third-party PropTypes ' +
+              'library. See https://fb.me/react-warning-dont-call-proptypes ' + 'for details.'
+            );
+            manualPropTypeCallCache[cacheKey] = true;
+            manualPropTypeWarningCount++;
+          }
+        }
+      }
+      if (props[propName] == null) {
+        if (isRequired) {
+          if (props[propName] === null) {
+            return new PropTypeError('The ' + location + ' `' + propFullName + '` is marked as required ' + ('in `' + componentName + '`, but its value is `null`.'));
+          }
+          return new PropTypeError('The ' + location + ' `' + propFullName + '` is marked as required in ' + ('`' + componentName + '`, but its value is `undefined`.'));
+        }
+        return null;
+      } else {
+        return validate(props, propName, componentName, location, propFullName);
+      }
+    }
+
+    var chainedCheckType = checkType.bind(null, false);
+    chainedCheckType.isRequired = checkType.bind(null, true);
+
+    return chainedCheckType;
+  }
+
+  function createPrimitiveTypeChecker(expectedType) {
+    function validate(props, propName, componentName, location, propFullName, secret) {
+      var propValue = props[propName];
+      var propType = getPropType(propValue);
+      if (propType !== expectedType) {
+        // `propValue` being instance of, say, date/regexp, pass the 'object'
+        // check, but we can offer a more precise error message here rather than
+        // 'of type `object`'.
+        var preciseType = getPreciseType(propValue);
+
+        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + preciseType + '` supplied to `' + componentName + '`, expected ') + ('`' + expectedType + '`.'));
+      }
+      return null;
+    }
+    return createChainableTypeChecker(validate);
+  }
+
+  function createAnyTypeChecker() {
+    return createChainableTypeChecker(emptyFunctionThatReturnsNull);
+  }
+
+  function createArrayOfTypeChecker(typeChecker) {
+    function validate(props, propName, componentName, location, propFullName) {
+      if (typeof typeChecker !== 'function') {
+        return new PropTypeError('Property `' + propFullName + '` of component `' + componentName + '` has invalid PropType notation inside arrayOf.');
+      }
+      var propValue = props[propName];
+      if (!Array.isArray(propValue)) {
+        var propType = getPropType(propValue);
+        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected an array.'));
+      }
+      for (var i = 0; i < propValue.length; i++) {
+        var error = typeChecker(propValue, i, componentName, location, propFullName + '[' + i + ']', ReactPropTypesSecret$1);
+        if (error instanceof Error) {
+          return error;
+        }
+      }
+      return null;
+    }
+    return createChainableTypeChecker(validate);
+  }
+
+  function createElementTypeChecker() {
+    function validate(props, propName, componentName, location, propFullName) {
+      var propValue = props[propName];
+      if (!isValidElement(propValue)) {
+        var propType = getPropType(propValue);
+        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected a single ReactElement.'));
+      }
+      return null;
+    }
+    return createChainableTypeChecker(validate);
+  }
+
+  function createElementTypeTypeChecker() {
+    function validate(props, propName, componentName, location, propFullName) {
+      var propValue = props[propName];
+      if (!ReactIs$1.isValidElementType(propValue)) {
+        var propType = getPropType(propValue);
+        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected a single ReactElement type.'));
+      }
+      return null;
+    }
+    return createChainableTypeChecker(validate);
+  }
+
+  function createInstanceTypeChecker(expectedClass) {
+    function validate(props, propName, componentName, location, propFullName) {
+      if (!(props[propName] instanceof expectedClass)) {
+        var expectedClassName = expectedClass.name || ANONYMOUS;
+        var actualClassName = getClassName(props[propName]);
+        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + actualClassName + '` supplied to `' + componentName + '`, expected ') + ('instance of `' + expectedClassName + '`.'));
+      }
+      return null;
+    }
+    return createChainableTypeChecker(validate);
+  }
+
+  function createEnumTypeChecker(expectedValues) {
+    if (!Array.isArray(expectedValues)) {
+      if (process.env.NODE_ENV !== 'production') {
+        if (arguments.length > 1) {
+          printWarning(
+            'Invalid arguments supplied to oneOf, expected an array, got ' + arguments.length + ' arguments. ' +
+            'A common mistake is to write oneOf(x, y, z) instead of oneOf([x, y, z]).'
+          );
+        } else {
+          printWarning('Invalid argument supplied to oneOf, expected an array.');
+        }
+      }
+      return emptyFunctionThatReturnsNull;
+    }
+
+    function validate(props, propName, componentName, location, propFullName) {
+      var propValue = props[propName];
+      for (var i = 0; i < expectedValues.length; i++) {
+        if (is(propValue, expectedValues[i])) {
+          return null;
+        }
+      }
+
+      var valuesString = JSON.stringify(expectedValues, function replacer(key, value) {
+        var type = getPreciseType(value);
+        if (type === 'symbol') {
+          return String(value);
+        }
+        return value;
+      });
+      return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of value `' + String(propValue) + '` ' + ('supplied to `' + componentName + '`, expected one of ' + valuesString + '.'));
+    }
+    return createChainableTypeChecker(validate);
+  }
+
+  function createObjectOfTypeChecker(typeChecker) {
+    function validate(props, propName, componentName, location, propFullName) {
+      if (typeof typeChecker !== 'function') {
+        return new PropTypeError('Property `' + propFullName + '` of component `' + componentName + '` has invalid PropType notation inside objectOf.');
+      }
+      var propValue = props[propName];
+      var propType = getPropType(propValue);
+      if (propType !== 'object') {
+        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected an object.'));
+      }
+      for (var key in propValue) {
+        if (has(propValue, key)) {
+          var error = typeChecker(propValue, key, componentName, location, propFullName + '.' + key, ReactPropTypesSecret$1);
+          if (error instanceof Error) {
+            return error;
+          }
+        }
+      }
+      return null;
+    }
+    return createChainableTypeChecker(validate);
+  }
+
+  function createUnionTypeChecker(arrayOfTypeCheckers) {
+    if (!Array.isArray(arrayOfTypeCheckers)) {
+      process.env.NODE_ENV !== 'production' ? printWarning('Invalid argument supplied to oneOfType, expected an instance of array.') : void 0;
+      return emptyFunctionThatReturnsNull;
+    }
+
+    for (var i = 0; i < arrayOfTypeCheckers.length; i++) {
+      var checker = arrayOfTypeCheckers[i];
+      if (typeof checker !== 'function') {
+        printWarning(
+          'Invalid argument supplied to oneOfType. Expected an array of check functions, but ' +
+          'received ' + getPostfixForTypeWarning(checker) + ' at index ' + i + '.'
+        );
+        return emptyFunctionThatReturnsNull;
+      }
+    }
+
+    function validate(props, propName, componentName, location, propFullName) {
+      for (var i = 0; i < arrayOfTypeCheckers.length; i++) {
+        var checker = arrayOfTypeCheckers[i];
+        if (checker(props, propName, componentName, location, propFullName, ReactPropTypesSecret$1) == null) {
+          return null;
+        }
+      }
+
+      return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` supplied to ' + ('`' + componentName + '`.'));
+    }
+    return createChainableTypeChecker(validate);
+  }
+
+  function createNodeChecker() {
+    function validate(props, propName, componentName, location, propFullName) {
+      if (!isNode(props[propName])) {
+        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` supplied to ' + ('`' + componentName + '`, expected a ReactNode.'));
+      }
+      return null;
+    }
+    return createChainableTypeChecker(validate);
+  }
+
+  function createShapeTypeChecker(shapeTypes) {
+    function validate(props, propName, componentName, location, propFullName) {
+      var propValue = props[propName];
+      var propType = getPropType(propValue);
+      if (propType !== 'object') {
+        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type `' + propType + '` ' + ('supplied to `' + componentName + '`, expected `object`.'));
+      }
+      for (var key in shapeTypes) {
+        var checker = shapeTypes[key];
+        if (!checker) {
+          continue;
+        }
+        var error = checker(propValue, key, componentName, location, propFullName + '.' + key, ReactPropTypesSecret$1);
+        if (error) {
+          return error;
+        }
+      }
+      return null;
+    }
+    return createChainableTypeChecker(validate);
+  }
+
+  function createStrictShapeTypeChecker(shapeTypes) {
+    function validate(props, propName, componentName, location, propFullName) {
+      var propValue = props[propName];
+      var propType = getPropType(propValue);
+      if (propType !== 'object') {
+        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type `' + propType + '` ' + ('supplied to `' + componentName + '`, expected `object`.'));
+      }
+      // We need to check all keys in case some are required but missing from
+      // props.
+      var allKeys = assign({}, props[propName], shapeTypes);
+      for (var key in allKeys) {
+        var checker = shapeTypes[key];
+        if (!checker) {
+          return new PropTypeError(
+            'Invalid ' + location + ' `' + propFullName + '` key `' + key + '` supplied to `' + componentName + '`.' +
+            '\nBad object: ' + JSON.stringify(props[propName], null, '  ') +
+            '\nValid keys: ' +  JSON.stringify(Object.keys(shapeTypes), null, '  ')
+          );
+        }
+        var error = checker(propValue, key, componentName, location, propFullName + '.' + key, ReactPropTypesSecret$1);
+        if (error) {
+          return error;
+        }
+      }
+      return null;
+    }
+
+    return createChainableTypeChecker(validate);
+  }
+
+  function isNode(propValue) {
+    switch (typeof propValue) {
+      case 'number':
+      case 'string':
+      case 'undefined':
+        return true;
+      case 'boolean':
+        return !propValue;
+      case 'object':
+        if (Array.isArray(propValue)) {
+          return propValue.every(isNode);
+        }
+        if (propValue === null || isValidElement(propValue)) {
+          return true;
+        }
+
+        var iteratorFn = getIteratorFn(propValue);
+        if (iteratorFn) {
+          var iterator = iteratorFn.call(propValue);
+          var step;
+          if (iteratorFn !== propValue.entries) {
+            while (!(step = iterator.next()).done) {
+              if (!isNode(step.value)) {
+                return false;
+              }
+            }
+          } else {
+            // Iterator will provide entry [k,v] tuples rather than values.
+            while (!(step = iterator.next()).done) {
+              var entry = step.value;
+              if (entry) {
+                if (!isNode(entry[1])) {
+                  return false;
+                }
+              }
+            }
+          }
+        } else {
+          return false;
+        }
+
+        return true;
+      default:
+        return false;
+    }
+  }
+
+  function isSymbol(propType, propValue) {
+    // Native Symbol.
+    if (propType === 'symbol') {
+      return true;
+    }
+
+    // falsy value can't be a Symbol
+    if (!propValue) {
+      return false;
+    }
+
+    // 19.4.3.5 Symbol.prototype[@@toStringTag] === 'Symbol'
+    if (propValue['@@toStringTag'] === 'Symbol') {
+      return true;
+    }
+
+    // Fallback for non-spec compliant Symbols which are polyfilled.
+    if (typeof Symbol === 'function' && propValue instanceof Symbol) {
+      return true;
+    }
+
+    return false;
+  }
+
+  // Equivalent of `typeof` but with special handling for array and regexp.
+  function getPropType(propValue) {
+    var propType = typeof propValue;
+    if (Array.isArray(propValue)) {
+      return 'array';
+    }
+    if (propValue instanceof RegExp) {
+      // Old webkits (at least until Android 4.0) return 'function' rather than
+      // 'object' for typeof a RegExp. We'll normalize this here so that /bla/
+      // passes PropTypes.object.
+      return 'object';
+    }
+    if (isSymbol(propType, propValue)) {
+      return 'symbol';
+    }
+    return propType;
+  }
+
+  // This handles more types than `getPropType`. Only used for error messages.
+  // See `createPrimitiveTypeChecker`.
+  function getPreciseType(propValue) {
+    if (typeof propValue === 'undefined' || propValue === null) {
+      return '' + propValue;
+    }
+    var propType = getPropType(propValue);
+    if (propType === 'object') {
+      if (propValue instanceof Date) {
+        return 'date';
+      } else if (propValue instanceof RegExp) {
+        return 'regexp';
+      }
+    }
+    return propType;
+  }
+
+  // Returns a string that is postfixed to a warning about an invalid type.
+  // For example, "undefined" or "of type array"
+  function getPostfixForTypeWarning(value) {
+    var type = getPreciseType(value);
+    switch (type) {
+      case 'array':
+      case 'object':
+        return 'an ' + type;
+      case 'boolean':
+      case 'date':
+      case 'regexp':
+        return 'a ' + type;
+      default:
+        return type;
+    }
+  }
+
+  // Returns class name of the object, if any.
+  function getClassName(propValue) {
+    if (!propValue.constructor || !propValue.constructor.name) {
+      return ANONYMOUS;
+    }
+    return propValue.constructor.name;
+  }
+
+  ReactPropTypes.checkPropTypes = checkPropTypes;
+  ReactPropTypes.resetWarningCache = checkPropTypes.resetWarningCache;
+  ReactPropTypes.PropTypes = ReactPropTypes;
+
+  return ReactPropTypes;
+};
+
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+var ReactPropTypesSecret = ReactPropTypesSecret_1;
+
+function emptyFunction() {}
+function emptyFunctionWithReset() {}
+emptyFunctionWithReset.resetWarningCache = emptyFunction;
+
+var factoryWithThrowingShims = function() {
+  function shim(props, propName, componentName, location, propFullName, secret) {
+    if (secret === ReactPropTypesSecret) {
+      // It is still safe when called from React.
+      return;
+    }
+    var err = new Error(
+      'Calling PropTypes validators directly is not supported by the `prop-types` package. ' +
+      'Use PropTypes.checkPropTypes() to call them. ' +
+      'Read more at http://fb.me/use-check-prop-types'
+    );
+    err.name = 'Invariant Violation';
+    throw err;
+  }  shim.isRequired = shim;
+  function getShim() {
+    return shim;
+  }  // Important!
+  // Keep this list in sync with production version in `./factoryWithTypeCheckers.js`.
+  var ReactPropTypes = {
+    array: shim,
+    bool: shim,
+    func: shim,
+    number: shim,
+    object: shim,
+    string: shim,
+    symbol: shim,
+
+    any: shim,
+    arrayOf: getShim,
+    element: shim,
+    elementType: shim,
+    instanceOf: getShim,
+    node: shim,
+    objectOf: getShim,
+    oneOf: getShim,
+    oneOfType: getShim,
+    shape: getShim,
+    exact: getShim,
+
+    checkPropTypes: emptyFunctionWithReset,
+    resetWarningCache: emptyFunction
+  };
+
+  ReactPropTypes.PropTypes = ReactPropTypes;
+
+  return ReactPropTypes;
+};
+
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+if (process.env.NODE_ENV !== 'production') {
+  var ReactIs = reactIs.exports;
+
+  // By explicitly using `prop-types` you are opting into new development behavior.
+  // http://fb.me/prop-types-in-prod
+  var throwOnDirectAccess = true;
+  propTypes.exports = factoryWithTypeCheckers(ReactIs.isElement, throwOnDirectAccess);
+} else {
+  // By explicitly using `prop-types` you are opting into new production behavior.
+  // http://fb.me/prop-types-in-prod
+  propTypes.exports = factoryWithThrowingShims();
+}
+
+var PropTypes = propTypes.exports;
+
+// Unique ID creation requires a high quality random # generator. In the browser we therefore
+// require the crypto API and do not support built-in fallback to lower quality random number
+// generators (like Math.random()).
+// getRandomValues needs to be invoked in a context where "this" is a Crypto implementation. Also,
+// find the complete implementation of crypto (msCrypto) on IE11.
+var getRandomValues = typeof crypto != 'undefined' && crypto.getRandomValues && crypto.getRandomValues.bind(crypto) || typeof msCrypto != 'undefined' && typeof msCrypto.getRandomValues == 'function' && msCrypto.getRandomValues.bind(msCrypto);
+var rnds8 = new Uint8Array(16); // eslint-disable-line no-undef
+
+function rng() {
+  if (!getRandomValues) {
+    throw new Error('crypto.getRandomValues() not supported. See https://github.com/uuidjs/uuid#getrandomvalues-not-supported');
+  }
+
+  return getRandomValues(rnds8);
+}
+
+/**
+ * Convert array of 16 byte values to UUID string format of the form:
+ * XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
+ */
+var byteToHex = [];
+
+for (var i = 0; i < 256; ++i) {
+  byteToHex[i] = (i + 0x100).toString(16).substr(1);
+}
+
+function bytesToUuid(buf, offset) {
+  var i = offset || 0;
+  var bth = byteToHex; // join used to fix memory issue caused by concatenation: https://bugs.chromium.org/p/v8/issues/detail?id=3175#c4
+
+  return [bth[buf[i++]], bth[buf[i++]], bth[buf[i++]], bth[buf[i++]], '-', bth[buf[i++]], bth[buf[i++]], '-', bth[buf[i++]], bth[buf[i++]], '-', bth[buf[i++]], bth[buf[i++]], '-', bth[buf[i++]], bth[buf[i++]], bth[buf[i++]], bth[buf[i++]], bth[buf[i++]], bth[buf[i++]]].join('');
+}
+
+function v4(options, buf, offset) {
+  var i = buf && offset || 0;
+
+  if (typeof options == 'string') {
+    buf = options === 'binary' ? new Array(16) : null;
+    options = null;
+  }
+
+  options = options || {};
+  var rnds = options.random || (options.rng || rng)(); // Per 4.4, set bits for version and `clock_seq_hi_and_reserved`
+
+  rnds[6] = rnds[6] & 0x0f | 0x40;
+  rnds[8] = rnds[8] & 0x3f | 0x80; // Copy bytes to buffer, if provided
+
+  if (buf) {
+    for (var ii = 0; ii < 16; ++ii) {
+      buf[i + ii] = rnds[ii];
+    }
+  }
+
+  return buf || bytesToUuid(rnds);
+}
+
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+
+function _defineProperties(target, props) {
+  for (var i = 0; i < props.length; i++) {
+    var descriptor = props[i];
+    descriptor.enumerable = descriptor.enumerable || false;
+    descriptor.configurable = true;
+    if ("value" in descriptor) descriptor.writable = true;
+    Object.defineProperty(target, descriptor.key, descriptor);
+  }
+}
+
+function _createClass(Constructor, protoProps, staticProps) {
+  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties(Constructor, staticProps);
+  return Constructor;
+}
+
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
 }
 
 function _extends() {
@@ -5038,2473 +5112,1738 @@ function _extends() {
   return _extends.apply(this, arguments);
 }
 
-/**
- * Simple ponyfill for Object.fromEntries
- */
+function ownKeys(object, enumerableOnly) {
+  var keys = Object.keys(object);
 
-var fromEntries = function fromEntries(entries) {
-  return entries.reduce(function (acc, _ref) {
-    var key = _ref[0],
-        value = _ref[1];
-    acc[key] = value;
-    return acc;
-  }, {});
+  if (Object.getOwnPropertySymbols) {
+    var symbols = Object.getOwnPropertySymbols(object);
+    if (enumerableOnly) symbols = symbols.filter(function (sym) {
+      return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+    });
+    keys.push.apply(keys, symbols);
+  }
+
+  return keys;
+}
+
+function _objectSpread2(target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i] != null ? arguments[i] : {};
+
+    if (i % 2) {
+      ownKeys(Object(source), true).forEach(function (key) {
+        _defineProperty(target, key, source[key]);
+      });
+    } else if (Object.getOwnPropertyDescriptors) {
+      Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+    } else {
+      ownKeys(Object(source)).forEach(function (key) {
+        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+      });
+    }
+  }
+
+  return target;
+}
+
+function _inherits(subClass, superClass) {
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function");
+  }
+
+  subClass.prototype = Object.create(superClass && superClass.prototype, {
+    constructor: {
+      value: subClass,
+      writable: true,
+      configurable: true
+    }
+  });
+  if (superClass) _setPrototypeOf(subClass, superClass);
+}
+
+function _getPrototypeOf(o) {
+  _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
+    return o.__proto__ || Object.getPrototypeOf(o);
+  };
+  return _getPrototypeOf(o);
+}
+
+function _setPrototypeOf(o, p) {
+  _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
+    o.__proto__ = p;
+    return o;
+  };
+
+  return _setPrototypeOf(o, p);
+}
+
+function _assertThisInitialized(self) {
+  if (self === void 0) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }
+
+  return self;
+}
+
+function _possibleConstructorReturn(self, call) {
+  if (call && (typeof call === "object" || typeof call === "function")) {
+    return call;
+  }
+
+  return _assertThisInitialized(self);
+}
+
+var CONSTANT = {
+  GLOBAL: {
+    HIDE: '__react_tooltip_hide_event',
+    REBUILD: '__react_tooltip_rebuild_event',
+    SHOW: '__react_tooltip_show_event'
+  }
 };
+
 /**
- * Small wrapper around `useLayoutEffect` to get rid of the warning on SSR envs
+ * Static methods for react-tooltip
  */
 
-var useIsomorphicLayoutEffect = typeof window !== 'undefined' && window.document && window.document.createElement ? React__namespace.useLayoutEffect : React__namespace.useEffect;
+var dispatchGlobalEvent = function dispatchGlobalEvent(eventName, opts) {
+  // Compatible with IE
+  // @see http://stackoverflow.com/questions/26596123/internet-explorer-9-10-11-event-constructor-doesnt-work
+  // @see https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/CustomEvent
+  var event;
 
-var top = 'top';
-var bottom = 'bottom';
-var right = 'right';
-var left = 'left';
-var auto = 'auto';
-var basePlacements = [top, bottom, right, left];
-var start = 'start';
-var end = 'end';
-var clippingParents = 'clippingParents';
-var viewport = 'viewport';
-var popper = 'popper';
-var reference = 'reference';
-var variationPlacements = /*#__PURE__*/basePlacements.reduce(function (acc, placement) {
-  return acc.concat([placement + "-" + start, placement + "-" + end]);
-}, []);
-var placements = /*#__PURE__*/[].concat(basePlacements, [auto]).reduce(function (acc, placement) {
-  return acc.concat([placement, placement + "-" + start, placement + "-" + end]);
-}, []); // modifiers that need to read the DOM
-
-var beforeRead = 'beforeRead';
-var read = 'read';
-var afterRead = 'afterRead'; // pure-logic modifiers
-
-var beforeMain = 'beforeMain';
-var main = 'main';
-var afterMain = 'afterMain'; // modifier with the purpose to write to the DOM (or write into a framework state)
-
-var beforeWrite = 'beforeWrite';
-var write = 'write';
-var afterWrite = 'afterWrite';
-var modifierPhases = [beforeRead, read, afterRead, beforeMain, main, afterMain, beforeWrite, write, afterWrite];
-
-function getNodeName(element) {
-  return element ? (element.nodeName || '').toLowerCase() : null;
-}
-
-function getWindow(node) {
-  if (node == null) {
-    return window;
+  if (typeof window.CustomEvent === 'function') {
+    event = new window.CustomEvent(eventName, {
+      detail: opts
+    });
+  } else {
+    event = document.createEvent('Event');
+    event.initEvent(eventName, false, true, opts);
   }
 
-  if (node.toString() !== '[object Window]') {
-    var ownerDocument = node.ownerDocument;
-    return ownerDocument ? ownerDocument.defaultView || window : window;
+  window.dispatchEvent(event);
+};
+
+function staticMethods (target) {
+  /**
+   * Hide all tooltip
+   * @trigger ReactTooltip.hide()
+   */
+  target.hide = function (target) {
+    dispatchGlobalEvent(CONSTANT.GLOBAL.HIDE, {
+      target: target
+    });
+  };
+  /**
+   * Rebuild all tooltip
+   * @trigger ReactTooltip.rebuild()
+   */
+
+
+  target.rebuild = function () {
+    dispatchGlobalEvent(CONSTANT.GLOBAL.REBUILD);
+  };
+  /**
+   * Show specific tooltip
+   * @trigger ReactTooltip.show()
+   */
+
+
+  target.show = function (target) {
+    dispatchGlobalEvent(CONSTANT.GLOBAL.SHOW, {
+      target: target
+    });
+  };
+
+  target.prototype.globalRebuild = function () {
+    if (this.mount) {
+      this.unbindListener();
+      this.bindListener();
+    }
+  };
+
+  target.prototype.globalShow = function (event) {
+    if (this.mount) {
+      var hasTarget = event && event.detail && event.detail.target && true || false; // Create a fake event, specific show will limit the type to `solid`
+      // only `float` type cares e.clientX e.clientY
+
+      this.showTooltip({
+        currentTarget: hasTarget && event.detail.target
+      }, true);
+    }
+  };
+
+  target.prototype.globalHide = function (event) {
+    if (this.mount) {
+      var hasTarget = event && event.detail && event.detail.target && true || false;
+      this.hideTooltip({
+        currentTarget: hasTarget && event.detail.target
+      }, hasTarget);
+    }
+  };
+}
+
+/**
+ * Events that should be bound to the window
+ */
+function windowListener (target) {
+  target.prototype.bindWindowEvents = function (resizeHide) {
+    // ReactTooltip.hide
+    window.removeEventListener(CONSTANT.GLOBAL.HIDE, this.globalHide);
+    window.addEventListener(CONSTANT.GLOBAL.HIDE, this.globalHide, false); // ReactTooltip.rebuild
+
+    window.removeEventListener(CONSTANT.GLOBAL.REBUILD, this.globalRebuild);
+    window.addEventListener(CONSTANT.GLOBAL.REBUILD, this.globalRebuild, false); // ReactTooltip.show
+
+    window.removeEventListener(CONSTANT.GLOBAL.SHOW, this.globalShow);
+    window.addEventListener(CONSTANT.GLOBAL.SHOW, this.globalShow, false); // Resize
+
+    if (resizeHide) {
+      window.removeEventListener('resize', this.onWindowResize);
+      window.addEventListener('resize', this.onWindowResize, false);
+    }
+  };
+
+  target.prototype.unbindWindowEvents = function () {
+    window.removeEventListener(CONSTANT.GLOBAL.HIDE, this.globalHide);
+    window.removeEventListener(CONSTANT.GLOBAL.REBUILD, this.globalRebuild);
+    window.removeEventListener(CONSTANT.GLOBAL.SHOW, this.globalShow);
+    window.removeEventListener('resize', this.onWindowResize);
+  };
+  /**
+   * invoked by resize event of window
+   */
+
+
+  target.prototype.onWindowResize = function () {
+    if (!this.mount) return;
+    this.hideTooltip();
+  };
+}
+
+/**
+ * Custom events to control showing and hiding of tooltip
+ *
+ * @attributes
+ * - `event` {String}
+ * - `eventOff` {String}
+ */
+var checkStatus = function checkStatus(dataEventOff, e) {
+  var show = this.state.show;
+  var id = this.props.id;
+  var isCapture = this.isCapture(e.currentTarget);
+  var currentItem = e.currentTarget.getAttribute('currentItem');
+  if (!isCapture) e.stopPropagation();
+
+  if (show && currentItem === 'true') {
+    if (!dataEventOff) this.hideTooltip(e);
+  } else {
+    e.currentTarget.setAttribute('currentItem', 'true');
+    setUntargetItems(e.currentTarget, this.getTargetArray(id));
+    this.showTooltip(e);
+  }
+};
+
+var setUntargetItems = function setUntargetItems(currentTarget, targetArray) {
+  for (var i = 0; i < targetArray.length; i++) {
+    if (currentTarget !== targetArray[i]) {
+      targetArray[i].setAttribute('currentItem', 'false');
+    } else {
+      targetArray[i].setAttribute('currentItem', 'true');
+    }
+  }
+};
+
+var customListeners = {
+  id: '9b69f92e-d3fe-498b-b1b4-c5e63a51b0cf',
+  set: function set(target, event, listener) {
+    if (this.id in target) {
+      var map = target[this.id];
+      map[event] = listener;
+    } else {
+      // this is workaround for WeakMap, which is not supported in older browsers, such as IE
+      Object.defineProperty(target, this.id, {
+        configurable: true,
+        value: _defineProperty({}, event, listener)
+      });
+    }
+  },
+  get: function get(target, event) {
+    var map = target[this.id];
+
+    if (map !== undefined) {
+      return map[event];
+    }
+  }
+};
+function customEvent (target) {
+  target.prototype.isCustomEvent = function (ele) {
+    var event = this.state.event;
+    return event || !!ele.getAttribute('data-event');
+  };
+  /* Bind listener for custom event */
+
+
+  target.prototype.customBindListener = function (ele) {
+    var _this = this;
+
+    var _this$state = this.state,
+        event = _this$state.event,
+        eventOff = _this$state.eventOff;
+    var dataEvent = ele.getAttribute('data-event') || event;
+    var dataEventOff = ele.getAttribute('data-event-off') || eventOff;
+    dataEvent.split(' ').forEach(function (event) {
+      ele.removeEventListener(event, customListeners.get(ele, event));
+      var customListener = checkStatus.bind(_this, dataEventOff);
+      customListeners.set(ele, event, customListener);
+      ele.addEventListener(event, customListener, false);
+    });
+
+    if (dataEventOff) {
+      dataEventOff.split(' ').forEach(function (event) {
+        ele.removeEventListener(event, _this.hideTooltip);
+        ele.addEventListener(event, _this.hideTooltip, false);
+      });
+    }
+  };
+  /* Unbind listener for custom event */
+
+
+  target.prototype.customUnbindListener = function (ele) {
+    var _this$state2 = this.state,
+        event = _this$state2.event,
+        eventOff = _this$state2.eventOff;
+    var dataEvent = event || ele.getAttribute('data-event');
+    var dataEventOff = eventOff || ele.getAttribute('data-event-off');
+    ele.removeEventListener(dataEvent, customListeners.get(ele, event));
+    if (dataEventOff) ele.removeEventListener(dataEventOff, this.hideTooltip);
+  };
+}
+
+/**
+ * Util method to judge if it should follow capture model
+ */
+function isCapture (target) {
+  target.prototype.isCapture = function (currentTarget) {
+    return currentTarget && currentTarget.getAttribute('data-iscapture') === 'true' || this.props.isCapture || false;
+  };
+}
+
+/**
+ * Util method to get effect
+ */
+function getEffect (target) {
+  target.prototype.getEffect = function (currentTarget) {
+    var dataEffect = currentTarget.getAttribute('data-effect');
+    return dataEffect || this.props.effect || 'float';
+  };
+}
+
+/**
+ * Util method to get effect
+ */
+
+var makeProxy = function makeProxy(e) {
+  var proxy = {};
+
+  for (var key in e) {
+    if (typeof e[key] === 'function') {
+      proxy[key] = e[key].bind(e);
+    } else {
+      proxy[key] = e[key];
+    }
   }
 
-  return node;
-}
+  return proxy;
+};
 
-function isElement(node) {
-  var OwnElement = getWindow(node).Element;
-  return node instanceof OwnElement || node instanceof Element;
-}
+var bodyListener = function bodyListener(callback, options, e) {
+  var _options$respectEffec = options.respectEffect,
+      respectEffect = _options$respectEffec === void 0 ? false : _options$respectEffec,
+      _options$customEvent = options.customEvent,
+      customEvent = _options$customEvent === void 0 ? false : _options$customEvent;
+  var id = this.props.id;
+  var tip = e.target.getAttribute('data-tip') || null;
+  var forId = e.target.getAttribute('data-for') || null;
+  var target = e.target;
 
-function isHTMLElement(node) {
-  var OwnElement = getWindow(node).HTMLElement;
-  return node instanceof OwnElement || node instanceof HTMLElement;
-}
-
-function isShadowRoot(node) {
-  // IE 11 has no ShadowRoot
-  if (typeof ShadowRoot === 'undefined') {
-    return false;
+  if (this.isCustomEvent(target) && !customEvent) {
+    return;
   }
 
-  var OwnElement = getWindow(node).ShadowRoot;
-  return node instanceof OwnElement || node instanceof ShadowRoot;
+  var isTargetBelongsToTooltip = id == null && forId == null || forId === id;
+
+  if (tip != null && (!respectEffect || this.getEffect(target) === 'float') && isTargetBelongsToTooltip) {
+    var proxy = makeProxy(e);
+    proxy.currentTarget = target;
+    callback(proxy);
+  }
+};
+
+var findCustomEvents = function findCustomEvents(targetArray, dataAttribute) {
+  var events = {};
+  targetArray.forEach(function (target) {
+    var event = target.getAttribute(dataAttribute);
+    if (event) event.split(' ').forEach(function (event) {
+      return events[event] = true;
+    });
+  });
+  return events;
+};
+
+var getBody = function getBody() {
+  return document.getElementsByTagName('body')[0];
+};
+
+function bodyMode (target) {
+  target.prototype.isBodyMode = function () {
+    return !!this.props.bodyMode;
+  };
+
+  target.prototype.bindBodyListener = function (targetArray) {
+    var _this = this;
+
+    var _this$state = this.state,
+        event = _this$state.event,
+        eventOff = _this$state.eventOff,
+        possibleCustomEvents = _this$state.possibleCustomEvents,
+        possibleCustomEventsOff = _this$state.possibleCustomEventsOff;
+    var body = getBody();
+    var customEvents = findCustomEvents(targetArray, 'data-event');
+    var customEventsOff = findCustomEvents(targetArray, 'data-event-off');
+    if (event != null) customEvents[event] = true;
+    if (eventOff != null) customEventsOff[eventOff] = true;
+    possibleCustomEvents.split(' ').forEach(function (event) {
+      return customEvents[event] = true;
+    });
+    possibleCustomEventsOff.split(' ').forEach(function (event) {
+      return customEventsOff[event] = true;
+    });
+    this.unbindBodyListener(body);
+    var listeners = this.bodyModeListeners = {};
+
+    if (event == null) {
+      listeners.mouseover = bodyListener.bind(this, this.showTooltip, {});
+      listeners.mousemove = bodyListener.bind(this, this.updateTooltip, {
+        respectEffect: true
+      });
+      listeners.mouseout = bodyListener.bind(this, this.hideTooltip, {});
+    }
+
+    for (var _event in customEvents) {
+      listeners[_event] = bodyListener.bind(this, function (e) {
+        var targetEventOff = e.currentTarget.getAttribute('data-event-off') || eventOff;
+        checkStatus.call(_this, targetEventOff, e);
+      }, {
+        customEvent: true
+      });
+    }
+
+    for (var _event2 in customEventsOff) {
+      listeners[_event2] = bodyListener.bind(this, this.hideTooltip, {
+        customEvent: true
+      });
+    }
+
+    for (var _event3 in listeners) {
+      body.addEventListener(_event3, listeners[_event3]);
+    }
+  };
+
+  target.prototype.unbindBodyListener = function (body) {
+    body = body || getBody();
+    var listeners = this.bodyModeListeners;
+
+    for (var event in listeners) {
+      body.removeEventListener(event, listeners[event]);
+    }
+  };
 }
 
-// and applies them to the HTMLElements such as popper and arrow
+/**
+ * Tracking target removing from DOM.
+ * It's necessary to hide tooltip when it's target disappears.
+ * Otherwise, the tooltip would be shown forever until another target
+ * is triggered.
+ *
+ * If MutationObserver is not available, this feature just doesn't work.
+ */
+// https://hacks.mozilla.org/2012/05/dom-mutationobserver-reacting-to-dom-changes-without-killing-browser-performance/
+var getMutationObserverClass = function getMutationObserverClass() {
+  return window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
+};
 
-function applyStyles(_ref) {
-  var state = _ref.state;
-  Object.keys(state.elements).forEach(function (name) {
-    var style = state.styles[name] || {};
-    var attributes = state.attributes[name] || {};
-    var element = state.elements[name]; // arrow is optional + virtual elements
+function trackRemoval (target) {
+  target.prototype.bindRemovalTracker = function () {
+    var _this = this;
 
-    if (!isHTMLElement(element) || !getNodeName(element)) {
-      return;
-    } // Flow doesn't support to extend this property, but it's the most
-    // effective way to apply styles to an HTMLElement
-    // $FlowFixMe[cannot-write]
+    var MutationObserver = getMutationObserverClass();
+    if (MutationObserver == null) return;
+    var observer = new MutationObserver(function (mutations) {
+      for (var m1 = 0; m1 < mutations.length; m1++) {
+        var mutation = mutations[m1];
 
+        for (var m2 = 0; m2 < mutation.removedNodes.length; m2++) {
+          var element = mutation.removedNodes[m2];
 
-    Object.assign(element.style, style);
-    Object.keys(attributes).forEach(function (name) {
-      var value = attributes[name];
+          if (element === _this.state.currentTarget) {
+            _this.hideTooltip();
 
-      if (value === false) {
-        element.removeAttribute(name);
-      } else {
-        element.setAttribute(name, value === true ? '' : value);
+            return;
+          }
+        }
       }
     });
+    observer.observe(window.document, {
+      childList: true,
+      subtree: true
+    });
+    this.removalTracker = observer;
+  };
+
+  target.prototype.unbindRemovalTracker = function () {
+    if (this.removalTracker) {
+      this.removalTracker.disconnect();
+      this.removalTracker = null;
+    }
+  };
+}
+
+/**
+ * Calculate the position of tooltip
+ *
+ * @params
+ * - `e` {Event} the event of current mouse
+ * - `target` {Element} the currentTarget of the event
+ * - `node` {DOM} the react-tooltip object
+ * - `place` {String} top / right / bottom / left
+ * - `effect` {String} float / solid
+ * - `offset` {Object} the offset to default position
+ *
+ * @return {Object}
+ * - `isNewState` {Bool} required
+ * - `newState` {Object}
+ * - `position` {Object} {left: {Number}, top: {Number}}
+ */
+function getPosition (e, target, node, place, desiredPlace, effect, offset) {
+  var _getDimensions = getDimensions(node),
+      tipWidth = _getDimensions.width,
+      tipHeight = _getDimensions.height;
+
+  var _getDimensions2 = getDimensions(target),
+      targetWidth = _getDimensions2.width,
+      targetHeight = _getDimensions2.height;
+
+  var _getCurrentOffset = getCurrentOffset(e, target, effect),
+      mouseX = _getCurrentOffset.mouseX,
+      mouseY = _getCurrentOffset.mouseY;
+
+  var defaultOffset = getDefaultPosition(effect, targetWidth, targetHeight, tipWidth, tipHeight);
+
+  var _calculateOffset = calculateOffset(offset),
+      extraOffsetX = _calculateOffset.extraOffsetX,
+      extraOffsetY = _calculateOffset.extraOffsetY;
+
+  var windowWidth = window.innerWidth;
+  var windowHeight = window.innerHeight;
+
+  var _getParent = getParent(node),
+      parentTop = _getParent.parentTop,
+      parentLeft = _getParent.parentLeft; // Get the edge offset of the tooltip
+
+
+  var getTipOffsetLeft = function getTipOffsetLeft(place) {
+    var offsetX = defaultOffset[place].l;
+    return mouseX + offsetX + extraOffsetX;
+  };
+
+  var getTipOffsetRight = function getTipOffsetRight(place) {
+    var offsetX = defaultOffset[place].r;
+    return mouseX + offsetX + extraOffsetX;
+  };
+
+  var getTipOffsetTop = function getTipOffsetTop(place) {
+    var offsetY = defaultOffset[place].t;
+    return mouseY + offsetY + extraOffsetY;
+  };
+
+  var getTipOffsetBottom = function getTipOffsetBottom(place) {
+    var offsetY = defaultOffset[place].b;
+    return mouseY + offsetY + extraOffsetY;
+  }; //
+  // Functions to test whether the tooltip's sides are inside
+  // the client window for a given orientation p
+  //
+  //  _____________
+  // |             | <-- Right side
+  // | p = 'left'  |\
+  // |             |/  |\
+  // |_____________|   |_\  <-- Mouse
+  //      / \           |
+  //       |
+  //       |
+  //  Bottom side
+  //
+
+
+  var outsideLeft = function outsideLeft(p) {
+    return getTipOffsetLeft(p) < 0;
+  };
+
+  var outsideRight = function outsideRight(p) {
+    return getTipOffsetRight(p) > windowWidth;
+  };
+
+  var outsideTop = function outsideTop(p) {
+    return getTipOffsetTop(p) < 0;
+  };
+
+  var outsideBottom = function outsideBottom(p) {
+    return getTipOffsetBottom(p) > windowHeight;
+  }; // Check whether the tooltip with orientation p is completely inside the client window
+
+
+  var outside = function outside(p) {
+    return outsideLeft(p) || outsideRight(p) || outsideTop(p) || outsideBottom(p);
+  };
+
+  var inside = function inside(p) {
+    return !outside(p);
+  };
+
+  var placesList = ['top', 'bottom', 'left', 'right'];
+  var insideList = [];
+
+  for (var i = 0; i < 4; i++) {
+    var p = placesList[i];
+
+    if (inside(p)) {
+      insideList.push(p);
+    }
+  }
+
+  var isNewState = false;
+  var newPlace;
+  var shouldUpdatePlace = desiredPlace !== place;
+
+  if (inside(desiredPlace) && shouldUpdatePlace) {
+    isNewState = true;
+    newPlace = desiredPlace;
+  } else if (insideList.length > 0 && outside(desiredPlace) && outside(place)) {
+    isNewState = true;
+    newPlace = insideList[0];
+  }
+
+  if (isNewState) {
+    return {
+      isNewState: true,
+      newState: {
+        place: newPlace
+      }
+    };
+  }
+
+  return {
+    isNewState: false,
+    position: {
+      left: parseInt(getTipOffsetLeft(place) - parentLeft, 10),
+      top: parseInt(getTipOffsetTop(place) - parentTop, 10)
+    }
+  };
+}
+
+var getDimensions = function getDimensions(node) {
+  var _node$getBoundingClie = node.getBoundingClientRect(),
+      height = _node$getBoundingClie.height,
+      width = _node$getBoundingClie.width;
+
+  return {
+    height: parseInt(height, 10),
+    width: parseInt(width, 10)
+  };
+}; // Get current mouse offset
+
+
+var getCurrentOffset = function getCurrentOffset(e, currentTarget, effect) {
+  var boundingClientRect = currentTarget.getBoundingClientRect();
+  var targetTop = boundingClientRect.top;
+  var targetLeft = boundingClientRect.left;
+
+  var _getDimensions3 = getDimensions(currentTarget),
+      targetWidth = _getDimensions3.width,
+      targetHeight = _getDimensions3.height;
+
+  if (effect === 'float') {
+    return {
+      mouseX: e.clientX,
+      mouseY: e.clientY
+    };
+  }
+
+  return {
+    mouseX: targetLeft + targetWidth / 2,
+    mouseY: targetTop + targetHeight / 2
+  };
+}; // List all possibility of tooltip final offset
+// This is useful in judging if it is necessary for tooltip to switch position when out of window
+
+
+var getDefaultPosition = function getDefaultPosition(effect, targetWidth, targetHeight, tipWidth, tipHeight) {
+  var top;
+  var right;
+  var bottom;
+  var left;
+  var disToMouse = 3;
+  var triangleHeight = 2;
+  var cursorHeight = 12; // Optimize for float bottom only, cause the cursor will hide the tooltip
+
+  if (effect === 'float') {
+    top = {
+      l: -(tipWidth / 2),
+      r: tipWidth / 2,
+      t: -(tipHeight + disToMouse + triangleHeight),
+      b: -disToMouse
+    };
+    bottom = {
+      l: -(tipWidth / 2),
+      r: tipWidth / 2,
+      t: disToMouse + cursorHeight,
+      b: tipHeight + disToMouse + triangleHeight + cursorHeight
+    };
+    left = {
+      l: -(tipWidth + disToMouse + triangleHeight),
+      r: -disToMouse,
+      t: -(tipHeight / 2),
+      b: tipHeight / 2
+    };
+    right = {
+      l: disToMouse,
+      r: tipWidth + disToMouse + triangleHeight,
+      t: -(tipHeight / 2),
+      b: tipHeight / 2
+    };
+  } else if (effect === 'solid') {
+    top = {
+      l: -(tipWidth / 2),
+      r: tipWidth / 2,
+      t: -(targetHeight / 2 + tipHeight + triangleHeight),
+      b: -(targetHeight / 2)
+    };
+    bottom = {
+      l: -(tipWidth / 2),
+      r: tipWidth / 2,
+      t: targetHeight / 2,
+      b: targetHeight / 2 + tipHeight + triangleHeight
+    };
+    left = {
+      l: -(tipWidth + targetWidth / 2 + triangleHeight),
+      r: -(targetWidth / 2),
+      t: -(tipHeight / 2),
+      b: tipHeight / 2
+    };
+    right = {
+      l: targetWidth / 2,
+      r: tipWidth + targetWidth / 2 + triangleHeight,
+      t: -(tipHeight / 2),
+      b: tipHeight / 2
+    };
+  }
+
+  return {
+    top: top,
+    bottom: bottom,
+    left: left,
+    right: right
+  };
+}; // Consider additional offset into position calculation
+
+
+var calculateOffset = function calculateOffset(offset) {
+  var extraOffsetX = 0;
+  var extraOffsetY = 0;
+
+  if (Object.prototype.toString.apply(offset) === '[object String]') {
+    offset = JSON.parse(offset.toString().replace(/'/g, '"'));
+  }
+
+  for (var key in offset) {
+    if (key === 'top') {
+      extraOffsetY -= parseInt(offset[key], 10);
+    } else if (key === 'bottom') {
+      extraOffsetY += parseInt(offset[key], 10);
+    } else if (key === 'left') {
+      extraOffsetX -= parseInt(offset[key], 10);
+    } else if (key === 'right') {
+      extraOffsetX += parseInt(offset[key], 10);
+    }
+  }
+
+  return {
+    extraOffsetX: extraOffsetX,
+    extraOffsetY: extraOffsetY
+  };
+}; // Get the offset of the parent elements
+
+
+var getParent = function getParent(currentTarget) {
+  var currentParent = currentTarget;
+
+  while (currentParent) {
+    var computedStyle = window.getComputedStyle(currentParent); // transform and will-change: transform change the containing block
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/Containing_Block
+
+    if (computedStyle.getPropertyValue('transform') !== 'none' || computedStyle.getPropertyValue('will-change') === 'transform') break;
+    currentParent = currentParent.parentElement;
+  }
+
+  var parentTop = currentParent && currentParent.getBoundingClientRect().top || 0;
+  var parentLeft = currentParent && currentParent.getBoundingClientRect().left || 0;
+  return {
+    parentTop: parentTop,
+    parentLeft: parentLeft
+  };
+};
+
+/**
+ * To get the tooltip content
+ * it may comes from data-tip or this.props.children
+ * it should support multiline
+ *
+ * @params
+ * - `tip` {String} value of data-tip
+ * - `children` {ReactElement} this.props.children
+ * - `multiline` {Any} could be Bool(true/false) or String('true'/'false')
+ *
+ * @return
+ * - String or react component
+ */
+function getTipContent (tip, children, getContent, multiline) {
+  if (children) return children;
+  if (getContent !== undefined && getContent !== null) return getContent; // getContent can be 0, '', etc.
+
+  if (getContent === null) return null; // Tip not exist and children is null or undefined
+
+  var regexp = /<br\s*\/?>/;
+
+  if (!multiline || multiline === 'false' || !regexp.test(tip)) {
+    // No trim(), so that user can keep their input
+    return tip;
+  } // Multiline tooltip content
+
+
+  return tip.split(regexp).map(function (d, i) {
+    return React__default['default'].createElement("span", {
+      key: i,
+      className: "multi-line"
+    }, d);
   });
 }
 
-function effect$2(_ref2) {
-  var state = _ref2.state;
-  var initialStyles = {
-    popper: {
-      position: state.options.strategy,
-      left: '0',
-      top: '0',
-      margin: '0'
-    },
-    arrow: {
-      position: 'absolute'
-    },
-    reference: {}
-  };
-  Object.assign(state.elements.popper.style, initialStyles.popper);
-  state.styles = initialStyles;
+/**
+ * Support aria- and role in ReactTooltip
+ *
+ * @params props {Object}
+ * @return {Object}
+ */
+function parseAria(props) {
+  var ariaObj = {};
+  Object.keys(props).filter(function (prop) {
+    // aria-xxx and role is acceptable
+    return /(^aria-\w+$|^role$)/.test(prop);
+  }).forEach(function (prop) {
+    ariaObj[prop] = props[prop];
+  });
+  return ariaObj;
+}
 
-  if (state.elements.arrow) {
-    Object.assign(state.elements.arrow.style, initialStyles.arrow);
+/**
+ * Convert nodelist to array
+ * @see https://github.com/facebook/fbjs/blob/e66ba20ad5be433eb54423f2b097d829324d9de6/packages/fbjs/src/core/createArrayFromMixed.js#L24
+ * NodeLists are functions in Safari
+ */
+function nodeListToArray (nodeList) {
+  var length = nodeList.length;
+
+  if (nodeList.hasOwnProperty) {
+    return Array.prototype.slice.call(nodeList);
   }
 
-  return function () {
-    Object.keys(state.elements).forEach(function (name) {
-      var element = state.elements[name];
-      var attributes = state.attributes[name] || {};
-      var styleProperties = Object.keys(state.styles.hasOwnProperty(name) ? state.styles[name] : initialStyles[name]); // Set all values to an empty string to unset them
+  return new Array(length).fill().map(function (index) {
+    return nodeList[index];
+  });
+}
 
-      var style = styleProperties.reduce(function (style, property) {
-        style[property] = '';
-        return style;
-      }, {}); // arrow is optional + virtual elements
+function generateUUID() {
+  return 't' + v4();
+}
 
-      if (!isHTMLElement(element) || !getNodeName(element)) {
+var baseCss = ".__react_component_tooltip {\n  border-radius: 3px;\n  display: inline-block;\n  font-size: 13px;\n  left: -999em;\n  opacity: 0;\n  padding: 8px 21px;\n  position: fixed;\n  pointer-events: none;\n  transition: opacity 0.3s ease-out;\n  top: -999em;\n  visibility: hidden;\n  z-index: 999;\n}\n.__react_component_tooltip.allow_hover, .__react_component_tooltip.allow_click {\n  pointer-events: auto;\n}\n.__react_component_tooltip::before, .__react_component_tooltip::after {\n  content: \"\";\n  width: 0;\n  height: 0;\n  position: absolute;\n}\n.__react_component_tooltip.show {\n  opacity: 0.9;\n  margin-top: 0;\n  margin-left: 0;\n  visibility: visible;\n}\n.__react_component_tooltip.place-top::before {\n  border-left: 10px solid transparent;\n  border-right: 10px solid transparent;\n  bottom: -8px;\n  left: 50%;\n  margin-left: -10px;\n}\n.__react_component_tooltip.place-bottom::before {\n  border-left: 10px solid transparent;\n  border-right: 10px solid transparent;\n  top: -8px;\n  left: 50%;\n  margin-left: -10px;\n}\n.__react_component_tooltip.place-left::before {\n  border-top: 6px solid transparent;\n  border-bottom: 6px solid transparent;\n  right: -8px;\n  top: 50%;\n  margin-top: -5px;\n}\n.__react_component_tooltip.place-right::before {\n  border-top: 6px solid transparent;\n  border-bottom: 6px solid transparent;\n  left: -8px;\n  top: 50%;\n  margin-top: -5px;\n}\n.__react_component_tooltip .multi-line {\n  display: block;\n  padding: 2px 0;\n  text-align: center;\n}";
+
+/**
+ * Default pop-up style values (text color, background color).
+ */
+var defaultColors = {
+  dark: {
+    text: '#fff',
+    background: '#222',
+    border: 'transparent',
+    arrow: '#222'
+  },
+  success: {
+    text: '#fff',
+    background: '#8DC572',
+    border: 'transparent',
+    arrow: '#8DC572'
+  },
+  warning: {
+    text: '#fff',
+    background: '#F0AD4E',
+    border: 'transparent',
+    arrow: '#F0AD4E'
+  },
+  error: {
+    text: '#fff',
+    background: '#BE6464',
+    border: 'transparent',
+    arrow: '#BE6464'
+  },
+  info: {
+    text: '#fff',
+    background: '#337AB7',
+    border: 'transparent',
+    arrow: '#337AB7'
+  },
+  light: {
+    text: '#222',
+    background: '#fff',
+    border: 'transparent',
+    arrow: '#fff'
+  }
+};
+function getDefaultPopupColors(type) {
+  return defaultColors[type] ? _objectSpread2({}, defaultColors[type]) : undefined;
+}
+
+/**
+ * Generates the specific tooltip style for use on render.
+ */
+
+function generateTooltipStyle(uuid, customColors, type, hasBorder) {
+  return generateStyle(uuid, getPopupColors(customColors, type, hasBorder));
+}
+/**
+ * Generates the tooltip style rules based on the element-specified "data-type" property.
+ */
+
+function generateStyle(uuid, colors) {
+  var textColor = colors.text;
+  var backgroundColor = colors.background;
+  var borderColor = colors.border;
+  var arrowColor = colors.arrow;
+  return "\n  \t.".concat(uuid, " {\n\t    color: ").concat(textColor, ";\n\t    background: ").concat(backgroundColor, ";\n\t    border: 1px solid ").concat(borderColor, ";\n  \t}\n\n  \t.").concat(uuid, ".place-top {\n        margin-top: -10px;\n    }\n    .").concat(uuid, ".place-top::before {\n        border-top: 8px solid ").concat(borderColor, ";\n    }\n    .").concat(uuid, ".place-top::after {\n        border-left: 8px solid transparent;\n        border-right: 8px solid transparent;\n        bottom: -6px;\n        left: 50%;\n        margin-left: -8px;\n        border-top-color: ").concat(arrowColor, ";\n        border-top-style: solid;\n        border-top-width: 6px;\n    }\n\n    .").concat(uuid, ".place-bottom {\n        margin-top: 10px;\n    }\n    .").concat(uuid, ".place-bottom::before {\n        border-bottom: 8px solid ").concat(borderColor, ";\n    }\n    .").concat(uuid, ".place-bottom::after {\n        border-left: 8px solid transparent;\n        border-right: 8px solid transparent;\n        top: -6px;\n        left: 50%;\n        margin-left: -8px;\n        border-bottom-color: ").concat(arrowColor, ";\n        border-bottom-style: solid;\n        border-bottom-width: 6px;\n    }\n\n    .").concat(uuid, ".place-left {\n        margin-left: -10px;\n    }\n    .").concat(uuid, ".place-left::before {\n        border-left: 8px solid ").concat(borderColor, ";\n    }\n    .").concat(uuid, ".place-left::after {\n        border-top: 5px solid transparent;\n        border-bottom: 5px solid transparent;\n        right: -6px;\n        top: 50%;\n        margin-top: -4px;\n        border-left-color: ").concat(arrowColor, ";\n        border-left-style: solid;\n        border-left-width: 6px;\n    }\n\n    .").concat(uuid, ".place-right {\n        margin-left: 10px;\n    }\n    .").concat(uuid, ".place-right::before {\n        border-right: 8px solid ").concat(borderColor, ";\n    }\n    .").concat(uuid, ".place-right::after {\n        border-top: 5px solid transparent;\n        border-bottom: 5px solid transparent;\n        left: -6px;\n        top: 50%;\n        margin-top: -4px;\n        border-right-color: ").concat(arrowColor, ";\n        border-right-style: solid;\n        border-right-width: 6px;\n    }\n  ");
+}
+
+function getPopupColors(customColors, type, hasBorder) {
+  var textColor = customColors.text;
+  var backgroundColor = customColors.background;
+  var borderColor = customColors.border;
+  var arrowColor = customColors.arrow ? customColors.arrow : customColors.background;
+  var colors = getDefaultPopupColors(type);
+
+  if (textColor) {
+    colors.text = textColor;
+  }
+
+  if (backgroundColor) {
+    colors.background = backgroundColor;
+  }
+
+  if (hasBorder) {
+    if (borderColor) {
+      colors.border = borderColor;
+    } else {
+      colors.border = type === 'light' ? 'black' : 'white';
+    }
+  }
+
+  if (arrowColor) {
+    colors.arrow = arrowColor;
+  }
+
+  return colors;
+}
+
+var _class, _class2, _temp;
+
+var ReactTooltip = staticMethods(_class = windowListener(_class = customEvent(_class = isCapture(_class = getEffect(_class = bodyMode(_class = trackRemoval(_class = (_temp = _class2 =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(ReactTooltip, _React$Component);
+
+  _createClass(ReactTooltip, null, [{
+    key: "propTypes",
+    get: function get() {
+      return {
+        uuid: PropTypes.string,
+        children: PropTypes.any,
+        place: PropTypes.string,
+        type: PropTypes.string,
+        effect: PropTypes.string,
+        offset: PropTypes.object,
+        multiline: PropTypes.bool,
+        border: PropTypes.bool,
+        textColor: PropTypes.string,
+        backgroundColor: PropTypes.string,
+        borderColor: PropTypes.string,
+        arrowColor: PropTypes.string,
+        insecure: PropTypes.bool,
+        "class": PropTypes.string,
+        className: PropTypes.string,
+        id: PropTypes.string,
+        html: PropTypes.bool,
+        delayHide: PropTypes.number,
+        delayUpdate: PropTypes.number,
+        delayShow: PropTypes.number,
+        event: PropTypes.string,
+        eventOff: PropTypes.string,
+        isCapture: PropTypes.bool,
+        globalEventOff: PropTypes.string,
+        getContent: PropTypes.any,
+        afterShow: PropTypes.func,
+        afterHide: PropTypes.func,
+        overridePosition: PropTypes.func,
+        disable: PropTypes.bool,
+        scrollHide: PropTypes.bool,
+        resizeHide: PropTypes.bool,
+        wrapper: PropTypes.string,
+        bodyMode: PropTypes.bool,
+        possibleCustomEvents: PropTypes.string,
+        possibleCustomEventsOff: PropTypes.string,
+        clickable: PropTypes.bool
+      };
+    }
+  }]);
+
+  function ReactTooltip(props) {
+    var _this;
+
+    _classCallCheck(this, ReactTooltip);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(ReactTooltip).call(this, props));
+    _this.state = {
+      uuid: props.uuid || generateUUID(),
+      place: props.place || 'top',
+      // Direction of tooltip
+      desiredPlace: props.place || 'top',
+      type: 'dark',
+      // Color theme of tooltip
+      effect: 'float',
+      // float or fixed
+      show: false,
+      border: false,
+      customColors: {},
+      offset: {},
+      extraClass: '',
+      html: false,
+      delayHide: 0,
+      delayShow: 0,
+      event: props.event || null,
+      eventOff: props.eventOff || null,
+      currentEvent: null,
+      // Current mouse event
+      currentTarget: null,
+      // Current target of mouse event
+      ariaProps: parseAria(props),
+      // aria- and role attributes
+      isEmptyTip: false,
+      disable: false,
+      possibleCustomEvents: props.possibleCustomEvents || '',
+      possibleCustomEventsOff: props.possibleCustomEventsOff || '',
+      originTooltip: null,
+      isMultiline: false
+    };
+
+    _this.bind(['showTooltip', 'updateTooltip', 'hideTooltip', 'hideTooltipOnScroll', 'getTooltipContent', 'globalRebuild', 'globalShow', 'globalHide', 'onWindowResize', 'mouseOnToolTip']);
+
+    _this.mount = true;
+    _this.delayShowLoop = null;
+    _this.delayHideLoop = null;
+    _this.delayReshow = null;
+    _this.intervalUpdateContent = null;
+    return _this;
+  }
+  /**
+   * For unify the bind and unbind listener
+   */
+
+
+  _createClass(ReactTooltip, [{
+    key: "bind",
+    value: function bind(methodArray) {
+      var _this2 = this;
+
+      methodArray.forEach(function (method) {
+        _this2[method] = _this2[method].bind(_this2);
+      });
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this$props = this.props;
+          _this$props.insecure;
+          var resizeHide = _this$props.resizeHide;
+      this.bindListener(); // Bind listener for tooltip
+
+      this.bindWindowEvents(resizeHide); // Bind global event for static method
+
+      this.injectStyles(); // Inject styles for each DOM root having tooltip.
+    }
+  }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      this.mount = false;
+      this.clearTimer();
+      this.unbindListener();
+      this.removeScrollListener(this.state.currentTarget);
+      this.unbindWindowEvents();
+    }
+    /* Look for the closest DOM root having tooltip and inject styles. */
+
+  }, {
+    key: "injectStyles",
+    value: function injectStyles() {
+      var tooltipRef = this.tooltipRef;
+
+      if (!tooltipRef) {
         return;
       }
 
-      Object.assign(element.style, style);
-      Object.keys(attributes).forEach(function (attribute) {
-        element.removeAttribute(attribute);
-      });
-    });
-  };
-} // eslint-disable-next-line import/no-unused-modules
+      var parentNode = tooltipRef.parentNode;
 
-
-var applyStyles$1 = {
-  name: 'applyStyles',
-  enabled: true,
-  phase: 'write',
-  fn: applyStyles,
-  effect: effect$2,
-  requires: ['computeStyles']
-};
-
-function getBasePlacement(placement) {
-  return placement.split('-')[0];
-}
-
-function getBoundingClientRect(element) {
-  var rect = element.getBoundingClientRect();
-  return {
-    width: rect.width,
-    height: rect.height,
-    top: rect.top,
-    right: rect.right,
-    bottom: rect.bottom,
-    left: rect.left,
-    x: rect.left,
-    y: rect.top
-  };
-}
-
-// means it doesn't take into account transforms.
-
-function getLayoutRect(element) {
-  var clientRect = getBoundingClientRect(element); // Use the clientRect sizes if it's not been transformed.
-  // Fixes https://github.com/popperjs/popper-core/issues/1223
-
-  var width = element.offsetWidth;
-  var height = element.offsetHeight;
-
-  if (Math.abs(clientRect.width - width) <= 1) {
-    width = clientRect.width;
-  }
-
-  if (Math.abs(clientRect.height - height) <= 1) {
-    height = clientRect.height;
-  }
-
-  return {
-    x: element.offsetLeft,
-    y: element.offsetTop,
-    width: width,
-    height: height
-  };
-}
-
-function contains(parent, child) {
-  var rootNode = child.getRootNode && child.getRootNode(); // First, attempt with faster native method
-
-  if (parent.contains(child)) {
-    return true;
-  } // then fallback to custom implementation with Shadow DOM support
-  else if (rootNode && isShadowRoot(rootNode)) {
-      var next = child;
-
-      do {
-        if (next && parent.isSameNode(next)) {
-          return true;
-        } // $FlowFixMe[prop-missing]: need a better way to handle this...
-
-
-        next = next.parentNode || next.host;
-      } while (next);
-    } // Give up, the result is false
-
-
-  return false;
-}
-
-function getComputedStyle(element) {
-  return getWindow(element).getComputedStyle(element);
-}
-
-function isTableElement(element) {
-  return ['table', 'td', 'th'].indexOf(getNodeName(element)) >= 0;
-}
-
-function getDocumentElement(element) {
-  // $FlowFixMe[incompatible-return]: assume body is always available
-  return ((isElement(element) ? element.ownerDocument : // $FlowFixMe[prop-missing]
-  element.document) || window.document).documentElement;
-}
-
-function getParentNode(element) {
-  if (getNodeName(element) === 'html') {
-    return element;
-  }
-
-  return (// this is a quicker (but less type safe) way to save quite some bytes from the bundle
-    // $FlowFixMe[incompatible-return]
-    // $FlowFixMe[prop-missing]
-    element.assignedSlot || // step into the shadow DOM of the parent of a slotted node
-    element.parentNode || ( // DOM Element detected
-    isShadowRoot(element) ? element.host : null) || // ShadowRoot detected
-    // $FlowFixMe[incompatible-call]: HTMLElement is a Node
-    getDocumentElement(element) // fallback
-
-  );
-}
-
-function getTrueOffsetParent(element) {
-  if (!isHTMLElement(element) || // https://github.com/popperjs/popper-core/issues/837
-  getComputedStyle(element).position === 'fixed') {
-    return null;
-  }
-
-  return element.offsetParent;
-} // `.offsetParent` reports `null` for fixed elements, while absolute elements
-// return the containing block
-
-
-function getContainingBlock(element) {
-  var isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') !== -1;
-  var isIE = navigator.userAgent.indexOf('Trident') !== -1;
-
-  if (isIE && isHTMLElement(element)) {
-    // In IE 9, 10 and 11 fixed elements containing block is always established by the viewport
-    var elementCss = getComputedStyle(element);
-
-    if (elementCss.position === 'fixed') {
-      return null;
-    }
-  }
-
-  var currentNode = getParentNode(element);
-
-  while (isHTMLElement(currentNode) && ['html', 'body'].indexOf(getNodeName(currentNode)) < 0) {
-    var css = getComputedStyle(currentNode); // This is non-exhaustive but covers the most common CSS properties that
-    // create a containing block.
-    // https://developer.mozilla.org/en-US/docs/Web/CSS/Containing_block#identifying_the_containing_block
-
-    if (css.transform !== 'none' || css.perspective !== 'none' || css.contain === 'paint' || ['transform', 'perspective'].indexOf(css.willChange) !== -1 || isFirefox && css.willChange === 'filter' || isFirefox && css.filter && css.filter !== 'none') {
-      return currentNode;
-    } else {
-      currentNode = currentNode.parentNode;
-    }
-  }
-
-  return null;
-} // Gets the closest ancestor positioned element. Handles some edge cases,
-// such as table ancestors and cross browser bugs.
-
-
-function getOffsetParent(element) {
-  var window = getWindow(element);
-  var offsetParent = getTrueOffsetParent(element);
-
-  while (offsetParent && isTableElement(offsetParent) && getComputedStyle(offsetParent).position === 'static') {
-    offsetParent = getTrueOffsetParent(offsetParent);
-  }
-
-  if (offsetParent && (getNodeName(offsetParent) === 'html' || getNodeName(offsetParent) === 'body' && getComputedStyle(offsetParent).position === 'static')) {
-    return window;
-  }
-
-  return offsetParent || getContainingBlock(element) || window;
-}
-
-function getMainAxisFromPlacement(placement) {
-  return ['top', 'bottom'].indexOf(placement) >= 0 ? 'x' : 'y';
-}
-
-var max = Math.max;
-var min = Math.min;
-var round = Math.round;
-
-function within(min$1, value, max$1) {
-  return max(min$1, min(value, max$1));
-}
-
-function getFreshSideObject() {
-  return {
-    top: 0,
-    right: 0,
-    bottom: 0,
-    left: 0
-  };
-}
-
-function mergePaddingObject(paddingObject) {
-  return Object.assign({}, getFreshSideObject(), paddingObject);
-}
-
-function expandToHashMap(value, keys) {
-  return keys.reduce(function (hashMap, key) {
-    hashMap[key] = value;
-    return hashMap;
-  }, {});
-}
-
-var toPaddingObject = function toPaddingObject(padding, state) {
-  padding = typeof padding === 'function' ? padding(Object.assign({}, state.rects, {
-    placement: state.placement
-  })) : padding;
-  return mergePaddingObject(typeof padding !== 'number' ? padding : expandToHashMap(padding, basePlacements));
-};
-
-function arrow(_ref) {
-  var _state$modifiersData$;
-
-  var state = _ref.state,
-      name = _ref.name,
-      options = _ref.options;
-  var arrowElement = state.elements.arrow;
-  var popperOffsets = state.modifiersData.popperOffsets;
-  var basePlacement = getBasePlacement(state.placement);
-  var axis = getMainAxisFromPlacement(basePlacement);
-  var isVertical = [left, right].indexOf(basePlacement) >= 0;
-  var len = isVertical ? 'height' : 'width';
-
-  if (!arrowElement || !popperOffsets) {
-    return;
-  }
-
-  var paddingObject = toPaddingObject(options.padding, state);
-  var arrowRect = getLayoutRect(arrowElement);
-  var minProp = axis === 'y' ? top : left;
-  var maxProp = axis === 'y' ? bottom : right;
-  var endDiff = state.rects.reference[len] + state.rects.reference[axis] - popperOffsets[axis] - state.rects.popper[len];
-  var startDiff = popperOffsets[axis] - state.rects.reference[axis];
-  var arrowOffsetParent = getOffsetParent(arrowElement);
-  var clientSize = arrowOffsetParent ? axis === 'y' ? arrowOffsetParent.clientHeight || 0 : arrowOffsetParent.clientWidth || 0 : 0;
-  var centerToReference = endDiff / 2 - startDiff / 2; // Make sure the arrow doesn't overflow the popper if the center point is
-  // outside of the popper bounds
-
-  var min = paddingObject[minProp];
-  var max = clientSize - arrowRect[len] - paddingObject[maxProp];
-  var center = clientSize / 2 - arrowRect[len] / 2 + centerToReference;
-  var offset = within(min, center, max); // Prevents breaking syntax highlighting...
-
-  var axisProp = axis;
-  state.modifiersData[name] = (_state$modifiersData$ = {}, _state$modifiersData$[axisProp] = offset, _state$modifiersData$.centerOffset = offset - center, _state$modifiersData$);
-}
-
-function effect$1(_ref2) {
-  var state = _ref2.state,
-      options = _ref2.options;
-  var _options$element = options.element,
-      arrowElement = _options$element === void 0 ? '[data-popper-arrow]' : _options$element;
-
-  if (arrowElement == null) {
-    return;
-  } // CSS selector
-
-
-  if (typeof arrowElement === 'string') {
-    arrowElement = state.elements.popper.querySelector(arrowElement);
-
-    if (!arrowElement) {
-      return;
-    }
-  }
-
-  if (process.env.NODE_ENV !== "production") {
-    if (!isHTMLElement(arrowElement)) {
-      console.error(['Popper: "arrow" element must be an HTMLElement (not an SVGElement).', 'To use an SVG arrow, wrap it in an HTMLElement that will be used as', 'the arrow.'].join(' '));
-    }
-  }
-
-  if (!contains(state.elements.popper, arrowElement)) {
-    if (process.env.NODE_ENV !== "production") {
-      console.error(['Popper: "arrow" modifier\'s `element` must be a child of the popper', 'element.'].join(' '));
-    }
-
-    return;
-  }
-
-  state.elements.arrow = arrowElement;
-} // eslint-disable-next-line import/no-unused-modules
-
-
-var arrow$1 = {
-  name: 'arrow',
-  enabled: true,
-  phase: 'main',
-  fn: arrow,
-  effect: effect$1,
-  requires: ['popperOffsets'],
-  requiresIfExists: ['preventOverflow']
-};
-
-var unsetSides = {
-  top: 'auto',
-  right: 'auto',
-  bottom: 'auto',
-  left: 'auto'
-}; // Round the offsets to the nearest suitable subpixel based on the DPR.
-// Zooming can change the DPR, but it seems to report a value that will
-// cleanly divide the values into the appropriate subpixels.
-
-function roundOffsetsByDPR(_ref) {
-  var x = _ref.x,
-      y = _ref.y;
-  var win = window;
-  var dpr = win.devicePixelRatio || 1;
-  return {
-    x: round(round(x * dpr) / dpr) || 0,
-    y: round(round(y * dpr) / dpr) || 0
-  };
-}
-
-function mapToStyles(_ref2) {
-  var _Object$assign2;
-
-  var popper = _ref2.popper,
-      popperRect = _ref2.popperRect,
-      placement = _ref2.placement,
-      offsets = _ref2.offsets,
-      position = _ref2.position,
-      gpuAcceleration = _ref2.gpuAcceleration,
-      adaptive = _ref2.adaptive,
-      roundOffsets = _ref2.roundOffsets;
-
-  var _ref3 = roundOffsets === true ? roundOffsetsByDPR(offsets) : typeof roundOffsets === 'function' ? roundOffsets(offsets) : offsets,
-      _ref3$x = _ref3.x,
-      x = _ref3$x === void 0 ? 0 : _ref3$x,
-      _ref3$y = _ref3.y,
-      y = _ref3$y === void 0 ? 0 : _ref3$y;
-
-  var hasX = offsets.hasOwnProperty('x');
-  var hasY = offsets.hasOwnProperty('y');
-  var sideX = left;
-  var sideY = top;
-  var win = window;
-
-  if (adaptive) {
-    var offsetParent = getOffsetParent(popper);
-    var heightProp = 'clientHeight';
-    var widthProp = 'clientWidth';
-
-    if (offsetParent === getWindow(popper)) {
-      offsetParent = getDocumentElement(popper);
-
-      if (getComputedStyle(offsetParent).position !== 'static') {
-        heightProp = 'scrollHeight';
-        widthProp = 'scrollWidth';
+      while (parentNode.parentNode) {
+        parentNode = parentNode.parentNode;
       }
-    } // $FlowFixMe[incompatible-cast]: force type refinement, we compare offsetParent with window above, but Flow doesn't detect it
 
+      var domRoot;
 
-    offsetParent = offsetParent;
-
-    if (placement === top) {
-      sideY = bottom; // $FlowFixMe[prop-missing]
-
-      y -= offsetParent[heightProp] - popperRect.height;
-      y *= gpuAcceleration ? 1 : -1;
-    }
-
-    if (placement === left) {
-      sideX = right; // $FlowFixMe[prop-missing]
-
-      x -= offsetParent[widthProp] - popperRect.width;
-      x *= gpuAcceleration ? 1 : -1;
-    }
-  }
-
-  var commonStyles = Object.assign({
-    position: position
-  }, adaptive && unsetSides);
-
-  if (gpuAcceleration) {
-    var _Object$assign;
-
-    return Object.assign({}, commonStyles, (_Object$assign = {}, _Object$assign[sideY] = hasY ? '0' : '', _Object$assign[sideX] = hasX ? '0' : '', _Object$assign.transform = (win.devicePixelRatio || 1) < 2 ? "translate(" + x + "px, " + y + "px)" : "translate3d(" + x + "px, " + y + "px, 0)", _Object$assign));
-  }
-
-  return Object.assign({}, commonStyles, (_Object$assign2 = {}, _Object$assign2[sideY] = hasY ? y + "px" : '', _Object$assign2[sideX] = hasX ? x + "px" : '', _Object$assign2.transform = '', _Object$assign2));
-}
-
-function computeStyles(_ref4) {
-  var state = _ref4.state,
-      options = _ref4.options;
-  var _options$gpuAccelerat = options.gpuAcceleration,
-      gpuAcceleration = _options$gpuAccelerat === void 0 ? true : _options$gpuAccelerat,
-      _options$adaptive = options.adaptive,
-      adaptive = _options$adaptive === void 0 ? true : _options$adaptive,
-      _options$roundOffsets = options.roundOffsets,
-      roundOffsets = _options$roundOffsets === void 0 ? true : _options$roundOffsets;
-
-  if (process.env.NODE_ENV !== "production") {
-    var transitionProperty = getComputedStyle(state.elements.popper).transitionProperty || '';
-
-    if (adaptive && ['transform', 'top', 'right', 'bottom', 'left'].some(function (property) {
-      return transitionProperty.indexOf(property) >= 0;
-    })) {
-      console.warn(['Popper: Detected CSS transitions on at least one of the following', 'CSS properties: "transform", "top", "right", "bottom", "left".', '\n\n', 'Disable the "computeStyles" modifier\'s `adaptive` option to allow', 'for smooth transitions, or remove these properties from the CSS', 'transition declaration on the popper element if only transitioning', 'opacity or background-color for example.', '\n\n', 'We recommend using the popper element as a wrapper around an inner', 'element that can have any CSS property transitioned for animations.'].join(' '));
-    }
-  }
-
-  var commonStyles = {
-    placement: getBasePlacement(state.placement),
-    popper: state.elements.popper,
-    popperRect: state.rects.popper,
-    gpuAcceleration: gpuAcceleration
-  };
-
-  if (state.modifiersData.popperOffsets != null) {
-    state.styles.popper = Object.assign({}, state.styles.popper, mapToStyles(Object.assign({}, commonStyles, {
-      offsets: state.modifiersData.popperOffsets,
-      position: state.options.strategy,
-      adaptive: adaptive,
-      roundOffsets: roundOffsets
-    })));
-  }
-
-  if (state.modifiersData.arrow != null) {
-    state.styles.arrow = Object.assign({}, state.styles.arrow, mapToStyles(Object.assign({}, commonStyles, {
-      offsets: state.modifiersData.arrow,
-      position: 'absolute',
-      adaptive: false,
-      roundOffsets: roundOffsets
-    })));
-  }
-
-  state.attributes.popper = Object.assign({}, state.attributes.popper, {
-    'data-popper-placement': state.placement
-  });
-} // eslint-disable-next-line import/no-unused-modules
-
-
-var computeStyles$1 = {
-  name: 'computeStyles',
-  enabled: true,
-  phase: 'beforeWrite',
-  fn: computeStyles,
-  data: {}
-};
-
-var passive = {
-  passive: true
-};
-
-function effect(_ref) {
-  var state = _ref.state,
-      instance = _ref.instance,
-      options = _ref.options;
-  var _options$scroll = options.scroll,
-      scroll = _options$scroll === void 0 ? true : _options$scroll,
-      _options$resize = options.resize,
-      resize = _options$resize === void 0 ? true : _options$resize;
-  var window = getWindow(state.elements.popper);
-  var scrollParents = [].concat(state.scrollParents.reference, state.scrollParents.popper);
-
-  if (scroll) {
-    scrollParents.forEach(function (scrollParent) {
-      scrollParent.addEventListener('scroll', instance.update, passive);
-    });
-  }
-
-  if (resize) {
-    window.addEventListener('resize', instance.update, passive);
-  }
-
-  return function () {
-    if (scroll) {
-      scrollParents.forEach(function (scrollParent) {
-        scrollParent.removeEventListener('scroll', instance.update, passive);
-      });
-    }
-
-    if (resize) {
-      window.removeEventListener('resize', instance.update, passive);
-    }
-  };
-} // eslint-disable-next-line import/no-unused-modules
-
-
-var eventListeners = {
-  name: 'eventListeners',
-  enabled: true,
-  phase: 'write',
-  fn: function fn() {},
-  effect: effect,
-  data: {}
-};
-
-var hash$1 = {
-  left: 'right',
-  right: 'left',
-  bottom: 'top',
-  top: 'bottom'
-};
-function getOppositePlacement(placement) {
-  return placement.replace(/left|right|bottom|top/g, function (matched) {
-    return hash$1[matched];
-  });
-}
-
-var hash = {
-  start: 'end',
-  end: 'start'
-};
-function getOppositeVariationPlacement(placement) {
-  return placement.replace(/start|end/g, function (matched) {
-    return hash[matched];
-  });
-}
-
-function getWindowScroll(node) {
-  var win = getWindow(node);
-  var scrollLeft = win.pageXOffset;
-  var scrollTop = win.pageYOffset;
-  return {
-    scrollLeft: scrollLeft,
-    scrollTop: scrollTop
-  };
-}
-
-function getWindowScrollBarX(element) {
-  // If <html> has a CSS width greater than the viewport, then this will be
-  // incorrect for RTL.
-  // Popper 1 is broken in this case and never had a bug report so let's assume
-  // it's not an issue. I don't think anyone ever specifies width on <html>
-  // anyway.
-  // Browsers where the left scrollbar doesn't cause an issue report `0` for
-  // this (e.g. Edge 2019, IE11, Safari)
-  return getBoundingClientRect(getDocumentElement(element)).left + getWindowScroll(element).scrollLeft;
-}
-
-function getViewportRect(element) {
-  var win = getWindow(element);
-  var html = getDocumentElement(element);
-  var visualViewport = win.visualViewport;
-  var width = html.clientWidth;
-  var height = html.clientHeight;
-  var x = 0;
-  var y = 0; // NB: This isn't supported on iOS <= 12. If the keyboard is open, the popper
-  // can be obscured underneath it.
-  // Also, `html.clientHeight` adds the bottom bar height in Safari iOS, even
-  // if it isn't open, so if this isn't available, the popper will be detected
-  // to overflow the bottom of the screen too early.
-
-  if (visualViewport) {
-    width = visualViewport.width;
-    height = visualViewport.height; // Uses Layout Viewport (like Chrome; Safari does not currently)
-    // In Chrome, it returns a value very close to 0 (+/-) but contains rounding
-    // errors due to floating point numbers, so we need to check precision.
-    // Safari returns a number <= 0, usually < -1 when pinch-zoomed
-    // Feature detection fails in mobile emulation mode in Chrome.
-    // Math.abs(win.innerWidth / visualViewport.scale - visualViewport.width) <
-    // 0.001
-    // Fallback here: "Not Safari" userAgent
-
-    if (!/^((?!chrome|android).)*safari/i.test(navigator.userAgent)) {
-      x = visualViewport.offsetLeft;
-      y = visualViewport.offsetTop;
-    }
-  }
-
-  return {
-    width: width,
-    height: height,
-    x: x + getWindowScrollBarX(element),
-    y: y
-  };
-}
-
-// of the `<html>` and `<body>` rect bounds if horizontally scrollable
-
-function getDocumentRect(element) {
-  var _element$ownerDocumen;
-
-  var html = getDocumentElement(element);
-  var winScroll = getWindowScroll(element);
-  var body = (_element$ownerDocumen = element.ownerDocument) == null ? void 0 : _element$ownerDocumen.body;
-  var width = max(html.scrollWidth, html.clientWidth, body ? body.scrollWidth : 0, body ? body.clientWidth : 0);
-  var height = max(html.scrollHeight, html.clientHeight, body ? body.scrollHeight : 0, body ? body.clientHeight : 0);
-  var x = -winScroll.scrollLeft + getWindowScrollBarX(element);
-  var y = -winScroll.scrollTop;
-
-  if (getComputedStyle(body || html).direction === 'rtl') {
-    x += max(html.clientWidth, body ? body.clientWidth : 0) - width;
-  }
-
-  return {
-    width: width,
-    height: height,
-    x: x,
-    y: y
-  };
-}
-
-function isScrollParent(element) {
-  // Firefox wants us to check `-x` and `-y` variations as well
-  var _getComputedStyle = getComputedStyle(element),
-      overflow = _getComputedStyle.overflow,
-      overflowX = _getComputedStyle.overflowX,
-      overflowY = _getComputedStyle.overflowY;
-
-  return /auto|scroll|overlay|hidden/.test(overflow + overflowY + overflowX);
-}
-
-function getScrollParent(node) {
-  if (['html', 'body', '#document'].indexOf(getNodeName(node)) >= 0) {
-    // $FlowFixMe[incompatible-return]: assume body is always available
-    return node.ownerDocument.body;
-  }
-
-  if (isHTMLElement(node) && isScrollParent(node)) {
-    return node;
-  }
-
-  return getScrollParent(getParentNode(node));
-}
-
-/*
-given a DOM element, return the list of all scroll parents, up the list of ancesors
-until we get to the top window object. This list is what we attach scroll listeners
-to, because if any of these parent elements scroll, we'll need to re-calculate the
-reference element's position.
-*/
-
-function listScrollParents(element, list) {
-  var _element$ownerDocumen;
-
-  if (list === void 0) {
-    list = [];
-  }
-
-  var scrollParent = getScrollParent(element);
-  var isBody = scrollParent === ((_element$ownerDocumen = element.ownerDocument) == null ? void 0 : _element$ownerDocumen.body);
-  var win = getWindow(scrollParent);
-  var target = isBody ? [win].concat(win.visualViewport || [], isScrollParent(scrollParent) ? scrollParent : []) : scrollParent;
-  var updatedList = list.concat(target);
-  return isBody ? updatedList : // $FlowFixMe[incompatible-call]: isBody tells us target will be an HTMLElement here
-  updatedList.concat(listScrollParents(getParentNode(target)));
-}
-
-function rectToClientRect(rect) {
-  return Object.assign({}, rect, {
-    left: rect.x,
-    top: rect.y,
-    right: rect.x + rect.width,
-    bottom: rect.y + rect.height
-  });
-}
-
-function getInnerBoundingClientRect(element) {
-  var rect = getBoundingClientRect(element);
-  rect.top = rect.top + element.clientTop;
-  rect.left = rect.left + element.clientLeft;
-  rect.bottom = rect.top + element.clientHeight;
-  rect.right = rect.left + element.clientWidth;
-  rect.width = element.clientWidth;
-  rect.height = element.clientHeight;
-  rect.x = rect.left;
-  rect.y = rect.top;
-  return rect;
-}
-
-function getClientRectFromMixedType(element, clippingParent) {
-  return clippingParent === viewport ? rectToClientRect(getViewportRect(element)) : isHTMLElement(clippingParent) ? getInnerBoundingClientRect(clippingParent) : rectToClientRect(getDocumentRect(getDocumentElement(element)));
-} // A "clipping parent" is an overflowable container with the characteristic of
-// clipping (or hiding) overflowing elements with a position different from
-// `initial`
-
-
-function getClippingParents(element) {
-  var clippingParents = listScrollParents(getParentNode(element));
-  var canEscapeClipping = ['absolute', 'fixed'].indexOf(getComputedStyle(element).position) >= 0;
-  var clipperElement = canEscapeClipping && isHTMLElement(element) ? getOffsetParent(element) : element;
-
-  if (!isElement(clipperElement)) {
-    return [];
-  } // $FlowFixMe[incompatible-return]: https://github.com/facebook/flow/issues/1414
-
-
-  return clippingParents.filter(function (clippingParent) {
-    return isElement(clippingParent) && contains(clippingParent, clipperElement) && getNodeName(clippingParent) !== 'body';
-  });
-} // Gets the maximum area that the element is visible in due to any number of
-// clipping parents
-
-
-function getClippingRect(element, boundary, rootBoundary) {
-  var mainClippingParents = boundary === 'clippingParents' ? getClippingParents(element) : [].concat(boundary);
-  var clippingParents = [].concat(mainClippingParents, [rootBoundary]);
-  var firstClippingParent = clippingParents[0];
-  var clippingRect = clippingParents.reduce(function (accRect, clippingParent) {
-    var rect = getClientRectFromMixedType(element, clippingParent);
-    accRect.top = max(rect.top, accRect.top);
-    accRect.right = min(rect.right, accRect.right);
-    accRect.bottom = min(rect.bottom, accRect.bottom);
-    accRect.left = max(rect.left, accRect.left);
-    return accRect;
-  }, getClientRectFromMixedType(element, firstClippingParent));
-  clippingRect.width = clippingRect.right - clippingRect.left;
-  clippingRect.height = clippingRect.bottom - clippingRect.top;
-  clippingRect.x = clippingRect.left;
-  clippingRect.y = clippingRect.top;
-  return clippingRect;
-}
-
-function getVariation(placement) {
-  return placement.split('-')[1];
-}
-
-function computeOffsets(_ref) {
-  var reference = _ref.reference,
-      element = _ref.element,
-      placement = _ref.placement;
-  var basePlacement = placement ? getBasePlacement(placement) : null;
-  var variation = placement ? getVariation(placement) : null;
-  var commonX = reference.x + reference.width / 2 - element.width / 2;
-  var commonY = reference.y + reference.height / 2 - element.height / 2;
-  var offsets;
-
-  switch (basePlacement) {
-    case top:
-      offsets = {
-        x: commonX,
-        y: reference.y - element.height
-      };
-      break;
-
-    case bottom:
-      offsets = {
-        x: commonX,
-        y: reference.y + reference.height
-      };
-      break;
-
-    case right:
-      offsets = {
-        x: reference.x + reference.width,
-        y: commonY
-      };
-      break;
-
-    case left:
-      offsets = {
-        x: reference.x - element.width,
-        y: commonY
-      };
-      break;
-
-    default:
-      offsets = {
-        x: reference.x,
-        y: reference.y
-      };
-  }
-
-  var mainAxis = basePlacement ? getMainAxisFromPlacement(basePlacement) : null;
-
-  if (mainAxis != null) {
-    var len = mainAxis === 'y' ? 'height' : 'width';
-
-    switch (variation) {
-      case start:
-        offsets[mainAxis] = offsets[mainAxis] - (reference[len] / 2 - element[len] / 2);
-        break;
-
-      case end:
-        offsets[mainAxis] = offsets[mainAxis] + (reference[len] / 2 - element[len] / 2);
-        break;
-    }
-  }
-
-  return offsets;
-}
-
-function detectOverflow(state, options) {
-  if (options === void 0) {
-    options = {};
-  }
-
-  var _options = options,
-      _options$placement = _options.placement,
-      placement = _options$placement === void 0 ? state.placement : _options$placement,
-      _options$boundary = _options.boundary,
-      boundary = _options$boundary === void 0 ? clippingParents : _options$boundary,
-      _options$rootBoundary = _options.rootBoundary,
-      rootBoundary = _options$rootBoundary === void 0 ? viewport : _options$rootBoundary,
-      _options$elementConte = _options.elementContext,
-      elementContext = _options$elementConte === void 0 ? popper : _options$elementConte,
-      _options$altBoundary = _options.altBoundary,
-      altBoundary = _options$altBoundary === void 0 ? false : _options$altBoundary,
-      _options$padding = _options.padding,
-      padding = _options$padding === void 0 ? 0 : _options$padding;
-  var paddingObject = mergePaddingObject(typeof padding !== 'number' ? padding : expandToHashMap(padding, basePlacements));
-  var altContext = elementContext === popper ? reference : popper;
-  var referenceElement = state.elements.reference;
-  var popperRect = state.rects.popper;
-  var element = state.elements[altBoundary ? altContext : elementContext];
-  var clippingClientRect = getClippingRect(isElement(element) ? element : element.contextElement || getDocumentElement(state.elements.popper), boundary, rootBoundary);
-  var referenceClientRect = getBoundingClientRect(referenceElement);
-  var popperOffsets = computeOffsets({
-    reference: referenceClientRect,
-    element: popperRect,
-    strategy: 'absolute',
-    placement: placement
-  });
-  var popperClientRect = rectToClientRect(Object.assign({}, popperRect, popperOffsets));
-  var elementClientRect = elementContext === popper ? popperClientRect : referenceClientRect; // positive = overflowing the clipping rect
-  // 0 or negative = within the clipping rect
-
-  var overflowOffsets = {
-    top: clippingClientRect.top - elementClientRect.top + paddingObject.top,
-    bottom: elementClientRect.bottom - clippingClientRect.bottom + paddingObject.bottom,
-    left: clippingClientRect.left - elementClientRect.left + paddingObject.left,
-    right: elementClientRect.right - clippingClientRect.right + paddingObject.right
-  };
-  var offsetData = state.modifiersData.offset; // Offsets can be applied only to the popper element
-
-  if (elementContext === popper && offsetData) {
-    var offset = offsetData[placement];
-    Object.keys(overflowOffsets).forEach(function (key) {
-      var multiply = [right, bottom].indexOf(key) >= 0 ? 1 : -1;
-      var axis = [top, bottom].indexOf(key) >= 0 ? 'y' : 'x';
-      overflowOffsets[key] += offset[axis] * multiply;
-    });
-  }
-
-  return overflowOffsets;
-}
-
-function computeAutoPlacement(state, options) {
-  if (options === void 0) {
-    options = {};
-  }
-
-  var _options = options,
-      placement = _options.placement,
-      boundary = _options.boundary,
-      rootBoundary = _options.rootBoundary,
-      padding = _options.padding,
-      flipVariations = _options.flipVariations,
-      _options$allowedAutoP = _options.allowedAutoPlacements,
-      allowedAutoPlacements = _options$allowedAutoP === void 0 ? placements : _options$allowedAutoP;
-  var variation = getVariation(placement);
-  var placements$1 = variation ? flipVariations ? variationPlacements : variationPlacements.filter(function (placement) {
-    return getVariation(placement) === variation;
-  }) : basePlacements;
-  var allowedPlacements = placements$1.filter(function (placement) {
-    return allowedAutoPlacements.indexOf(placement) >= 0;
-  });
-
-  if (allowedPlacements.length === 0) {
-    allowedPlacements = placements$1;
-
-    if (process.env.NODE_ENV !== "production") {
-      console.error(['Popper: The `allowedAutoPlacements` option did not allow any', 'placements. Ensure the `placement` option matches the variation', 'of the allowed placements.', 'For example, "auto" cannot be used to allow "bottom-start".', 'Use "auto-start" instead.'].join(' '));
-    }
-  } // $FlowFixMe[incompatible-type]: Flow seems to have problems with two array unions...
-
-
-  var overflows = allowedPlacements.reduce(function (acc, placement) {
-    acc[placement] = detectOverflow(state, {
-      placement: placement,
-      boundary: boundary,
-      rootBoundary: rootBoundary,
-      padding: padding
-    })[getBasePlacement(placement)];
-    return acc;
-  }, {});
-  return Object.keys(overflows).sort(function (a, b) {
-    return overflows[a] - overflows[b];
-  });
-}
-
-function getExpandedFallbackPlacements(placement) {
-  if (getBasePlacement(placement) === auto) {
-    return [];
-  }
-
-  var oppositePlacement = getOppositePlacement(placement);
-  return [getOppositeVariationPlacement(placement), oppositePlacement, getOppositeVariationPlacement(oppositePlacement)];
-}
-
-function flip(_ref) {
-  var state = _ref.state,
-      options = _ref.options,
-      name = _ref.name;
-
-  if (state.modifiersData[name]._skip) {
-    return;
-  }
-
-  var _options$mainAxis = options.mainAxis,
-      checkMainAxis = _options$mainAxis === void 0 ? true : _options$mainAxis,
-      _options$altAxis = options.altAxis,
-      checkAltAxis = _options$altAxis === void 0 ? true : _options$altAxis,
-      specifiedFallbackPlacements = options.fallbackPlacements,
-      padding = options.padding,
-      boundary = options.boundary,
-      rootBoundary = options.rootBoundary,
-      altBoundary = options.altBoundary,
-      _options$flipVariatio = options.flipVariations,
-      flipVariations = _options$flipVariatio === void 0 ? true : _options$flipVariatio,
-      allowedAutoPlacements = options.allowedAutoPlacements;
-  var preferredPlacement = state.options.placement;
-  var basePlacement = getBasePlacement(preferredPlacement);
-  var isBasePlacement = basePlacement === preferredPlacement;
-  var fallbackPlacements = specifiedFallbackPlacements || (isBasePlacement || !flipVariations ? [getOppositePlacement(preferredPlacement)] : getExpandedFallbackPlacements(preferredPlacement));
-  var placements = [preferredPlacement].concat(fallbackPlacements).reduce(function (acc, placement) {
-    return acc.concat(getBasePlacement(placement) === auto ? computeAutoPlacement(state, {
-      placement: placement,
-      boundary: boundary,
-      rootBoundary: rootBoundary,
-      padding: padding,
-      flipVariations: flipVariations,
-      allowedAutoPlacements: allowedAutoPlacements
-    }) : placement);
-  }, []);
-  var referenceRect = state.rects.reference;
-  var popperRect = state.rects.popper;
-  var checksMap = new Map();
-  var makeFallbackChecks = true;
-  var firstFittingPlacement = placements[0];
-
-  for (var i = 0; i < placements.length; i++) {
-    var placement = placements[i];
-
-    var _basePlacement = getBasePlacement(placement);
-
-    var isStartVariation = getVariation(placement) === start;
-    var isVertical = [top, bottom].indexOf(_basePlacement) >= 0;
-    var len = isVertical ? 'width' : 'height';
-    var overflow = detectOverflow(state, {
-      placement: placement,
-      boundary: boundary,
-      rootBoundary: rootBoundary,
-      altBoundary: altBoundary,
-      padding: padding
-    });
-    var mainVariationSide = isVertical ? isStartVariation ? right : left : isStartVariation ? bottom : top;
-
-    if (referenceRect[len] > popperRect[len]) {
-      mainVariationSide = getOppositePlacement(mainVariationSide);
-    }
-
-    var altVariationSide = getOppositePlacement(mainVariationSide);
-    var checks = [];
-
-    if (checkMainAxis) {
-      checks.push(overflow[_basePlacement] <= 0);
-    }
-
-    if (checkAltAxis) {
-      checks.push(overflow[mainVariationSide] <= 0, overflow[altVariationSide] <= 0);
-    }
-
-    if (checks.every(function (check) {
-      return check;
-    })) {
-      firstFittingPlacement = placement;
-      makeFallbackChecks = false;
-      break;
-    }
-
-    checksMap.set(placement, checks);
-  }
-
-  if (makeFallbackChecks) {
-    // `2` may be desired in some cases – research later
-    var numberOfChecks = flipVariations ? 3 : 1;
-
-    var _loop = function _loop(_i) {
-      var fittingPlacement = placements.find(function (placement) {
-        var checks = checksMap.get(placement);
-
-        if (checks) {
-          return checks.slice(0, _i).every(function (check) {
-            return check;
-          });
-        }
-      });
-
-      if (fittingPlacement) {
-        firstFittingPlacement = fittingPlacement;
-        return "break";
-      }
-    };
-
-    for (var _i = numberOfChecks; _i > 0; _i--) {
-      var _ret = _loop(_i);
-
-      if (_ret === "break") break;
-    }
-  }
-
-  if (state.placement !== firstFittingPlacement) {
-    state.modifiersData[name]._skip = true;
-    state.placement = firstFittingPlacement;
-    state.reset = true;
-  }
-} // eslint-disable-next-line import/no-unused-modules
-
-
-var flip$1 = {
-  name: 'flip',
-  enabled: true,
-  phase: 'main',
-  fn: flip,
-  requiresIfExists: ['offset'],
-  data: {
-    _skip: false
-  }
-};
-
-function getSideOffsets(overflow, rect, preventedOffsets) {
-  if (preventedOffsets === void 0) {
-    preventedOffsets = {
-      x: 0,
-      y: 0
-    };
-  }
-
-  return {
-    top: overflow.top - rect.height - preventedOffsets.y,
-    right: overflow.right - rect.width + preventedOffsets.x,
-    bottom: overflow.bottom - rect.height + preventedOffsets.y,
-    left: overflow.left - rect.width - preventedOffsets.x
-  };
-}
-
-function isAnySideFullyClipped(overflow) {
-  return [top, right, bottom, left].some(function (side) {
-    return overflow[side] >= 0;
-  });
-}
-
-function hide(_ref) {
-  var state = _ref.state,
-      name = _ref.name;
-  var referenceRect = state.rects.reference;
-  var popperRect = state.rects.popper;
-  var preventedOffsets = state.modifiersData.preventOverflow;
-  var referenceOverflow = detectOverflow(state, {
-    elementContext: 'reference'
-  });
-  var popperAltOverflow = detectOverflow(state, {
-    altBoundary: true
-  });
-  var referenceClippingOffsets = getSideOffsets(referenceOverflow, referenceRect);
-  var popperEscapeOffsets = getSideOffsets(popperAltOverflow, popperRect, preventedOffsets);
-  var isReferenceHidden = isAnySideFullyClipped(referenceClippingOffsets);
-  var hasPopperEscaped = isAnySideFullyClipped(popperEscapeOffsets);
-  state.modifiersData[name] = {
-    referenceClippingOffsets: referenceClippingOffsets,
-    popperEscapeOffsets: popperEscapeOffsets,
-    isReferenceHidden: isReferenceHidden,
-    hasPopperEscaped: hasPopperEscaped
-  };
-  state.attributes.popper = Object.assign({}, state.attributes.popper, {
-    'data-popper-reference-hidden': isReferenceHidden,
-    'data-popper-escaped': hasPopperEscaped
-  });
-} // eslint-disable-next-line import/no-unused-modules
-
-
-var hide$1 = {
-  name: 'hide',
-  enabled: true,
-  phase: 'main',
-  requiresIfExists: ['preventOverflow'],
-  fn: hide
-};
-
-function distanceAndSkiddingToXY(placement, rects, offset) {
-  var basePlacement = getBasePlacement(placement);
-  var invertDistance = [left, top].indexOf(basePlacement) >= 0 ? -1 : 1;
-
-  var _ref = typeof offset === 'function' ? offset(Object.assign({}, rects, {
-    placement: placement
-  })) : offset,
-      skidding = _ref[0],
-      distance = _ref[1];
-
-  skidding = skidding || 0;
-  distance = (distance || 0) * invertDistance;
-  return [left, right].indexOf(basePlacement) >= 0 ? {
-    x: distance,
-    y: skidding
-  } : {
-    x: skidding,
-    y: distance
-  };
-}
-
-function offset(_ref2) {
-  var state = _ref2.state,
-      options = _ref2.options,
-      name = _ref2.name;
-  var _options$offset = options.offset,
-      offset = _options$offset === void 0 ? [0, 0] : _options$offset;
-  var data = placements.reduce(function (acc, placement) {
-    acc[placement] = distanceAndSkiddingToXY(placement, state.rects, offset);
-    return acc;
-  }, {});
-  var _data$state$placement = data[state.placement],
-      x = _data$state$placement.x,
-      y = _data$state$placement.y;
-
-  if (state.modifiersData.popperOffsets != null) {
-    state.modifiersData.popperOffsets.x += x;
-    state.modifiersData.popperOffsets.y += y;
-  }
-
-  state.modifiersData[name] = data;
-} // eslint-disable-next-line import/no-unused-modules
-
-
-var offset$1 = {
-  name: 'offset',
-  enabled: true,
-  phase: 'main',
-  requires: ['popperOffsets'],
-  fn: offset
-};
-
-function popperOffsets(_ref) {
-  var state = _ref.state,
-      name = _ref.name;
-  // Offsets are the actual position the popper needs to have to be
-  // properly positioned near its reference element
-  // This is the most basic placement, and will be adjusted by
-  // the modifiers in the next step
-  state.modifiersData[name] = computeOffsets({
-    reference: state.rects.reference,
-    element: state.rects.popper,
-    strategy: 'absolute',
-    placement: state.placement
-  });
-} // eslint-disable-next-line import/no-unused-modules
-
-
-var popperOffsets$1 = {
-  name: 'popperOffsets',
-  enabled: true,
-  phase: 'read',
-  fn: popperOffsets,
-  data: {}
-};
-
-function getAltAxis(axis) {
-  return axis === 'x' ? 'y' : 'x';
-}
-
-function preventOverflow(_ref) {
-  var state = _ref.state,
-      options = _ref.options,
-      name = _ref.name;
-  var _options$mainAxis = options.mainAxis,
-      checkMainAxis = _options$mainAxis === void 0 ? true : _options$mainAxis,
-      _options$altAxis = options.altAxis,
-      checkAltAxis = _options$altAxis === void 0 ? false : _options$altAxis,
-      boundary = options.boundary,
-      rootBoundary = options.rootBoundary,
-      altBoundary = options.altBoundary,
-      padding = options.padding,
-      _options$tether = options.tether,
-      tether = _options$tether === void 0 ? true : _options$tether,
-      _options$tetherOffset = options.tetherOffset,
-      tetherOffset = _options$tetherOffset === void 0 ? 0 : _options$tetherOffset;
-  var overflow = detectOverflow(state, {
-    boundary: boundary,
-    rootBoundary: rootBoundary,
-    padding: padding,
-    altBoundary: altBoundary
-  });
-  var basePlacement = getBasePlacement(state.placement);
-  var variation = getVariation(state.placement);
-  var isBasePlacement = !variation;
-  var mainAxis = getMainAxisFromPlacement(basePlacement);
-  var altAxis = getAltAxis(mainAxis);
-  var popperOffsets = state.modifiersData.popperOffsets;
-  var referenceRect = state.rects.reference;
-  var popperRect = state.rects.popper;
-  var tetherOffsetValue = typeof tetherOffset === 'function' ? tetherOffset(Object.assign({}, state.rects, {
-    placement: state.placement
-  })) : tetherOffset;
-  var data = {
-    x: 0,
-    y: 0
-  };
-
-  if (!popperOffsets) {
-    return;
-  }
-
-  if (checkMainAxis || checkAltAxis) {
-    var mainSide = mainAxis === 'y' ? top : left;
-    var altSide = mainAxis === 'y' ? bottom : right;
-    var len = mainAxis === 'y' ? 'height' : 'width';
-    var offset = popperOffsets[mainAxis];
-    var min$1 = popperOffsets[mainAxis] + overflow[mainSide];
-    var max$1 = popperOffsets[mainAxis] - overflow[altSide];
-    var additive = tether ? -popperRect[len] / 2 : 0;
-    var minLen = variation === start ? referenceRect[len] : popperRect[len];
-    var maxLen = variation === start ? -popperRect[len] : -referenceRect[len]; // We need to include the arrow in the calculation so the arrow doesn't go
-    // outside the reference bounds
-
-    var arrowElement = state.elements.arrow;
-    var arrowRect = tether && arrowElement ? getLayoutRect(arrowElement) : {
-      width: 0,
-      height: 0
-    };
-    var arrowPaddingObject = state.modifiersData['arrow#persistent'] ? state.modifiersData['arrow#persistent'].padding : getFreshSideObject();
-    var arrowPaddingMin = arrowPaddingObject[mainSide];
-    var arrowPaddingMax = arrowPaddingObject[altSide]; // If the reference length is smaller than the arrow length, we don't want
-    // to include its full size in the calculation. If the reference is small
-    // and near the edge of a boundary, the popper can overflow even if the
-    // reference is not overflowing as well (e.g. virtual elements with no
-    // width or height)
-
-    var arrowLen = within(0, referenceRect[len], arrowRect[len]);
-    var minOffset = isBasePlacement ? referenceRect[len] / 2 - additive - arrowLen - arrowPaddingMin - tetherOffsetValue : minLen - arrowLen - arrowPaddingMin - tetherOffsetValue;
-    var maxOffset = isBasePlacement ? -referenceRect[len] / 2 + additive + arrowLen + arrowPaddingMax + tetherOffsetValue : maxLen + arrowLen + arrowPaddingMax + tetherOffsetValue;
-    var arrowOffsetParent = state.elements.arrow && getOffsetParent(state.elements.arrow);
-    var clientOffset = arrowOffsetParent ? mainAxis === 'y' ? arrowOffsetParent.clientTop || 0 : arrowOffsetParent.clientLeft || 0 : 0;
-    var offsetModifierValue = state.modifiersData.offset ? state.modifiersData.offset[state.placement][mainAxis] : 0;
-    var tetherMin = popperOffsets[mainAxis] + minOffset - offsetModifierValue - clientOffset;
-    var tetherMax = popperOffsets[mainAxis] + maxOffset - offsetModifierValue;
-
-    if (checkMainAxis) {
-      var preventedOffset = within(tether ? min(min$1, tetherMin) : min$1, offset, tether ? max(max$1, tetherMax) : max$1);
-      popperOffsets[mainAxis] = preventedOffset;
-      data[mainAxis] = preventedOffset - offset;
-    }
-
-    if (checkAltAxis) {
-      var _mainSide = mainAxis === 'x' ? top : left;
-
-      var _altSide = mainAxis === 'x' ? bottom : right;
-
-      var _offset = popperOffsets[altAxis];
-
-      var _min = _offset + overflow[_mainSide];
-
-      var _max = _offset - overflow[_altSide];
-
-      var _preventedOffset = within(tether ? min(_min, tetherMin) : _min, _offset, tether ? max(_max, tetherMax) : _max);
-
-      popperOffsets[altAxis] = _preventedOffset;
-      data[altAxis] = _preventedOffset - _offset;
-    }
-  }
-
-  state.modifiersData[name] = data;
-} // eslint-disable-next-line import/no-unused-modules
-
-
-var preventOverflow$1 = {
-  name: 'preventOverflow',
-  enabled: true,
-  phase: 'main',
-  fn: preventOverflow,
-  requiresIfExists: ['offset']
-};
-
-function getHTMLElementScroll(element) {
-  return {
-    scrollLeft: element.scrollLeft,
-    scrollTop: element.scrollTop
-  };
-}
-
-function getNodeScroll(node) {
-  if (node === getWindow(node) || !isHTMLElement(node)) {
-    return getWindowScroll(node);
-  } else {
-    return getHTMLElementScroll(node);
-  }
-}
-
-// Composite means it takes into account transforms as well as layout.
-
-function getCompositeRect(elementOrVirtualElement, offsetParent, isFixed) {
-  if (isFixed === void 0) {
-    isFixed = false;
-  }
-
-  var documentElement = getDocumentElement(offsetParent);
-  var rect = getBoundingClientRect(elementOrVirtualElement);
-  var isOffsetParentAnElement = isHTMLElement(offsetParent);
-  var scroll = {
-    scrollLeft: 0,
-    scrollTop: 0
-  };
-  var offsets = {
-    x: 0,
-    y: 0
-  };
-
-  if (isOffsetParentAnElement || !isOffsetParentAnElement && !isFixed) {
-    if (getNodeName(offsetParent) !== 'body' || // https://github.com/popperjs/popper-core/issues/1078
-    isScrollParent(documentElement)) {
-      scroll = getNodeScroll(offsetParent);
-    }
-
-    if (isHTMLElement(offsetParent)) {
-      offsets = getBoundingClientRect(offsetParent);
-      offsets.x += offsetParent.clientLeft;
-      offsets.y += offsetParent.clientTop;
-    } else if (documentElement) {
-      offsets.x = getWindowScrollBarX(documentElement);
-    }
-  }
-
-  return {
-    x: rect.left + scroll.scrollLeft - offsets.x,
-    y: rect.top + scroll.scrollTop - offsets.y,
-    width: rect.width,
-    height: rect.height
-  };
-}
-
-function order(modifiers) {
-  var map = new Map();
-  var visited = new Set();
-  var result = [];
-  modifiers.forEach(function (modifier) {
-    map.set(modifier.name, modifier);
-  }); // On visiting object, check for its dependencies and visit them recursively
-
-  function sort(modifier) {
-    visited.add(modifier.name);
-    var requires = [].concat(modifier.requires || [], modifier.requiresIfExists || []);
-    requires.forEach(function (dep) {
-      if (!visited.has(dep)) {
-        var depModifier = map.get(dep);
-
-        if (depModifier) {
-          sort(depModifier);
-        }
-      }
-    });
-    result.push(modifier);
-  }
-
-  modifiers.forEach(function (modifier) {
-    if (!visited.has(modifier.name)) {
-      // check for visited object
-      sort(modifier);
-    }
-  });
-  return result;
-}
-
-function orderModifiers(modifiers) {
-  // order based on dependencies
-  var orderedModifiers = order(modifiers); // order based on phase
-
-  return modifierPhases.reduce(function (acc, phase) {
-    return acc.concat(orderedModifiers.filter(function (modifier) {
-      return modifier.phase === phase;
-    }));
-  }, []);
-}
-
-function debounce(fn) {
-  var pending;
-  return function () {
-    if (!pending) {
-      pending = new Promise(function (resolve) {
-        Promise.resolve().then(function () {
-          pending = undefined;
-          resolve(fn());
-        });
-      });
-    }
-
-    return pending;
-  };
-}
-
-function format(str) {
-  for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-    args[_key - 1] = arguments[_key];
-  }
-
-  return [].concat(args).reduce(function (p, c) {
-    return p.replace(/%s/, c);
-  }, str);
-}
-
-var INVALID_MODIFIER_ERROR = 'Popper: modifier "%s" provided an invalid %s property, expected %s but got %s';
-var MISSING_DEPENDENCY_ERROR = 'Popper: modifier "%s" requires "%s", but "%s" modifier is not available';
-var VALID_PROPERTIES = ['name', 'enabled', 'phase', 'fn', 'effect', 'requires', 'options'];
-function validateModifiers(modifiers) {
-  modifiers.forEach(function (modifier) {
-    Object.keys(modifier).forEach(function (key) {
-      switch (key) {
-        case 'name':
-          if (typeof modifier.name !== 'string') {
-            console.error(format(INVALID_MODIFIER_ERROR, String(modifier.name), '"name"', '"string"', "\"" + String(modifier.name) + "\""));
-          }
-
+      switch (parentNode.constructor.name) {
+        case 'Document':
+        case 'HTMLDocument':
+          domRoot = parentNode.head;
           break;
 
-        case 'enabled':
-          if (typeof modifier.enabled !== 'boolean') {
-            console.error(format(INVALID_MODIFIER_ERROR, modifier.name, '"enabled"', '"boolean"', "\"" + String(modifier.enabled) + "\""));
-          }
-
-        case 'phase':
-          if (modifierPhases.indexOf(modifier.phase) < 0) {
-            console.error(format(INVALID_MODIFIER_ERROR, modifier.name, '"phase"', "either " + modifierPhases.join(', '), "\"" + String(modifier.phase) + "\""));
-          }
-
-          break;
-
-        case 'fn':
-          if (typeof modifier.fn !== 'function') {
-            console.error(format(INVALID_MODIFIER_ERROR, modifier.name, '"fn"', '"function"', "\"" + String(modifier.fn) + "\""));
-          }
-
-          break;
-
-        case 'effect':
-          if (typeof modifier.effect !== 'function') {
-            console.error(format(INVALID_MODIFIER_ERROR, modifier.name, '"effect"', '"function"', "\"" + String(modifier.fn) + "\""));
-          }
-
-          break;
-
-        case 'requires':
-          if (!Array.isArray(modifier.requires)) {
-            console.error(format(INVALID_MODIFIER_ERROR, modifier.name, '"requires"', '"array"', "\"" + String(modifier.requires) + "\""));
-          }
-
-          break;
-
-        case 'requiresIfExists':
-          if (!Array.isArray(modifier.requiresIfExists)) {
-            console.error(format(INVALID_MODIFIER_ERROR, modifier.name, '"requiresIfExists"', '"array"', "\"" + String(modifier.requiresIfExists) + "\""));
-          }
-
-          break;
-
-        case 'options':
-        case 'data':
-          break;
-
+        case 'ShadowRoot':
         default:
-          console.error("PopperJS: an invalid property has been provided to the \"" + modifier.name + "\" modifier, valid properties are " + VALID_PROPERTIES.map(function (s) {
-            return "\"" + s + "\"";
-          }).join(', ') + "; but \"" + key + "\" was provided.");
+          domRoot = parentNode;
+          break;
+      } // Prevent styles duplication.
+
+
+      if (!domRoot.querySelector('style[data-react-tooltip]')) {
+        var style = document.createElement('style');
+        style.textContent = baseCss;
+        style.setAttribute('data-react-tooltip', 'true');
+        domRoot.appendChild(style);
       }
-
-      modifier.requires && modifier.requires.forEach(function (requirement) {
-        if (modifiers.find(function (mod) {
-          return mod.name === requirement;
-        }) == null) {
-          console.error(format(MISSING_DEPENDENCY_ERROR, String(modifier.name), requirement, requirement));
-        }
-      });
-    });
-  });
-}
-
-function uniqueBy(arr, fn) {
-  var identifiers = new Set();
-  return arr.filter(function (item) {
-    var identifier = fn(item);
-
-    if (!identifiers.has(identifier)) {
-      identifiers.add(identifier);
-      return true;
     }
-  });
-}
+    /**
+     * Return if the mouse is on the tooltip.
+     * @returns {boolean} true - mouse is on the tooltip
+     */
 
-function mergeByName(modifiers) {
-  var merged = modifiers.reduce(function (merged, current) {
-    var existing = merged[current.name];
-    merged[current.name] = existing ? Object.assign({}, existing, current, {
-      options: Object.assign({}, existing.options, current.options),
-      data: Object.assign({}, existing.data, current.data)
-    }) : current;
-    return merged;
-  }, {}); // IE11 does not support Object.values
+  }, {
+    key: "mouseOnToolTip",
+    value: function mouseOnToolTip() {
+      var show = this.state.show;
 
-  return Object.keys(merged).map(function (key) {
-    return merged[key];
-  });
-}
-
-var INVALID_ELEMENT_ERROR = 'Popper: Invalid reference or popper argument provided. They must be either a DOM element or virtual element.';
-var INFINITE_LOOP_ERROR = 'Popper: An infinite loop in the modifiers cycle has been detected! The cycle has been interrupted to prevent a browser crash.';
-var DEFAULT_OPTIONS = {
-  placement: 'bottom',
-  modifiers: [],
-  strategy: 'absolute'
-};
-
-function areValidElements() {
-  for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-    args[_key] = arguments[_key];
-  }
-
-  return !args.some(function (element) {
-    return !(element && typeof element.getBoundingClientRect === 'function');
-  });
-}
-
-function popperGenerator(generatorOptions) {
-  if (generatorOptions === void 0) {
-    generatorOptions = {};
-  }
-
-  var _generatorOptions = generatorOptions,
-      _generatorOptions$def = _generatorOptions.defaultModifiers,
-      defaultModifiers = _generatorOptions$def === void 0 ? [] : _generatorOptions$def,
-      _generatorOptions$def2 = _generatorOptions.defaultOptions,
-      defaultOptions = _generatorOptions$def2 === void 0 ? DEFAULT_OPTIONS : _generatorOptions$def2;
-  return function createPopper(reference, popper, options) {
-    if (options === void 0) {
-      options = defaultOptions;
-    }
-
-    var state = {
-      placement: 'bottom',
-      orderedModifiers: [],
-      options: Object.assign({}, DEFAULT_OPTIONS, defaultOptions),
-      modifiersData: {},
-      elements: {
-        reference: reference,
-        popper: popper
-      },
-      attributes: {},
-      styles: {}
-    };
-    var effectCleanupFns = [];
-    var isDestroyed = false;
-    var instance = {
-      state: state,
-      setOptions: function setOptions(options) {
-        cleanupModifierEffects();
-        state.options = Object.assign({}, defaultOptions, state.options, options);
-        state.scrollParents = {
-          reference: isElement(reference) ? listScrollParents(reference) : reference.contextElement ? listScrollParents(reference.contextElement) : [],
-          popper: listScrollParents(popper)
-        }; // Orders the modifiers based on their dependencies and `phase`
-        // properties
-
-        var orderedModifiers = orderModifiers(mergeByName([].concat(defaultModifiers, state.options.modifiers))); // Strip out disabled modifiers
-
-        state.orderedModifiers = orderedModifiers.filter(function (m) {
-          return m.enabled;
-        }); // Validate the provided modifiers so that the consumer will get warned
-        // if one of the modifiers is invalid for any reason
-
-        if (process.env.NODE_ENV !== "production") {
-          var modifiers = uniqueBy([].concat(orderedModifiers, state.options.modifiers), function (_ref) {
-            var name = _ref.name;
-            return name;
-          });
-          validateModifiers(modifiers);
-
-          if (getBasePlacement(state.options.placement) === auto) {
-            var flipModifier = state.orderedModifiers.find(function (_ref2) {
-              var name = _ref2.name;
-              return name === 'flip';
-            });
-
-            if (!flipModifier) {
-              console.error(['Popper: "auto" placements require the "flip" modifier be', 'present and enabled to work.'].join(' '));
-            }
-          }
-
-          var _getComputedStyle = getComputedStyle(popper),
-              marginTop = _getComputedStyle.marginTop,
-              marginRight = _getComputedStyle.marginRight,
-              marginBottom = _getComputedStyle.marginBottom,
-              marginLeft = _getComputedStyle.marginLeft; // We no longer take into account `margins` on the popper, and it can
-          // cause bugs with positioning, so we'll warn the consumer
-
-
-          if ([marginTop, marginRight, marginBottom, marginLeft].some(function (margin) {
-            return parseFloat(margin);
-          })) {
-            console.warn(['Popper: CSS "margin" styles cannot be used to apply padding', 'between the popper and its reference element or boundary.', 'To replicate margin, use the `offset` modifier, as well as', 'the `padding` option in the `preventOverflow` and `flip`', 'modifiers.'].join(' '));
+      if (show && this.tooltipRef) {
+        /* old IE or Firefox work around */
+        if (!this.tooltipRef.matches) {
+          /* old IE work around */
+          if (this.tooltipRef.msMatchesSelector) {
+            this.tooltipRef.matches = this.tooltipRef.msMatchesSelector;
+          } else {
+            /* old Firefox work around */
+            this.tooltipRef.matches = this.tooltipRef.mozMatchesSelector;
           }
         }
 
-        runModifierEffects();
-        return instance.update();
-      },
-      // Sync update – it will always be executed, even if not necessary. This
-      // is useful for low frequency updates where sync behavior simplifies the
-      // logic.
-      // For high frequency updates (e.g. `resize` and `scroll` events), always
-      // prefer the async Popper#update method
-      forceUpdate: function forceUpdate() {
-        if (isDestroyed) {
-          return;
-        }
-
-        var _state$elements = state.elements,
-            reference = _state$elements.reference,
-            popper = _state$elements.popper; // Don't proceed if `reference` or `popper` are not valid elements
-        // anymore
-
-        if (!areValidElements(reference, popper)) {
-          if (process.env.NODE_ENV !== "production") {
-            console.error(INVALID_ELEMENT_ERROR);
-          }
-
-          return;
-        } // Store the reference and popper rects to be read by modifiers
-
-
-        state.rects = {
-          reference: getCompositeRect(reference, getOffsetParent(popper), state.options.strategy === 'fixed'),
-          popper: getLayoutRect(popper)
-        }; // Modifiers have the ability to reset the current update cycle. The
-        // most common use case for this is the `flip` modifier changing the
-        // placement, which then needs to re-run all the modifiers, because the
-        // logic was previously ran for the previous placement and is therefore
-        // stale/incorrect
-
-        state.reset = false;
-        state.placement = state.options.placement; // On each update cycle, the `modifiersData` property for each modifier
-        // is filled with the initial data specified by the modifier. This means
-        // it doesn't persist and is fresh on each update.
-        // To ensure persistent data, use `${name}#persistent`
-
-        state.orderedModifiers.forEach(function (modifier) {
-          return state.modifiersData[modifier.name] = Object.assign({}, modifier.data);
-        });
-        var __debug_loops__ = 0;
-
-        for (var index = 0; index < state.orderedModifiers.length; index++) {
-          if (process.env.NODE_ENV !== "production") {
-            __debug_loops__ += 1;
-
-            if (__debug_loops__ > 100) {
-              console.error(INFINITE_LOOP_ERROR);
-              break;
-            }
-          }
-
-          if (state.reset === true) {
-            state.reset = false;
-            index = -1;
-            continue;
-          }
-
-          var _state$orderedModifie = state.orderedModifiers[index],
-              fn = _state$orderedModifie.fn,
-              _state$orderedModifie2 = _state$orderedModifie.options,
-              _options = _state$orderedModifie2 === void 0 ? {} : _state$orderedModifie2,
-              name = _state$orderedModifie.name;
-
-          if (typeof fn === 'function') {
-            state = fn({
-              state: state,
-              options: _options,
-              name: name,
-              instance: instance
-            }) || state;
-          }
-        }
-      },
-      // Async and optimistically optimized update – it will not be executed if
-      // not necessary (debounced to run at most once-per-tick)
-      update: debounce(function () {
-        return new Promise(function (resolve) {
-          instance.forceUpdate();
-          resolve(state);
-        });
-      }),
-      destroy: function destroy() {
-        cleanupModifierEffects();
-        isDestroyed = true;
-      }
-    };
-
-    if (!areValidElements(reference, popper)) {
-      if (process.env.NODE_ENV !== "production") {
-        console.error(INVALID_ELEMENT_ERROR);
+        return this.tooltipRef.matches(':hover');
       }
 
-      return instance;
-    }
-
-    instance.setOptions(options).then(function (state) {
-      if (!isDestroyed && options.onFirstUpdate) {
-        options.onFirstUpdate(state);
-      }
-    }); // Modifiers have the ability to execute arbitrary code before the first
-    // update cycle runs. They will be executed in the same order as the update
-    // cycle. This is useful when a modifier adds some persistent data that
-    // other modifiers need to use, but the modifier is run after the dependent
-    // one.
-
-    function runModifierEffects() {
-      state.orderedModifiers.forEach(function (_ref3) {
-        var name = _ref3.name,
-            _ref3$options = _ref3.options,
-            options = _ref3$options === void 0 ? {} : _ref3$options,
-            effect = _ref3.effect;
-
-        if (typeof effect === 'function') {
-          var cleanupFn = effect({
-            state: state,
-            name: name,
-            instance: instance,
-            options: options
-          });
-
-          var noopFn = function noopFn() {};
-
-          effectCleanupFns.push(cleanupFn || noopFn);
-        }
-      });
-    }
-
-    function cleanupModifierEffects() {
-      effectCleanupFns.forEach(function (fn) {
-        return fn();
-      });
-      effectCleanupFns = [];
-    }
-
-    return instance;
-  };
-}
-
-var defaultModifiers = [eventListeners, popperOffsets$1, computeStyles$1, applyStyles$1, offset$1, flip$1, preventOverflow$1, arrow$1, hide$1];
-var createPopper = /*#__PURE__*/popperGenerator({
-  defaultModifiers: defaultModifiers
-}); // eslint-disable-next-line import/no-unused-modules
-
-/* global Map:readonly, Set:readonly, ArrayBuffer:readonly */
-
-var hasElementType = typeof Element !== 'undefined';
-var hasMap = typeof Map === 'function';
-var hasSet = typeof Set === 'function';
-var hasArrayBuffer = typeof ArrayBuffer === 'function' && !!ArrayBuffer.isView;
-
-// Note: We **don't** need `envHasBigInt64Array` in fde es6/index.js
-
-function equal(a, b) {
-  // START: fast-deep-equal es6/index.js 3.1.1
-  if (a === b) return true;
-
-  if (a && b && typeof a == 'object' && typeof b == 'object') {
-    if (a.constructor !== b.constructor) return false;
-
-    var length, i, keys;
-    if (Array.isArray(a)) {
-      length = a.length;
-      if (length != b.length) return false;
-      for (i = length; i-- !== 0;)
-        if (!equal(a[i], b[i])) return false;
-      return true;
-    }
-
-    // START: Modifications:
-    // 1. Extra `has<Type> &&` helpers in initial condition allow es6 code
-    //    to co-exist with es5.
-    // 2. Replace `for of` with es5 compliant iteration using `for`.
-    //    Basically, take:
-    //
-    //    ```js
-    //    for (i of a.entries())
-    //      if (!b.has(i[0])) return false;
-    //    ```
-    //
-    //    ... and convert to:
-    //
-    //    ```js
-    //    it = a.entries();
-    //    while (!(i = it.next()).done)
-    //      if (!b.has(i.value[0])) return false;
-    //    ```
-    //
-    //    **Note**: `i` access switches to `i.value`.
-    var it;
-    if (hasMap && (a instanceof Map) && (b instanceof Map)) {
-      if (a.size !== b.size) return false;
-      it = a.entries();
-      while (!(i = it.next()).done)
-        if (!b.has(i.value[0])) return false;
-      it = a.entries();
-      while (!(i = it.next()).done)
-        if (!equal(i.value[1], b.get(i.value[0]))) return false;
-      return true;
-    }
-
-    if (hasSet && (a instanceof Set) && (b instanceof Set)) {
-      if (a.size !== b.size) return false;
-      it = a.entries();
-      while (!(i = it.next()).done)
-        if (!b.has(i.value[0])) return false;
-      return true;
-    }
-    // END: Modifications
-
-    if (hasArrayBuffer && ArrayBuffer.isView(a) && ArrayBuffer.isView(b)) {
-      length = a.length;
-      if (length != b.length) return false;
-      for (i = length; i-- !== 0;)
-        if (a[i] !== b[i]) return false;
-      return true;
-    }
-
-    if (a.constructor === RegExp) return a.source === b.source && a.flags === b.flags;
-    if (a.valueOf !== Object.prototype.valueOf) return a.valueOf() === b.valueOf();
-    if (a.toString !== Object.prototype.toString) return a.toString() === b.toString();
-
-    keys = Object.keys(a);
-    length = keys.length;
-    if (length !== Object.keys(b).length) return false;
-
-    for (i = length; i-- !== 0;)
-      if (!Object.prototype.hasOwnProperty.call(b, keys[i])) return false;
-    // END: fast-deep-equal
-
-    // START: react-fast-compare
-    // custom handling for DOM elements
-    if (hasElementType && a instanceof Element) return false;
-
-    // custom handling for React/Preact
-    for (i = length; i-- !== 0;) {
-      if ((keys[i] === '_owner' || keys[i] === '__v' || keys[i] === '__o') && a.$$typeof) {
-        // React-specific: avoid traversing React elements' _owner
-        // Preact-specific: avoid traversing Preact elements' __v and __o
-        //    __v = $_original / $_vnode
-        //    __o = $_owner
-        // These properties contain circular references and are not needed when
-        // comparing the actual elements (and not their owners)
-        // .$$typeof and ._store on just reasonable markers of elements
-
-        continue;
-      }
-
-      // all other properties should be traversed as usual
-      if (!equal(a[keys[i]], b[keys[i]])) return false;
-    }
-    // END: react-fast-compare
-
-    // START: fast-deep-equal
-    return true;
-  }
-
-  return a !== a && b !== b;
-}
-// end fast-deep-equal
-
-var reactFastCompare = function isEqual(a, b) {
-  try {
-    return equal(a, b);
-  } catch (error) {
-    if (((error.message || '').match(/stack|recursion/i))) {
-      // warn on circular references, don't crash
-      // browsers give this different errors name and messages:
-      // chrome/safari: "RangeError", "Maximum call stack size exceeded"
-      // firefox: "InternalError", too much recursion"
-      // edge: "Error", "Out of stack space"
-      console.warn('react-fast-compare cannot handle circular refs');
       return false;
     }
-    // some other error. we should definitely know about these
-    throw error;
-  }
-};
+    /**
+     * Pick out corresponded target elements
+     */
 
-var EMPTY_MODIFIERS = [];
-var usePopper = function usePopper(referenceElement, popperElement, options) {
-  if (options === void 0) {
-    options = {};
-  }
+  }, {
+    key: "getTargetArray",
+    value: function getTargetArray(id) {
+      var targetArray = [];
+      var selector;
 
-  var prevOptions = React__namespace.useRef(null);
-  var optionsWithDefaults = {
-    onFirstUpdate: options.onFirstUpdate,
-    placement: options.placement || 'bottom',
-    strategy: options.strategy || 'absolute',
-    modifiers: options.modifiers || EMPTY_MODIFIERS
-  };
+      if (!id) {
+        selector = '[data-tip]:not([data-for])';
+      } else {
+        var escaped = id.replace(/\\/g, '\\\\').replace(/"/g, '\\"');
+        selector = "[data-tip][data-for=\"".concat(escaped, "\"]");
+      } // Scan document for shadow DOM elements
 
-  var _React$useState = React__namespace.useState({
-    styles: {
-      popper: {
-        position: optionsWithDefaults.strategy,
-        left: '0',
-        top: '0'
-      },
-      arrow: {
-        position: 'absolute'
-      }
-    },
-    attributes: {}
-  }),
-      state = _React$useState[0],
-      setState = _React$useState[1];
 
-  var updateStateModifier = React__namespace.useMemo(function () {
-    return {
-      name: 'updateState',
-      enabled: true,
-      phase: 'write',
-      fn: function fn(_ref) {
-        var state = _ref.state;
-        var elements = Object.keys(state.elements);
-        setState({
-          styles: fromEntries(elements.map(function (element) {
-            return [element, state.styles[element] || {}];
-          })),
-          attributes: fromEntries(elements.map(function (element) {
-            return [element, state.attributes[element]];
-          }))
+      nodeListToArray(document.getElementsByTagName('*')).filter(function (element) {
+        return element.shadowRoot;
+      }).forEach(function (element) {
+        targetArray = targetArray.concat(nodeListToArray(element.shadowRoot.querySelectorAll(selector)));
+      });
+      return targetArray.concat(nodeListToArray(document.querySelectorAll(selector)));
+    }
+    /**
+     * Bind listener to the target elements
+     * These listeners used to trigger showing or hiding the tooltip
+     */
+
+  }, {
+    key: "bindListener",
+    value: function bindListener() {
+      var _this3 = this;
+
+      var _this$props2 = this.props,
+          id = _this$props2.id,
+          globalEventOff = _this$props2.globalEventOff,
+          isCapture = _this$props2.isCapture;
+      var targetArray = this.getTargetArray(id);
+      targetArray.forEach(function (target) {
+        if (target.getAttribute('currentItem') === null) {
+          target.setAttribute('currentItem', 'false');
+        }
+
+        _this3.unbindBasicListener(target);
+
+        if (_this3.isCustomEvent(target)) {
+          _this3.customUnbindListener(target);
+        }
+      });
+
+      if (this.isBodyMode()) {
+        this.bindBodyListener(targetArray);
+      } else {
+        targetArray.forEach(function (target) {
+          var isCaptureMode = _this3.isCapture(target);
+
+          var effect = _this3.getEffect(target);
+
+          if (_this3.isCustomEvent(target)) {
+            _this3.customBindListener(target);
+
+            return;
+          }
+
+          target.addEventListener('mouseenter', _this3.showTooltip, isCaptureMode);
+
+          if (effect === 'float') {
+            target.addEventListener('mousemove', _this3.updateTooltip, isCaptureMode);
+          }
+
+          target.addEventListener('mouseleave', _this3.hideTooltip, isCaptureMode);
         });
-      },
-      requires: ['computeStyles']
-    };
-  }, []);
-  var popperOptions = React__namespace.useMemo(function () {
-    var newOptions = {
-      onFirstUpdate: optionsWithDefaults.onFirstUpdate,
-      placement: optionsWithDefaults.placement,
-      strategy: optionsWithDefaults.strategy,
-      modifiers: [].concat(optionsWithDefaults.modifiers, [updateStateModifier, {
-        name: 'applyStyles',
-        enabled: false
-      }])
-    };
+      } // Global event to hide tooltip
 
-    if (reactFastCompare(prevOptions.current, newOptions)) {
-      return prevOptions.current || newOptions;
-    } else {
-      prevOptions.current = newOptions;
-      return newOptions;
+
+      if (globalEventOff) {
+        window.removeEventListener(globalEventOff, this.hideTooltip);
+        window.addEventListener(globalEventOff, this.hideTooltip, isCapture);
+      } // Track removal of targetArray elements from DOM
+
+
+      this.bindRemovalTracker();
     }
-  }, [optionsWithDefaults.onFirstUpdate, optionsWithDefaults.placement, optionsWithDefaults.strategy, optionsWithDefaults.modifiers, updateStateModifier]);
-  var popperInstanceRef = React__namespace.useRef();
-  useIsomorphicLayoutEffect(function () {
-    if (popperInstanceRef.current) {
-      popperInstanceRef.current.setOptions(popperOptions);
-    }
-  }, [popperOptions]);
-  useIsomorphicLayoutEffect(function () {
-    if (referenceElement == null || popperElement == null) {
-      return;
-    }
+    /**
+     * Unbind listeners on target elements
+     */
 
-    var createPopper$1 = options.createPopper || createPopper;
-    var popperInstance = createPopper$1(referenceElement, popperElement, popperOptions);
-    popperInstanceRef.current = popperInstance;
-    return function () {
-      popperInstance.destroy();
-      popperInstanceRef.current = null;
-    };
-  }, [referenceElement, popperElement, options.createPopper]);
-  return {
-    state: popperInstanceRef.current ? popperInstanceRef.current.state : null,
-    styles: state.styles,
-    attributes: state.attributes,
-    update: popperInstanceRef.current ? popperInstanceRef.current.update : null,
-    forceUpdate: popperInstanceRef.current ? popperInstanceRef.current.forceUpdate : null
-  };
-};
+  }, {
+    key: "unbindListener",
+    value: function unbindListener() {
+      var _this4 = this;
 
-function useGetLatest(val) {
-  var ref = React__namespace.useRef(val);
-  ref.current = val;
-  return React__namespace.useCallback(function () {
-    return ref.current;
-  }, []);
-}
+      var _this$props3 = this.props,
+          id = _this$props3.id,
+          globalEventOff = _this$props3.globalEventOff;
 
-var noop = function noop() {// do nothing
-};
+      if (this.isBodyMode()) {
+        this.unbindBodyListener();
+      } else {
+        var targetArray = this.getTargetArray(id);
+        targetArray.forEach(function (target) {
+          _this4.unbindBasicListener(target);
 
-function useControlledState(_ref) {
-  var initial = _ref.initial,
-      value = _ref.value,
-      _ref$onChange = _ref.onChange,
-      onChange = _ref$onChange === void 0 ? noop : _ref$onChange;
-
-  if (initial === undefined && value === undefined) {
-    throw new TypeError('Either "value" or "initial" variable must be set. Now both are undefined');
-  }
-
-  var _React$useState = React__namespace.useState(initial),
-      state = _React$useState[0],
-      setState = _React$useState[1];
-
-  var getLatest = useGetLatest(state);
-  var set = React__namespace.useCallback(function (updater) {
-    var state = getLatest();
-    var updatedState = typeof updater === 'function' ? updater(state) : updater;
-    if (typeof updatedState.persist === 'function') updatedState.persist();
-    setState(updatedState);
-    if (typeof onChange === 'function') onChange(updatedState);
-  }, [getLatest, onChange]);
-  var isControlled = value !== undefined;
-  return [isControlled ? value : state, isControlled ? onChange : set];
-}
-function generateBoundingClientRect(x, y) {
-  if (x === void 0) {
-    x = 0;
-  }
-
-  if (y === void 0) {
-    y = 0;
-  }
-
-  return function () {
-    return {
-      width: 0,
-      height: 0,
-      top: y,
-      right: x,
-      bottom: y,
-      left: x,
-      x: 0,
-      y: 0,
-      toJSON: function toJSON() {
-        return null;
+          if (_this4.isCustomEvent(target)) _this4.customUnbindListener(target);
+        });
       }
-    };
-  };
-}
 
-var _excluded = ["styles", "attributes"];
-var virtualElement = {
-  getBoundingClientRect: generateBoundingClientRect()
-};
-var defaultConfig = {
-  closeOnOutsideClick: true,
-  closeOnTriggerHidden: false,
-  defaultVisible: false,
-  delayHide: 0,
-  delayShow: 0,
-  followCursor: false,
-  interactive: false,
-  mutationObserverOptions: {
-    attributes: true,
-    childList: true,
-    subtree: true
-  },
-  offset: [0, 6],
-  trigger: 'hover'
-};
-function usePopperTooltip(config, popperOptions) {
-  var _popperProps$state, _popperProps$state$mo, _popperProps$state$mo2;
-
-  if (config === void 0) {
-    config = {};
-  }
-
-  if (popperOptions === void 0) {
-    popperOptions = {};
-  }
-
-  // Merging options with default options.
-  // Keys with undefined values are replaced with the default ones if any.
-  // Keys with other values pass through.
-  var finalConfig = Object.keys(defaultConfig).reduce(function (config, key) {
-    var _extends2;
-
-    return _extends({}, config, (_extends2 = {}, _extends2[key] = config[key] !== undefined ? config[key] : defaultConfig[key], _extends2));
-  }, config);
-  var defaultModifiers = React__namespace.useMemo(function () {
-    return [{
-      name: 'offset',
-      options: {
-        offset: finalConfig.offset
-      }
-    }];
-  }, // eslint-disable-next-line react-hooks/exhaustive-deps
-  Array.isArray(finalConfig.offset) ? finalConfig.offset : []);
-
-  var finalPopperOptions = _extends({}, popperOptions, {
-    placement: popperOptions.placement || finalConfig.placement,
-    modifiers: popperOptions.modifiers || defaultModifiers
-  });
-
-  var _React$useState = React__namespace.useState(null),
-      triggerRef = _React$useState[0],
-      setTriggerRef = _React$useState[1];
-
-  var _React$useState2 = React__namespace.useState(null),
-      tooltipRef = _React$useState2[0],
-      setTooltipRef = _React$useState2[1];
-
-  var _useControlledState = useControlledState({
-    initial: finalConfig.defaultVisible,
-    value: finalConfig.visible,
-    onChange: finalConfig.onVisibleChange
-  }),
-      visible = _useControlledState[0],
-      setVisible = _useControlledState[1];
-
-  var timer = React__namespace.useRef();
-  React__namespace.useEffect(function () {
-    return function () {
-      return clearTimeout(timer.current);
-    };
-  }, []);
-
-  var _usePopper = usePopper(finalConfig.followCursor ? virtualElement : triggerRef, tooltipRef, finalPopperOptions),
-      styles = _usePopper.styles,
-      attributes = _usePopper.attributes,
-      popperProps = _objectWithoutPropertiesLoose(_usePopper, _excluded);
-
-  var update = popperProps.update;
-  var getLatest = useGetLatest({
-    visible: visible,
-    triggerRef: triggerRef,
-    tooltipRef: tooltipRef,
-    finalConfig: finalConfig
-  });
-  var isTriggeredBy = React__namespace.useCallback(function (trigger) {
-    return Array.isArray(finalConfig.trigger) ? finalConfig.trigger.includes(trigger) : finalConfig.trigger === trigger;
-  }, // eslint-disable-next-line react-hooks/exhaustive-deps
-  Array.isArray(finalConfig.trigger) ? finalConfig.trigger : [finalConfig.trigger]);
-  var hideTooltip = React__namespace.useCallback(function () {
-    clearTimeout(timer.current);
-    timer.current = window.setTimeout(function () {
-      return setVisible(false);
-    }, finalConfig.delayHide);
-  }, [finalConfig.delayHide, setVisible]);
-  var showTooltip = React__namespace.useCallback(function () {
-    clearTimeout(timer.current);
-    timer.current = window.setTimeout(function () {
-      return setVisible(true);
-    }, finalConfig.delayShow);
-  }, [finalConfig.delayShow, setVisible]);
-  var toggleTooltip = React__namespace.useCallback(function () {
-    if (getLatest().visible) {
-      hideTooltip();
-    } else {
-      showTooltip();
+      if (globalEventOff) window.removeEventListener(globalEventOff, this.hideTooltip);
+      this.unbindRemovalTracker();
     }
-  }, [getLatest, hideTooltip, showTooltip]); // Handle click outside
+    /**
+     * Invoke this before bind listener and unmount the component
+     * it is necessary to invoke this even when binding custom event
+     * so that the tooltip can switch between custom and default listener
+     */
 
-  React__namespace.useEffect(function () {
-    if (!getLatest().finalConfig.closeOnOutsideClick) return;
+  }, {
+    key: "unbindBasicListener",
+    value: function unbindBasicListener(target) {
+      var isCaptureMode = this.isCapture(target);
+      target.removeEventListener('mouseenter', this.showTooltip, isCaptureMode);
+      target.removeEventListener('mousemove', this.updateTooltip, isCaptureMode);
+      target.removeEventListener('mouseleave', this.hideTooltip, isCaptureMode);
+    }
+  }, {
+    key: "getTooltipContent",
+    value: function getTooltipContent() {
+      var _this$props4 = this.props,
+          getContent = _this$props4.getContent,
+          children = _this$props4.children; // Generate tooltip content
 
-    var handleClickOutside = function handleClickOutside(event) {
-      var _event$composedPath;
+      var content;
 
-      var _getLatest = getLatest(),
-          tooltipRef = _getLatest.tooltipRef,
-          triggerRef = _getLatest.triggerRef;
-
-      var target = (event.composedPath == null ? void 0 : (_event$composedPath = event.composedPath()) == null ? void 0 : _event$composedPath[0]) || event.target;
-
-      if (target instanceof Node) {
-        if (tooltipRef != null && triggerRef != null && !tooltipRef.contains(target) && !triggerRef.contains(target)) {
-          hideTooltip();
+      if (getContent) {
+        if (Array.isArray(getContent)) {
+          content = getContent[0] && getContent[0](this.state.originTooltip);
+        } else {
+          content = getContent(this.state.originTooltip);
         }
       }
-    };
 
-    document.addEventListener('mousedown', handleClickOutside);
-    return function () {
-      return document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [getLatest, hideTooltip]); // Trigger: click
-
-  React__namespace.useEffect(function () {
-    if (triggerRef == null || !isTriggeredBy('click')) return;
-    triggerRef.addEventListener('click', toggleTooltip);
-    return function () {
-      return triggerRef.removeEventListener('click', toggleTooltip);
-    };
-  }, [triggerRef, isTriggeredBy, toggleTooltip]); // Trigger: right-click
-
-  React__namespace.useEffect(function () {
-    if (triggerRef == null || !isTriggeredBy('right-click')) return;
-
-    var preventDefaultAndToggle = function preventDefaultAndToggle(event) {
-      // Don't show the context menu
-      event.preventDefault();
-      toggleTooltip();
-    };
-
-    triggerRef.addEventListener('contextmenu', preventDefaultAndToggle);
-    return function () {
-      return triggerRef.removeEventListener('contextmenu', preventDefaultAndToggle);
-    };
-  }, [triggerRef, isTriggeredBy, toggleTooltip]); // Trigger: focus
-
-  React__namespace.useEffect(function () {
-    if (triggerRef == null || !isTriggeredBy('focus')) return;
-    triggerRef.addEventListener('focus', showTooltip);
-    triggerRef.addEventListener('blur', hideTooltip);
-    return function () {
-      triggerRef.removeEventListener('focus', showTooltip);
-      triggerRef.removeEventListener('blur', hideTooltip);
-    };
-  }, [triggerRef, isTriggeredBy, showTooltip, hideTooltip]); // Trigger: hover on trigger
-
-  React__namespace.useEffect(function () {
-    if (triggerRef == null || !isTriggeredBy('hover')) return;
-    triggerRef.addEventListener('mouseenter', showTooltip);
-    triggerRef.addEventListener('mouseleave', hideTooltip);
-    return function () {
-      triggerRef.removeEventListener('mouseenter', showTooltip);
-      triggerRef.removeEventListener('mouseleave', hideTooltip);
-    };
-  }, [triggerRef, isTriggeredBy, showTooltip, hideTooltip]); // Trigger: hover on tooltip, keep it open if hovered
-
-  React__namespace.useEffect(function () {
-    if (tooltipRef == null || !getLatest().finalConfig.interactive) return;
-    tooltipRef.addEventListener('mouseenter', showTooltip);
-    tooltipRef.addEventListener('mouseleave', hideTooltip);
-    return function () {
-      tooltipRef.removeEventListener('mouseenter', showTooltip);
-      tooltipRef.removeEventListener('mouseleave', hideTooltip);
-    };
-  }, [tooltipRef, showTooltip, hideTooltip, getLatest]); // Handle closing tooltip if trigger hidden
-
-  var isReferenceHidden = popperProps == null ? void 0 : (_popperProps$state = popperProps.state) == null ? void 0 : (_popperProps$state$mo = _popperProps$state.modifiersData) == null ? void 0 : (_popperProps$state$mo2 = _popperProps$state$mo.hide) == null ? void 0 : _popperProps$state$mo2.isReferenceHidden;
-  React__namespace.useEffect(function () {
-    if (finalConfig.closeOnTriggerHidden && isReferenceHidden) hideTooltip();
-  }, [finalConfig.closeOnTriggerHidden, hideTooltip, isReferenceHidden]); // Handle follow cursor
-
-  React__namespace.useEffect(function () {
-    if (!finalConfig.followCursor || triggerRef == null) return;
-
-    function setMousePosition(_ref) {
-      var clientX = _ref.clientX,
-          clientY = _ref.clientY;
-      virtualElement.getBoundingClientRect = generateBoundingClientRect(clientX, clientY);
-      update == null ? void 0 : update();
+      return getTipContent(this.state.originTooltip, children, content, this.state.isMultiline);
     }
-
-    triggerRef.addEventListener('mousemove', setMousePosition);
-    return function () {
-      return triggerRef.removeEventListener('mousemove', setMousePosition);
-    };
-  }, [finalConfig.followCursor, triggerRef, update]); // Handle tooltip DOM mutation changes (aka mutation observer)
-
-  React__namespace.useEffect(function () {
-    if (tooltipRef == null || update == null || finalConfig.mutationObserverOptions == null) return;
-    var observer = new MutationObserver(update);
-    observer.observe(tooltipRef, finalConfig.mutationObserverOptions);
-    return function () {
-      return observer.disconnect();
-    };
-  }, [finalConfig.mutationObserverOptions, tooltipRef, update]); // Tooltip props getter
-
-  var getTooltipProps = function getTooltipProps(args) {
-    if (args === void 0) {
-      args = {};
+  }, {
+    key: "isEmptyTip",
+    value: function isEmptyTip(placeholder) {
+      return typeof placeholder === 'string' && placeholder === '' || placeholder === null;
     }
+    /**
+     * When mouse enter, show the tooltip
+     */
 
-    return _extends({}, args, {
-      style: _extends({}, args.style, styles.popper)
-    }, attributes.popper, {
-      'data-popper-interactive': finalConfig.interactive
-    });
-  }; // Arrow props getter
+  }, {
+    key: "showTooltip",
+    value: function showTooltip(e, isGlobalCall) {
+      if (!this.tooltipRef) {
+        return;
+      }
+
+      if (isGlobalCall) {
+        // Don't trigger other elements belongs to other ReactTooltip
+        var targetArray = this.getTargetArray(this.props.id);
+        var isMyElement = targetArray.some(function (ele) {
+          return ele === e.currentTarget;
+        });
+        if (!isMyElement) return;
+      } // Get the tooltip content
+      // calculate in this phrase so that tip width height can be detected
 
 
-  var getArrowProps = function getArrowProps(args) {
-    if (args === void 0) {
-      args = {};
+      var _this$props5 = this.props,
+          multiline = _this$props5.multiline,
+          getContent = _this$props5.getContent;
+      var originTooltip = e.currentTarget.getAttribute('data-tip');
+      var isMultiline = e.currentTarget.getAttribute('data-multiline') || multiline || false; // If it is focus event or called by ReactTooltip.show, switch to `solid` effect
+
+      var switchToSolid = e instanceof window.FocusEvent || isGlobalCall; // if it needs to skip adding hide listener to scroll
+
+      var scrollHide = true;
+
+      if (e.currentTarget.getAttribute('data-scroll-hide')) {
+        scrollHide = e.currentTarget.getAttribute('data-scroll-hide') === 'true';
+      } else if (this.props.scrollHide != null) {
+        scrollHide = this.props.scrollHide;
+      } // Make sure the correct place is set
+
+
+      var desiredPlace = e.currentTarget.getAttribute('data-place') || this.props.place || 'top';
+      var effect = switchToSolid && 'solid' || this.getEffect(e.currentTarget);
+      var offset = e.currentTarget.getAttribute('data-offset') || this.props.offset || {};
+      var result = getPosition(e, e.currentTarget, this.tooltipRef, desiredPlace, desiredPlace, effect, offset);
+
+      if (result.position && this.props.overridePosition) {
+        result.position = this.props.overridePosition(result.position, e, e.currentTarget, this.tooltipRef, desiredPlace, desiredPlace, effect, offset);
+      }
+
+      var place = result.isNewState ? result.newState.place : desiredPlace; // To prevent previously created timers from triggering
+
+      this.clearTimer();
+      var target = e.currentTarget;
+      var reshowDelay = this.state.show ? target.getAttribute('data-delay-update') || this.props.delayUpdate : 0;
+      var self = this;
+
+      var updateState = function updateState() {
+        self.setState({
+          originTooltip: originTooltip,
+          isMultiline: isMultiline,
+          desiredPlace: desiredPlace,
+          place: place,
+          type: target.getAttribute('data-type') || self.props.type || 'dark',
+          customColors: {
+            text: target.getAttribute('data-text-color') || self.props.textColor || null,
+            background: target.getAttribute('data-background-color') || self.props.backgroundColor || null,
+            border: target.getAttribute('data-border-color') || self.props.borderColor || null,
+            arrow: target.getAttribute('data-arrow-color') || self.props.arrowColor || null
+          },
+          effect: effect,
+          offset: offset,
+          html: (target.getAttribute('data-html') ? target.getAttribute('data-html') === 'true' : self.props.html) || false,
+          delayShow: target.getAttribute('data-delay-show') || self.props.delayShow || 0,
+          delayHide: target.getAttribute('data-delay-hide') || self.props.delayHide || 0,
+          delayUpdate: target.getAttribute('data-delay-update') || self.props.delayUpdate || 0,
+          border: (target.getAttribute('data-border') ? target.getAttribute('data-border') === 'true' : self.props.border) || false,
+          extraClass: target.getAttribute('data-class') || self.props["class"] || self.props.className || '',
+          disable: (target.getAttribute('data-tip-disable') ? target.getAttribute('data-tip-disable') === 'true' : self.props.disable) || false,
+          currentTarget: target
+        }, function () {
+          if (scrollHide) {
+            self.addScrollListener(self.state.currentTarget);
+          }
+
+          self.updateTooltip(e);
+
+          if (getContent && Array.isArray(getContent)) {
+            self.intervalUpdateContent = setInterval(function () {
+              if (self.mount) {
+                var _getContent = self.props.getContent;
+                var placeholder = getTipContent(originTooltip, '', _getContent[0](), isMultiline);
+                var isEmptyTip = self.isEmptyTip(placeholder);
+                self.setState({
+                  isEmptyTip: isEmptyTip
+                });
+                self.updatePosition();
+              }
+            }, getContent[1]);
+          }
+        });
+      }; // If there is no delay call immediately, don't allow events to get in first.
+
+
+      if (reshowDelay) {
+        this.delayReshow = setTimeout(updateState, reshowDelay);
+      } else {
+        updateState();
+      }
     }
+    /**
+     * When mouse hover, update tool tip
+     */
 
-    return _extends({}, args, attributes.arrow, {
-      style: _extends({}, args.style, styles.arrow),
-      'data-popper-arrow': true
-    });
-  };
+  }, {
+    key: "updateTooltip",
+    value: function updateTooltip(e) {
+      var _this5 = this;
 
-  return _extends({
-    getArrowProps: getArrowProps,
-    getTooltipProps: getTooltipProps,
-    setTooltipRef: setTooltipRef,
-    setTriggerRef: setTriggerRef,
-    tooltipRef: tooltipRef,
-    triggerRef: triggerRef,
-    visible: visible
-  }, popperProps);
-}
+      var _this$state = this.state,
+          delayShow = _this$state.delayShow,
+          disable = _this$state.disable;
+      var afterShow = this.props.afterShow;
+      var placeholder = this.getTooltipContent();
+      var eventTarget = e.currentTarget || e.target; // Check if the mouse is actually over the tooltip, if so don't hide the tooltip
 
-const Container$3 = styled__default['default'].div`
-  position: relative;
-  height: 10px;
-  width: 10px;
-  margin: 2px;
-  border: 1px solid rgba(27, 31, 35, 0.06);
-`;
+      if (this.mouseOnToolTip()) {
+        return;
+      } // if the tooltip is empty, disable the tooltip
+
+
+      if (this.isEmptyTip(placeholder) || disable) {
+        return;
+      }
+
+      var delayTime = !this.state.show ? parseInt(delayShow, 10) : 0;
+
+      var updateState = function updateState() {
+        if (Array.isArray(placeholder) && placeholder.length > 0 || placeholder) {
+          var isInvisible = !_this5.state.show;
+
+          _this5.setState({
+            currentEvent: e,
+            currentTarget: eventTarget,
+            show: true
+          }, function () {
+            _this5.updatePosition();
+
+            if (isInvisible && afterShow) {
+              afterShow(e);
+            }
+          });
+        }
+      };
+
+      clearTimeout(this.delayShowLoop);
+
+      if (delayTime) {
+        this.delayShowLoop = setTimeout(updateState, delayTime);
+      } else {
+        updateState();
+      }
+    }
+    /*
+     * If we're mousing over the tooltip remove it when we leave.
+     */
+
+  }, {
+    key: "listenForTooltipExit",
+    value: function listenForTooltipExit() {
+      var show = this.state.show;
+
+      if (show && this.tooltipRef) {
+        this.tooltipRef.addEventListener('mouseleave', this.hideTooltip);
+      }
+    }
+  }, {
+    key: "removeListenerForTooltipExit",
+    value: function removeListenerForTooltipExit() {
+      var show = this.state.show;
+
+      if (show && this.tooltipRef) {
+        this.tooltipRef.removeEventListener('mouseleave', this.hideTooltip);
+      }
+    }
+    /**
+     * When mouse leave, hide tooltip
+     */
+
+  }, {
+    key: "hideTooltip",
+    value: function hideTooltip(e, hasTarget) {
+      var _this6 = this;
+
+      var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {
+        isScroll: false
+      };
+      var disable = this.state.disable;
+      var isScroll = options.isScroll;
+      var delayHide = isScroll ? 0 : this.state.delayHide;
+      var afterHide = this.props.afterHide;
+      var placeholder = this.getTooltipContent();
+      if (!this.mount) return;
+      if (this.isEmptyTip(placeholder) || disable) return; // if the tooltip is empty, disable the tooltip
+
+      if (hasTarget) {
+        // Don't trigger other elements belongs to other ReactTooltip
+        var targetArray = this.getTargetArray(this.props.id);
+        var isMyElement = targetArray.some(function (ele) {
+          return ele === e.currentTarget;
+        });
+        if (!isMyElement || !this.state.show) return;
+      }
+
+      var resetState = function resetState() {
+        var isVisible = _this6.state.show; // Check if the mouse is actually over the tooltip, if so don't hide the tooltip
+
+        if (_this6.mouseOnToolTip()) {
+          _this6.listenForTooltipExit();
+
+          return;
+        }
+
+        _this6.removeListenerForTooltipExit();
+
+        _this6.setState({
+          show: false
+        }, function () {
+          _this6.removeScrollListener(_this6.state.currentTarget);
+
+          if (isVisible && afterHide) {
+            afterHide(e);
+          }
+        });
+      };
+
+      this.clearTimer();
+
+      if (delayHide) {
+        this.delayHideLoop = setTimeout(resetState, parseInt(delayHide, 10));
+      } else {
+        resetState();
+      }
+    }
+    /**
+     * When scroll, hide tooltip
+     */
+
+  }, {
+    key: "hideTooltipOnScroll",
+    value: function hideTooltipOnScroll(event, hasTarget) {
+      this.hideTooltip(event, hasTarget, {
+        isScroll: true
+      });
+    }
+    /**
+     * Add scroll event listener when tooltip show
+     * automatically hide the tooltip when scrolling
+     */
+
+  }, {
+    key: "addScrollListener",
+    value: function addScrollListener(currentTarget) {
+      var isCaptureMode = this.isCapture(currentTarget);
+      window.addEventListener('scroll', this.hideTooltipOnScroll, isCaptureMode);
+    }
+  }, {
+    key: "removeScrollListener",
+    value: function removeScrollListener(currentTarget) {
+      var isCaptureMode = this.isCapture(currentTarget);
+      window.removeEventListener('scroll', this.hideTooltipOnScroll, isCaptureMode);
+    } // Calculation the position
+
+  }, {
+    key: "updatePosition",
+    value: function updatePosition() {
+      var _this7 = this;
+
+      var _this$state2 = this.state,
+          currentEvent = _this$state2.currentEvent,
+          currentTarget = _this$state2.currentTarget,
+          place = _this$state2.place,
+          desiredPlace = _this$state2.desiredPlace,
+          effect = _this$state2.effect,
+          offset = _this$state2.offset;
+      var node = this.tooltipRef;
+      var result = getPosition(currentEvent, currentTarget, node, place, desiredPlace, effect, offset);
+
+      if (result.position && this.props.overridePosition) {
+        result.position = this.props.overridePosition(result.position, currentEvent, currentTarget, node, place, desiredPlace, effect, offset);
+      }
+
+      if (result.isNewState) {
+        // Switch to reverse placement
+        return this.setState(result.newState, function () {
+          _this7.updatePosition();
+        });
+      } // Set tooltip position
+
+
+      node.style.left = result.position.left + 'px';
+      node.style.top = result.position.top + 'px';
+    }
+    /**
+     * CLear all kinds of timeout of interval
+     */
+
+  }, {
+    key: "clearTimer",
+    value: function clearTimer() {
+      clearTimeout(this.delayShowLoop);
+      clearTimeout(this.delayHideLoop);
+      clearTimeout(this.delayReshow);
+      clearInterval(this.intervalUpdateContent);
+    }
+  }, {
+    key: "hasCustomColors",
+    value: function hasCustomColors() {
+      var _this8 = this;
+
+      return Boolean(Object.keys(this.state.customColors).find(function (color) {
+        return color !== 'border' && _this8.state.customColors[color];
+      }) || this.state.border && this.state.customColors['border']);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this9 = this;
+
+      var _this$state3 = this.state,
+          extraClass = _this$state3.extraClass,
+          html = _this$state3.html,
+          ariaProps = _this$state3.ariaProps,
+          disable = _this$state3.disable;
+      var content = this.getTooltipContent();
+      var isEmptyTip = this.isEmptyTip(content);
+      var style = generateTooltipStyle(this.state.uuid, this.state.customColors, this.state.type, this.state.border);
+      var tooltipClass = '__react_component_tooltip' + " ".concat(this.state.uuid) + (this.state.show && !disable && !isEmptyTip ? ' show' : '') + (this.state.border ? ' border' : '') + " place-".concat(this.state.place) + // top, bottom, left, right
+      " type-".concat(this.hasCustomColors() ? 'custom' : this.state.type) + ( // dark, success, warning, error, info, light, custom
+      this.props.delayUpdate ? ' allow_hover' : '') + (this.props.clickable ? ' allow_click' : '');
+      var Wrapper = this.props.wrapper;
+
+      if (ReactTooltip.supportedWrappers.indexOf(Wrapper) < 0) {
+        Wrapper = ReactTooltip.defaultProps.wrapper;
+      }
+
+      var wrapperClassName = [tooltipClass, extraClass].filter(Boolean).join(' ');
+
+      if (html) {
+        var htmlContent = "".concat(content, "\n<style>").concat(style, "</style>");
+        return React__default['default'].createElement(Wrapper, _extends({
+          className: "".concat(wrapperClassName),
+          id: this.props.id,
+          ref: function ref(_ref) {
+            return _this9.tooltipRef = _ref;
+          }
+        }, ariaProps, {
+          "data-id": "tooltip",
+          dangerouslySetInnerHTML: {
+            __html: htmlContent
+          }
+        }));
+      } else {
+        return React__default['default'].createElement(Wrapper, _extends({
+          className: "".concat(wrapperClassName),
+          id: this.props.id
+        }, ariaProps, {
+          ref: function ref(_ref2) {
+            return _this9.tooltipRef = _ref2;
+          },
+          "data-id": "tooltip"
+        }), React__default['default'].createElement("style", {
+          dangerouslySetInnerHTML: {
+            __html: style
+          }
+        }), content);
+      }
+    }
+  }], [{
+    key: "getDerivedStateFromProps",
+    value: function getDerivedStateFromProps(nextProps, prevState) {
+      var ariaProps = prevState.ariaProps;
+      var newAriaProps = parseAria(nextProps);
+      var isChanged = Object.keys(newAriaProps).some(function (props) {
+        return newAriaProps[props] !== ariaProps[props];
+      });
+
+      if (!isChanged) {
+        return null;
+      }
+
+      return _objectSpread2({}, prevState, {
+        ariaProps: newAriaProps
+      });
+    }
+  }]);
+
+  return ReactTooltip;
+}(React__default['default'].Component), _defineProperty(_class2, "defaultProps", {
+  insecure: true,
+  resizeHide: true,
+  wrapper: 'div',
+  clickable: false
+}), _defineProperty(_class2, "supportedWrappers", ['div', 'span']), _defineProperty(_class2, "displayName", 'ReactTooltip'), _temp)) || _class) || _class) || _class) || _class) || _class) || _class) || _class;
+
+const Container$1 = ({
+  children,
+  ...rest
+}) => {
+  return /*#__PURE__*/React__default['default'].createElement(Container$7, _extends$1({
+    className: "rbh-box-container"
+  }, rest), children);
+};
 
 const Box = ({
+  id,
   box,
   legend,
   locale,
   marginTop,
-  showTooltip,
-  boxShape
+  boxShape,
+  showTooltip
 }) => {
-  const {
-    getArrowProps,
-    getTooltipProps,
-    setTooltipRef,
-    setTriggerRef,
-    visible
-  } = usePopperTooltip();
+  const [canShowTooltip, setCanShowTooltip] = React.useState(false);
   const {
     date,
     value,
@@ -7513,112 +6852,33 @@ const Box = ({
     onClick
   } = box;
 
-  const getColor = () => legend && legend.find(l => l.isInRange(value))?.color || '#ebedf0';
+  const getColor = () => legend && legend.find(l => l.isInRange(value))?.color || "#ebedf0";
 
   const label = valueLabel ? valueLabel : value;
   const finalColor = color ? color : getColor();
-  return /*#__PURE__*/React__default['default'].createElement(Container$3, {
-    ref: setTriggerRef,
-    onClick: () => onClick && onClick(date, value),
+  const canClick = onClick != null && value != null;
+  return /*#__PURE__*/React__default['default'].createElement(React__default['default'].Fragment, null, /*#__PURE__*/React__default['default'].createElement(Container$1, {
+    id: id,
+    "data-for": id,
+    "data-tip": true,
+    onMouseEnter: () => setCanShowTooltip(true),
+    onMouseLeave: () => setCanShowTooltip(false),
+    onClick: () => canClick && onClick(date, value),
     style: {
       marginTop,
       backgroundColor: finalColor,
-      cursor: value ? 'pointer' : '',
-      borderRadius: boxShape === 'circle' ? '50%' : 0
+      cursor: canClick ? "pointer" : "",
+      borderRadius: boxShape === "circle" ? "50%" : "15%"
     }
-  }, showTooltip && visible && /*#__PURE__*/React__default['default'].createElement("div", _extends$1({
-    ref: setTooltipRef
-  }, getTooltipProps({
-    className: "tooltip-container",
-    style: {
-      background: 'rgba(0, 0, 0, .75)',
-      color: '#fff',
-      minWidth: 100,
-      textAlign: 'center'
-    }
-  })), label ? /*#__PURE__*/React__default['default'].createElement("span", null, label) : date && locale && /*#__PURE__*/React__default['default'].createElement("span", null, format$1(date, 'PP', {
+  }), canShowTooltip && /*#__PURE__*/React__default['default'].createElement(ReactTooltip, {
+    id: id,
+    "aria-haspopup": "true"
+  }, showTooltip ? label ? label : date && locale ? `${format(date, "PP", {
     locale
-  }), value && /*#__PURE__*/React__default['default'].createElement("span", {
-    style: {
-      marginRight: 2
-    }
-  }, ":")), /*#__PURE__*/React__default['default'].createElement("div", getArrowProps({
-    className: "tooltip-arrow",
-    style: {
-      border: 'black',
-      '--tooltipBackground': 'rgba(0, 0, 0, .75)'
-    }
-  }))));
+  })} ${value ? `: ${value}` : ""}` : "" : null));
 };
 
-const Container$2 = styled__default['default'].div`
-  display: flex;
-  flex-direction: column;
-  height: 98px;
-
-  > span {
-    position: absolute;
-    top: 0;
-  }
-`;
-
-const Column = ({
-  date,
-  index,
-  margin = 2,
-  ...rest
-}) => {
-  return /*#__PURE__*/React__default['default'].createElement(Container$2, rest);
-};
-
-const Container$1 = styled__default['default'].div`
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  align-items: center;
-  padding: 20px 0;
-  max-width: 100%;
-  overflow-x: auto;
-  
-  ::-webkit-scrollbar {
-    width: 5px;
-    height: 7px;
-  } 
-  ::-webkit-scrollbar-track {
-    background: #ebedf0;
-  }
-  ::-webkit-scrollbar-thumb {
-    background: gray;
-  }
-`;
-const FlexContainer = styled__default['default'].div`
-  display: flex; 
-  align-items: center;
-  font-size: 10px;
-  margin-top: ${props => props.legend ? '10px' : 0} 
-`;
-const ColumnsContainer = styled__default['default'].div`
-  display: flex;
-  margin-left: 7px;
-  position: relative;
-  text-transform: capitalize;
-  padding-top: 14px;
-`;
-const WeekContainer = styled__default['default'].div`
-  height: 98px;
-  text-transform: capitalize;
-  margin-top: 14px;
-`;
-const WeekLabel = styled__default['default'].div`
-  display: flex;
-  align-items: center;
-  height: 14px;
-`;
-const BoxContainer = styled__default['default'].div`
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-`;
+var Box$1 = /*#__PURE__*/React.memo(Box);
 
 const Heatmap = ({
   startDate,
@@ -7635,21 +6895,15 @@ const Heatmap = ({
   contentAfterLegend
 }) => {
   const getLocale = () => {
-    if (locale$4 === 'pt-br') return locale$1;else if (locale$4 === 'es') return locale$2;else if (locale$4 === 'fr') return locale;
+    if (locale$4 === "pt-br") return locale$1;else if (locale$4 === "es") return locale$2;else if (locale$4 === "fr") return locale;
     return locale$3;
   };
-
-  const finalLocale = getLocale();
 
   const getValue = refDate => values?.find(x => isSameDay(x.date, refDate));
 
   const getStartDay = () => getDay(startDate);
 
-  const getColumns = () => {
-    const endDate = addDays(startDate, rangeDays);
-    const startDay = getStartDay();
-    const daysCount = differenceInDays(endDate, startDate);
-    const columnsCount = Math.floor(daysCount / 7) + (startDay > 0 ? 1 : 0);
+  const getDaysList = daysCount => {
     const daysList = Array(daysCount).fill(0).map((_, index) => {
       const newDate = addDays(startDate, index);
       const customValue = getValue(newDate);
@@ -7665,75 +6919,119 @@ const Heatmap = ({
         onClick
       };
     });
-    let refDate = startDate.setHours(0, 0, 0, 0);
-    return Array(columnsCount).fill(0).map((_, index) => {
-      const days = daysList.filter(x => x.date >= refDate).slice(0, index === 0 ? 7 - startDay : 7).filter(x => x != null);
-      refDate = addDays(days[days.length - 1]?.date, 1).setHours(0, 0, 0, 0);
-      const month = days.every(x => format$1(x.date, 'M') === format$1(days[0].date, 'M')) ? format$1(days[0].date, 'MMM', {
-        finalLocale
-      }) : '';
-      const year = format$1(refDate, 'y');
-      return {
-        index,
-        month,
-        year,
-        days
-      };
+    return daysList;
+  };
+
+  const fillColumn = (daysList, parameters, startDay, index) => {
+    const days = daysList.filter(x => x.date >= parameters.refDate).slice(0, index === 0 ? 7 - startDay : 7).filter(x => x != null);
+    const month = days.every(x => format(x.date, "M") === format(days[0].date, "M")) ? format(days[0].date, "MMM", {
+      locale: finalLocale
+    }) : "";
+    const year = format(parameters.refDate, "y");
+    parameters.refDate = addDays(days[days.length - 1]?.date, 1).setHours(0, 0, 0, 0);
+    return {
+      index,
+      month,
+      year,
+      days
+    };
+  };
+
+  const getColumnsList = (columnsCount, daysList, parameters, startDay) => {
+    const columnsList = Array(columnsCount).fill(0).map((_, index) => {
+      return fillColumn(daysList, parameters, startDay, index);
     });
+    return columnsList;
+  };
+
+  const finalLocale = getLocale();
+
+  const getColumns = () => {
+    const endDate = addDays(startDate, rangeDays);
+    const startDay = getStartDay();
+    const isIrregularRange = startDay > 0;
+    const daysCount = differenceInDays(endDate, startDate);
+    const columnsCount = Math.floor(daysCount / 7) + (isIrregularRange ? 1 : 0);
+    const daysList = getDaysList(daysCount);
+    const parameters = {
+      refDate: startDate.setHours(0, 0, 0, 0)
+    };
+    let columnsList = getColumnsList(columnsCount, daysList, parameters, startDay);
+    const sumDays = columnsList?.reduce((acc, value) => {
+      return acc + value.days?.length;
+    }, 0);
+
+    if (columnsList && sumDays < daysCount) {
+      const newIndex = columnsList[columnsList.length - 1]?.index + 1;
+      columnsList = [...columnsList, fillColumn(daysList, parameters, startDay, newIndex)];
+    }
+
+    return columnsList;
   };
 
   const [columns] = React.useState(getColumns());
 
   const showMonth = (index, month, year) => columns.find(x => x.month === month && x.year === year)?.index === index;
 
-  return /*#__PURE__*/React__default['default'].createElement(Container$1, null, /*#__PURE__*/React__default['default'].createElement(FlexContainer, null, /*#__PURE__*/React__default['default'].createElement(WeekContainer, null, Array(7).fill(0).map((_, index) => /*#__PURE__*/React__default['default'].createElement(WeekLabel, {
+  return /*#__PURE__*/React__default['default'].createElement(React__default['default'].Fragment, null, /*#__PURE__*/React__default['default'].createElement(Container$8, null, /*#__PURE__*/React__default['default'].createElement(Container$7, null, /*#__PURE__*/React__default['default'].createElement(Container$6, null, Array(7).fill(0).map((_, index) => /*#__PURE__*/React__default['default'].createElement(Container$5, {
+    key: `rbh-week-label-${index}`,
     style: {
-      visibility: showWeekDays.includes(index) ? 'visible' : 'hidden'
+      visibility: showWeekDays.includes(index) ? "visible" : "hidden"
     }
   }, finalLocale.localize.day(index, {
-    width: 'short'
-  })))), /*#__PURE__*/React__default['default'].createElement(ColumnsContainer, null, columns && columns.map(column => {
+    width: "short"
+  })))), /*#__PURE__*/React__default['default'].createElement(Container$4, null, columns && columns.map((column, indexColumn) => {
     const {
       index,
       month,
       year,
       days
     } = column;
-    return /*#__PURE__*/React__default['default'].createElement(Column, column, /*#__PURE__*/React__default['default'].createElement("span", {
+    return /*#__PURE__*/React__default['default'].createElement(Column$1, {
+      key: `rbh-column-${index}`
+    }, /*#__PURE__*/React__default['default'].createElement("span", {
       style: {
         left: index * 14,
-        visibility: showMonths && showMonth(index, month, year) ? 'visible' : 'hidden'
+        visibility: showMonths && showMonth(index, month, year) ? "visible" : "hidden"
       }
-    }, month), /*#__PURE__*/React__default['default'].createElement(BoxContainer, null, days && days.map((day, indexDay) => {
+    }, month), /*#__PURE__*/React__default['default'].createElement(Container$2, null, days && days.map((day, indexDay) => {
       const startDay = getStartDay();
       const formulaMargin = startDay * 14;
       const margin = startDay > 0 ? formulaMargin + 2 : formulaMargin;
-      return /*#__PURE__*/React__default['default'].createElement(Box, {
+      const boxId = `rbh-box-${indexColumn}-${indexDay}`;
+      return /*#__PURE__*/React__default['default'].createElement(Box$1, {
+        id: boxId,
+        key: boxId,
         box: day || {},
-        legend: legend,
-        locale: finalLocale,
         showTooltip: showBlockTooltip,
         boxShape: boxShape,
+        legend: legend,
+        locale: finalLocale,
         marginTop: index === 0 && indexDay === 0 ? margin || 2 : 2
       });
     })));
-  }))), /*#__PURE__*/React__default['default'].createElement(FlexContainer, {
+  }))), /*#__PURE__*/React__default['default'].createElement(Container$7, {
     legend: true
   }, contentBeforeLegend && /*#__PURE__*/React__default['default'].createElement("span", {
     style: {
       marginRight: 5
     }
-  }, contentBeforeLegend), legend && legend.map(legend => /*#__PURE__*/React__default['default'].createElement(Box, {
-    box: { ...legend,
-      value: legend.label
-    },
-    showTooltip: showLegendTooltip,
-    boxShape: boxShape
-  })), contentAfterLegend && /*#__PURE__*/React__default['default'].createElement("span", {
+  }, contentBeforeLegend), legend && legend.map((legend, index) => {
+    const boxId = `rbh-legend-box-${index}`;
+    return /*#__PURE__*/React__default['default'].createElement(Box$1, {
+      id: boxId,
+      key: boxId,
+      box: { ...legend,
+        value: legend.label
+      },
+      showTooltip: showLegendTooltip,
+      boxShape: boxShape
+    });
+  }), contentAfterLegend && /*#__PURE__*/React__default['default'].createElement("span", {
     style: {
       marginLeft: 5
     }
-  }, contentAfterLegend)));
+  }, contentAfterLegend))));
 };
 
 function styleInject(css, ref) {
@@ -7763,69 +7061,47 @@ function styleInject(css, ref) {
   }
 }
 
-var css_248z$1 = "*{box-sizing:border-box}";
-styleInject(css_248z$1);
-
-var css_248z = ".tooltip-container{--tooltipBackground:#fff;--tooltipBorder:silver;background-color:var(--tooltipBackground);border-radius:3px;border:1px solid var(--tooltipBorder);box-shadow:0 2px 4px rgba(0,0,0,.18);color:#000;display:flex;flex-direction:column;padding:.4rem;transition:opacity .3s;z-index:9999}.tooltip-arrow,.tooltip-container[data-popper-interactive=false]{pointer-events:none}.tooltip-arrow{height:1rem;position:absolute;width:1rem}.tooltip-arrow:after,.tooltip-arrow:before{border-style:solid;content:\"\";display:block;height:0;margin:auto;width:0}.tooltip-arrow:after{position:absolute}.tooltip-container[data-popper-placement*=bottom] .tooltip-arrow{left:0;margin-top:-.4rem;top:0}.tooltip-container[data-popper-placement*=bottom] .tooltip-arrow:before{border-left-color:transparent;border-bottom-color:var(--tooltipBorder);border-right-color:transparent;border-top-color:transparent;border-width:0 .5rem .4rem;position:absolute;top:-1px}.tooltip-container[data-popper-placement*=bottom] .tooltip-arrow:after{border-left-color:transparent;border-bottom-color:var(--tooltipBackground);border-right-color:transparent;border-top-color:transparent;border-width:0 .5rem .4rem}.tooltip-container[data-popper-placement*=top] .tooltip-arrow{bottom:0;left:0;margin-bottom:-1rem}.tooltip-container[data-popper-placement*=top] .tooltip-arrow:before{border-left-color:transparent;border-bottom-color:transparent;border-right-color:transparent;border-top-color:var(--tooltipBorder);border-width:.4rem .5rem 0;position:absolute;top:1px}.tooltip-container[data-popper-placement*=top] .tooltip-arrow:after{border-left-color:transparent;border-bottom-color:transparent;border-right-color:transparent;border-top-color:var(--tooltipBackground);border-width:.4rem .5rem 0}.tooltip-container[data-popper-placement*=right] .tooltip-arrow{left:0;margin-left:-.7rem}.tooltip-container[data-popper-placement*=right] .tooltip-arrow:before{border-left-color:transparent;border-bottom-color:transparent;border-right-color:var(--tooltipBorder);border-top-color:transparent;border-width:.5rem .4rem .5rem 0}.tooltip-container[data-popper-placement*=right] .tooltip-arrow:after{border-left-color:transparent;border-bottom-color:transparent;border-right-color:var(--tooltipBackground);border-top-color:transparent;border-width:.5rem .4rem .5rem 0;left:6px;top:0}.tooltip-container[data-popper-placement*=left] .tooltip-arrow{margin-right:-.7rem;right:0}.tooltip-container[data-popper-placement*=left] .tooltip-arrow:before{border-left-color:var(--tooltipBorder);border-bottom-color:transparent;border-right-color:transparent;border-top-color:transparent;border-width:.5rem 0 .5rem .4em}.tooltip-container[data-popper-placement*=left] .tooltip-arrow:after{border-left-color:var(--tooltipBackground);border-bottom-color:transparent;border-right-color:transparent;border-top-color:transparent;border-width:.5rem 0 .5rem .4em;left:3px;top:0}";
+var css_248z = "*{box-sizing:border-box}.rbh-container{display:flex;flex-direction:column;flex-wrap:wrap;align-items:center;padding:20px 0;max-width:100%;overflow-x:auto}.rbh-container::-webkit-scrollbar{width:5px;height:7px}.rbh-container::-webkit-scrollbar-track{background:#ebedf0}.rbh-container::-webkit-scrollbar-thumb{background:#ccc}.rbh-wrapper{display:flex;align-items:center;font-size:10px}.rbh-week-container{height:98px;text-transform:capitalize;margin-top:14px}.rbh-week-label{display:flex;align-items:center;height:14px}.rbh-columns-container{display:flex;margin-left:7px;padding-top:16px;position:relative;text-transform:capitalize}.rbh-column-container{display:flex;flex-direction:column;height:98px}.rbh-column-container>span{position:absolute;top:0}.rbh-boxes-container{display:flex;flex-direction:column;flex-wrap:wrap}.rbh-box-container{position:relative;height:10px;width:10px;margin:2px;border:1px solid rgba(27,31,35,.06)}";
 styleInject(css_248z);
 
-const propsDefault = {
-  showWeekDays: [1, 3, 5],
+const defaultProps = {
   startDate: new Date(),
-  rangeDays: getDaysInYear(new Date()),
   values: [],
-  legend: [{
-    isInRange: v => v === 0,
-    color: '#EBEDF0',
-    label: '= 0'
-  }, {
-    isInRange: v => v === 1,
-    color: '#9BE9A8',
-    label: '= 1'
-  }, {
-    isInRange: v => v === 2,
-    color: '#40C463',
-    label: '= 2'
-  }, {
-    isInRange: v => v === 3,
-    color: '#30A14E',
-    label: '= 3'
-  }, {
-    isInRange: v => v >= 4,
-    color: '#216E39',
-    label: '>= 4'
-  }],
+  showWeekDays: [1, 3, 5],
+  showMonths: true,
   showBlockTooltip: true,
   showLegendTooltip: true,
-  showMonths: true,
-  boxShape: 'square'
+  locale: "en",
+  rangeDays: 365,
+  boxShape: "square",
+  legend: [{
+    isInRange: v => v === 0,
+    color: "#EBEDF0",
+    label: "= 0"
+  }, {
+    isInRange: v => v === 1,
+    color: "#9BE9A8",
+    label: "= 1"
+  }, {
+    isInRange: v => v === 2,
+    color: "#40C463",
+    label: "= 2"
+  }, {
+    isInRange: v => v === 3,
+    color: "#30A14E",
+    label: "= 3"
+  }, {
+    isInRange: v => v >= 4,
+    color: "#216E39",
+    label: ">= 4"
+  }],
+  contentBeforeLegend: "Less",
+  contentAfterLegend: "More"
 };
 
 const Container = (props = {}) => {
-  const options = Object.assign({}, propsDefault, props);
-  return /*#__PURE__*/React__default['default'].createElement(styled.ThemeProvider, {
-    theme: {}
-  }, /*#__PURE__*/React__default['default'].createElement(Heatmap, options));
-};
-
-Container.propTypes = {
-  startDate: PropTypes.instanceOf(Date).isRequired,
-  values: PropTypes.array,
-  showWeekDays: PropTypes.array,
-  showBlockTooltip: PropTypes.bool,
-  showLegendTooltip: PropTypes.bool,
-  showMonths: PropTypes.bool,
-  locale: PropTypes.string,
-  rangeDays: PropTypes.number,
-  boxShape: PropTypes.string,
-  legend: PropTypes.arrayOf(PropTypes.shape({
-    isInRange: PropTypes.func.isRequired,
-    // Example: (value) => value > 3
-    color: PropTypes.string.isRequired,
-    label: PropTypes.string.isRequired
-  })),
-  contentBeforeLegend: PropTypes.string,
-  contentAfterLegend: PropTypes.string
+  const options = Object.assign({}, defaultProps, props);
+  return /*#__PURE__*/React__default['default'].createElement(Heatmap, options);
 };
 
 module.exports = Container;
